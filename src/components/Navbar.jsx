@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 const links = [
   { href: '#projects', label: 'Projetos' },
   { href: '#about', label: 'Sobre' },
+  { href: '#experience', label: 'Trajetória' },
   { href: '#contact', label: 'Contato' },
 ]
 
@@ -18,7 +19,7 @@ export default function Navbar() {
   }, [])
 
   useEffect(() => {
-    const sections = ['projects', 'about', 'contact']
+    const sections = ['projects', 'about', 'experience', 'contact']
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
