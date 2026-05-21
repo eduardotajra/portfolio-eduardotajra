@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Mail } from 'lucide-react'
+import { ArrowDown, Mail, Download } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 
 const roles = ['Front End Developer', 'Full Stack Developer', 'UI Engineer']
@@ -90,6 +90,14 @@ export default function Hero() {
             className="px-6 py-3 rounded-lg border border-border-2 text-text-secondary font-semibold text-sm hover:border-accent hover:text-text-primary transition-all duration-200"
           >
             Entre em contato
+          </a>
+          <a
+            href="/cv.pdf"
+            download
+            className="flex items-center gap-2 px-6 py-3 rounded-lg border border-border-2 text-text-secondary font-semibold text-sm hover:border-cyan hover:text-cyan transition-all duration-200"
+          >
+            <Download size={14} />
+            Currículo
           </a>
         </motion.div>
 
