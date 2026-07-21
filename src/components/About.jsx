@@ -2,9 +2,9 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const skills = {
-  Frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-  Backend: ['Node.js', 'Fastify', 'PostgreSQL', 'Firebase', 'Supabase', 'Python', 'Django'],
-  Ferramentas: ['Git', 'GitHub', 'Docker', 'Vercel', 'Figma', 'Sanity CMS'],
+  Frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Zustand', 'Vite'],
+  Backend: ['Node.js', 'Fastify', 'PostgreSQL', 'Drizzle ORM', 'Supabase', 'Firebase', 'Python', 'Django'],
+  Ferramentas: ['Git', 'GitHub', 'Docker', 'Vercel', 'Cloudflare Workers', 'Figma', 'Sanity CMS'],
 }
 
 export default function About() {
