@@ -7,7 +7,7 @@ const items = [
     type: 'edu',
     title: 'Pós Graduação Full-Stack com IA',
     org: 'Rocketseat',
-    period: '2026 — 2027',
+    period: '2026 a 2027',
     description:
       'Especialização com foco em Node.js, React, TypeScript, arquitetura de APIs REST e práticas de desenvolvimento profissional.',
     tags: ['Node.js', 'React', 'TypeScript', 'PostgreSQL'],
@@ -24,7 +24,7 @@ const items = [
     type: 'edu',
     title: 'Full-Stack Development Course',
     org: 'Infinity School',
-    period: '2023 — 2024',
+    period: '2023 a 2024',
     description:
       'Curso presencial com metodologia americana cobrindo desenvolvimento web completo, do zero ao mercado de trabalho.',
     tags: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'MongoDB'],
@@ -33,9 +33,9 @@ const items = [
     type: 'edu',
     title: 'Bacharel em Ciência da Computação',
     org: 'UNIFOR',
-    period: '2021 — 2025',
+    period: '2021 a 2025',
     description:
-      'TCC: evolução da QLattes (extensão criada pelo Prof. Dr. Nabor Mendonça) para análise, agrupamento e exportação de dados acadêmicos — comparação entre múltiplos currículos, gráficos e exportação em CSV, XLSX, PDF e PNG. Pesquisa financiada pelo CNPq.',
+      'TCC: evolução da QLattes (extensão criada pelo Prof. Dr. Nabor Mendonça) para análise, agrupamento e exportação de dados acadêmicos: comparação entre múltiplos currículos, gráficos e exportação em CSV, XLSX, PDF e PNG. Pesquisa financiada pelo CNPq.',
     tags: ['JavaScript', 'Extensões de Navegador', 'Pesquisa Acadêmica'],
   },
 ]

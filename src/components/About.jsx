@@ -43,8 +43,8 @@ export default function About() {
                 com React, Next.js e Node.js.
               </p>
               <p>
-                No TCC, evoluí a QLattes — extensão de análise de produção acadêmica criada
-                pelo Prof. Dr. Nabor Mendonça — para comparar múltiplos currículos e exportar
+                No TCC, evoluí a QLattes, extensão de análise de produção acadêmica criada
+                pelo Prof. Dr. Nabor Mendonça, para comparar múltiplos currículos e exportar
                 relatórios, em pesquisa financiada pelo CNPq. No estágio no Banco do Nordeste,
                 desenvolvi um app para o Gabinete da Presidência e automações que substituíram
                 processos manuais. Como freelance, entreguei o site institucional de um estúdio
