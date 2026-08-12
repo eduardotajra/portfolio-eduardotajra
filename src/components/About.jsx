@@ -2,9 +2,10 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const skills = {
-  Frontend: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Zustand', 'Vite'],
-  Backend: ['Node.js', 'Fastify', 'PostgreSQL', 'Drizzle ORM', 'Supabase', 'Firebase', 'Python', 'Django'],
-  Ferramentas: ['Git', 'GitHub', 'Docker', 'Vercel', 'Cloudflare Workers', 'Figma', 'Sanity CMS'],
+  Frontend: ['React', 'TypeScript', 'JavaScript', 'Next.js', 'Tailwind CSS', 'Framer Motion', 'GSAP', 'Zustand', 'Vite'],
+  Backend: ['Node.js', 'Express', 'Fastify', 'Prisma', 'PostgreSQL', 'Drizzle ORM', 'Supabase', 'Firebase', 'Python', 'Django', 'Java', 'C#'],
+  'IA e Automação': ['IA Generativa', 'Google Gemini', 'RPA', 'Puppeteer', 'Web Scraping'],
+  Ferramentas: ['Git', 'GitHub', 'Docker', 'Vercel', 'Cloudflare Workers', 'Sanity CMS', 'Scrum', 'Kanban'],
 }
 
 export default function About() {
@@ -36,18 +37,23 @@ export default function About() {
             </h2>
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p>
-                Desenvolvedor full stack com foco em front end e pós-graduação em
-                desenvolvimento fullstack pela Rocketseat. Construo desde extensões de
-                navegador até plataformas gamificadas, o que importa é entregar
-                experiências que as pessoas realmente querem usar.
+                Desenvolvedor fullstack, bacharel em Ciência da Computação pela UNIFOR e
+                cursando a Pós-graduação Full-Stack com IA na Rocketseat. Construo desde
+                extensões de navegador e automações com RPA até aplicações web completas
+                com React, Next.js e Node.js.
               </p>
               <p>
-                Meu TCC virou uma extensão real usada por pesquisadores do CNPq. Um projeto
-                pessoal virou um estúdio de jogos. Gosto de levar ideias até o fim.
+                No TCC, evoluí a QLattes — extensão de análise de produção acadêmica criada
+                pelo Prof. Dr. Nabor Mendonça — para comparar múltiplos currículos e exportar
+                relatórios, em pesquisa financiada pelo CNPq. No estágio no Banco do Nordeste,
+                desenvolvi um app para o Gabinete da Presidência e automações que substituíram
+                processos manuais. Como freelance, entreguei o site institucional de um estúdio
+                indie de games.
               </p>
               <p>
                 Atualmente aberto a oportunidades{' '}
-                <span className="text-accent">full time ou freelance</span>.
+                <span className="text-accent">full time ou freelance</span>, remoto ou em
+                Fortaleza/CE. Inglês avançado.
               </p>
             </div>
           </motion.div>

@@ -35,7 +35,7 @@ const items = [
     org: 'UNIFOR',
     period: '2021 — 2025',
     description:
-      'TCC: qlattes,extensão para classificação automática de artigos do Lattes/CNPq segundo o Qualis CAPES.',
+      'TCC: evolução da QLattes (extensão criada pelo Prof. Dr. Nabor Mendonça) para análise, agrupamento e exportação de dados acadêmicos — comparação entre múltiplos currículos, gráficos e exportação em CSV, XLSX, PDF e PNG. Pesquisa financiada pelo CNPq.',
     tags: ['JavaScript', 'Extensões de Navegador', 'Pesquisa Acadêmica'],
   },
 ]

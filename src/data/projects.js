@@ -21,7 +21,7 @@ export const projects = [
     screenshot: '/screenshots/meiosangue.png',
     links: {
       demo: 'https://arquivo-meio-sangue.vercel.app',
-      github: 'https://github.com/eduardotajra/arquivo-meio-sangue',
+      github: '', // repositorio privado
     },
     featured: true,
   },
@@ -34,7 +34,7 @@ export const projects = [
     screenshot: '/screenshots/ordem.png',
     links: {
       demo: 'https://ordem-arquivo-celula.vercel.app',
-      github: 'https://github.com/eduardotajra/ordem-arquivo-celula',
+      github: '', // repositorio privado
     },
     featured: true,
   },
@@ -47,7 +47,7 @@ export const projects = [
     screenshot: '/screenshots/fratura.png',
     links: {
       demo: 'https://projeto-fratura.vercel.app',
-      github: 'https://github.com/eduardotajra/projeto-fratura',
+      github: '', // repositorio privado
     },
     featured: true,
   },
@@ -82,7 +82,7 @@ export const projects = [
     title: 'Jornal Atlas',
     description:
       'Caça-palavras diário temático com enigmas escondidos, modo difícil, histórico de resultados e compartilhamento social.',
-    tags: ['React', 'Vite', 'Firebase', 'CSS Modules'],
+    tags: ['HTML', 'CSS', 'JavaScript', 'Firebase'],
     screenshot: '/screenshots/atlas.png',
     links: {
       demo: 'https://cacapalavras-atlas.vercel.app/',
@@ -94,12 +94,12 @@ export const projects = [
     id: 8,
     title: 'qlattes',
     description:
-      'Extensão para Chrome e Firefox que classifica automaticamente artigos do Lattes/CNPq de acordo com o novo Qualis da CAPES. TCC de graduação.',
-    tags: ['JavaScript', 'Chrome Extension', 'Firefox', 'CNPq'],
+      'TCC em Ciência da Computação: evoluí a QLattes, extensão de análise de produção acadêmica criada pelo Prof. Dr. Nabor Mendonça, para comparar múltiplos currículos, gerar gráficos e exportar relatórios em CSV, XLSX, PDF e PNG. Pesquisa financiada pelo CNPq.',
+    tags: ['React', 'JavaScript', 'Chrome Extension', 'CNPq'],
     screenshot: '/screenshots/qlattes.png',
     links: {
       demo: '',
-      github: 'https://github.com/eduardotajra/qlattes',
+      github: 'https://github.com/eduardotajra/qlattes/tree/react%2Bgroups',
     },
     featured: false,
   },
@@ -125,7 +125,33 @@ export const projects = [
     screenshot: null,
     links: {
       demo: '',
-      github: 'https://github.com/eduardotajra/HairDay',
+      github: '', // repositorio privado
+    },
+    featured: false,
+  },
+  {
+    id: 12,
+    title: 'Monitor de Cotação',
+    description:
+      'RPA que extrai a cotação do dólar por automação de navegador, persiste o histórico em PostgreSQL e serve os dados por API para um front em Next.js.',
+    tags: ['Puppeteer', 'Node.js', 'Express', 'Prisma', 'PostgreSQL', 'Next.js'],
+    screenshot: null,
+    links: {
+      demo: '',
+      github: 'https://github.com/eduardotajra/monitor-cotacao-rpa',
+    },
+    featured: false,
+  },
+  {
+    id: 13,
+    title: 'BackPex',
+    description:
+      'Plugin de Minecraft com mochilas evolutivas de 12 níveis, ritual de criação, persistência de itens e sistema de propriedade por jogador.',
+    tags: ['Java', 'Maven', 'Spigot API', 'Paper'],
+    screenshot: null,
+    links: {
+      demo: '',
+      github: 'https://github.com/eduardotajra/BackPex',
     },
     featured: false,
   },
