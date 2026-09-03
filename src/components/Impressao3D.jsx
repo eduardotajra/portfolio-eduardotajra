@@ -1,28 +1,12 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Upload, Sparkles, Wrench, PenTool, ArrowRight, ImageOff } from 'lucide-react'
+import { Upload, Sparkles, Wrench, PenTool, ArrowRight } from 'lucide-react'
 import { contato } from '../data/contato'
 
-/* ------------------------------------------------------------------ *
- * ⚠️  PLACEHOLDER — TROCAR ANTES DE PUBLICAR
- *
- * As fotos desta seção ainda não existem. Enquanto FOTOS_PENDENTES for
- * `true`, a galeria mostra molduras vazias marcadas como "foto pendente".
- *
- * Para publicar:
- *   1. salve as fotos reais em  public/impressao3d/
- *   2. confira se os nomes batem com os `arquivo` da lista `pecas`
- *   3. troque FOTOS_PENDENTES para false
- *
- * Não publicar esta seção com as molduras vazias.
- * ------------------------------------------------------------------ */
-const FOTOS_PENDENTES = true
-
 const pecas = [
-  { arquivo: '/impressao3d/chaveiros.jpg', legenda: 'Chaveiros personalizados' },
-  { arquivo: '/impressao3d/suporte.jpg', legenda: 'Suporte com QR code e NFC' },
-  { arquivo: '/impressao3d/organizador.jpg', legenda: 'Organizador de mesa' },
-  { arquivo: '/impressao3d/peca-funcional.jpg', legenda: 'Peça funcional sob medida' },
+  { arquivo: '/impressao3d/trofeu.jpg', legenda: 'Réplica de troféu com acabamento metálico' },
+  { arquivo: '/impressao3d/suporte-controle.jpg', legenda: 'Suporte de controle em formato de tentáculo' },
+  { arquivo: '/impressao3d/dinossauro.jpg', legenda: 'Dinossauro com textura de tricô' },
 ]
 
 const comoFunciona = [
@@ -107,35 +91,27 @@ export default function Impressao3D() {
 
         {/* Galeria */}
         <div className="mt-14">
-          {FOTOS_PENDENTES && (
-            <p className="mb-4 inline-flex items-center gap-2 rounded border border-yellow-500/30 bg-yellow-500/10 px-3 py-1.5 font-mono text-[11px] text-yellow-500/90">
-              <ImageOff size={12} />
-              placeholder: trocar pelas fotos reais antes de publicar
-            </p>
-          )}
-
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+          {/* No mobile a primeira ocupa a linha inteira e as outras duas dividem a
+              seguinte: composição cheia, sem célula vazia. No desktop, 3 colunas. */}
+          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
             {pecas.map((peca, i) => (
               <motion.figure
                 key={peca.arquivo}
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-                className="overflow-hidden rounded-xl border border-border bg-surface"
+                className={`overflow-hidden rounded-xl border border-border bg-surface ${
+                  i === 0 ? 'col-span-2 sm:col-span-1' : ''
+                }`}
               >
-                {FOTOS_PENDENTES ? (
-                  <div className="flex aspect-square flex-col items-center justify-center gap-2 border-b border-dashed border-border-2 bg-surface-2 text-muted">
-                    <ImageOff size={20} />
-                    <span className="font-mono text-[10px]">foto pendente</span>
-                  </div>
-                ) : (
-                  <img
-                    src={peca.arquivo}
-                    alt={peca.legenda}
-                    loading="lazy"
-                    className="aspect-square w-full border-b border-border object-cover"
-                  />
-                )}
+                <img
+                  src={peca.arquivo}
+                  alt={peca.legenda}
+                  loading="lazy"
+                  width="900"
+                  height="1200"
+                  className="aspect-[3/4] w-full border-b border-border object-cover"
+                />
                 <figcaption className="px-3 py-2.5 text-xs text-text-secondary">
                   {peca.legenda}
                 </figcaption>
