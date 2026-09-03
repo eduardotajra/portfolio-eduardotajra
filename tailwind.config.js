@@ -12,7 +12,9 @@ export default {
         accent: '#818cf8',
         'accent-dark': '#6366f1',
         cyan: '#22d3ee',
-        muted: '#475569',
+        // #64748b (sugerido) ficava em 4.19:1 no fundo da página e reprovava no AA.
+        // Este é o tom mais próximo que passa em todas as superfícies do site.
+        muted: '#7688a0',
         'text-primary': '#f1f5f9',
         'text-secondary': '#94a3b8',
       },

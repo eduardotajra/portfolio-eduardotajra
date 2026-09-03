@@ -146,36 +146,8 @@ export const projects = [
     },
     featured: false,
   },
-  {
-    id: 10,
-    title: 'AtlasOS: Sonho',
-    description:
-      'Um sistema operacional que nunca existiu. O visitante explora arquivos, logs e um terminal para remontar uma história fragmentada.',
-    category: 'autorais',
-    tags: ['JavaScript', 'HTML', 'CSS'],
-    screenshot: '/screenshots/atlasos.png',
-    repoPrivate: true,
-    links: {
-      demo: 'https://atlasos-sonho.vercel.app',
-      github: 'https://github.com/eduardotajra/atlasos-sonho',
-    },
-    featured: false,
-  },
-  {
-    id: 12,
-    title: 'Mapa Sistema Atlas',
-    description:
-      'Visualização de topologia de rede: os nós e as conexões de um sistema desenhados de forma navegável, em vez de uma planilha.',
-    category: 'autorais',
-    tags: ['JavaScript', 'SVG'],
-    screenshot: '/screenshots/mapaatlas.png',
-    repoPrivate: true,
-    links: {
-      demo: 'https://mapa-sistema-atlas.vercel.app',
-      github: 'https://github.com/eduardotajra/mapa-sistema-atlas',
-    },
-    featured: false,
-  },
+  // AtlasOS: Sonho e Mapa Sistema Atlas ficaram fora por ora: fazem parte de um
+  // universo de enigmas em andamento e expor o conteúdo entregaria pistas.
   {
     id: 14,
     title: 'Onze de Ouro',
