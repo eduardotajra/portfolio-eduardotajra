@@ -46,8 +46,9 @@ export default function About() {
                 pessoal virou um estúdio de jogos. Gosto de levar ideias até o fim.
               </p>
               <p>
-                Atualmente aberto a oportunidades{' '}
-                <span className="text-accent">full time ou freelance</span>.
+                Hoje trabalho com projetos sob encomenda, de sites e jogos a peças
+                impressas em 3D, e sigo{' '}
+                <span className="text-accent">disponível para novos trabalhos</span>.
               </p>
             </div>
           </motion.div>

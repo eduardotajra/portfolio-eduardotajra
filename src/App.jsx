@@ -9,6 +9,7 @@ const Home = lazy(() => import('./pages/Home'))
 const Projetos = lazy(() => import('./pages/Projetos'))
 // A navbar não aparece em /links e traz o framer-motion junto: fora do caminho crítico.
 const Navbar = lazy(() => import('./components/Navbar'))
+const Footer = lazy(() => import('./components/Footer'))
 
 // Fundo na cor do site: a troca de chunk não pisca branco.
 const Carregando = () => <div className="min-h-screen bg-bg" />
@@ -34,6 +35,11 @@ function Layout() {
           </Routes>
         </Suspense>
       </main>
+      {!rotaNua && (
+        <Suspense fallback={null}>
+          <Footer />
+        </Suspense>
+      )}
     </div>
   )
 }

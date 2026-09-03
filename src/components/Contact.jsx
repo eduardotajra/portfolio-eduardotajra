@@ -1,27 +1,31 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Mail, ArrowUpRight } from 'lucide-react'
+import { Mail, Download, Code2, Box } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
+import { contato } from '../data/contato'
 
-const links = [
+// WhatsApp é o canal comercial: fica em destaque, com a mensagem já escrita.
+const orcamentos = [
   {
-    icon: Mail,
-    label: 'Email',
-    value: 'eduardotajra2@hotmail.com',
-    href: 'mailto:eduardotajra2@hotmail.com',
+    icone: Code2,
+    titulo: 'Quero criar um projeto',
+    href: contato.whatsappDev,
+    cor: 'accent',
   },
   {
-    icon: GithubIcon,
-    label: 'GitHub',
-    value: 'github.com/eduardotajra',
-    href: 'https://github.com/eduardotajra',
+    icone: Box,
+    titulo: 'Quero imprimir uma peça',
+    href: contato.whatsapp3d,
+    cor: 'cyan',
   },
-  {
-    icon: LinkedinIcon,
-    label: 'LinkedIn',
-    value: 'linkedin.com/in/eduardo-tajra',
-    href: 'https://www.linkedin.com/in/eduardo-tajra/',
-  },
+]
+
+// Canais profissionais: continuam à mão, sem disputar a atenção com o orçamento.
+const profissionais = [
+  { Icone: Mail, rotulo: 'E-mail', href: `mailto:${contato.email}` },
+  { Icone: GithubIcon, rotulo: 'GitHub', href: contato.github },
+  { Icone: LinkedinIcon, rotulo: 'LinkedIn', href: contato.linkedin },
+  { Icone: Download, rotulo: 'Currículo', href: '/cv.pdf', baixar: true },
 ]
 
 export default function Contact() {
@@ -29,23 +33,22 @@ export default function Contact() {
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="contact" className="py-32 px-6">
-      <div className="max-w-2xl mx-auto text-center">
+    <section id="contact" className="px-6 py-24">
+      <div className="mx-auto max-w-2xl text-center">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
-          <p className="font-mono text-sm text-accent mb-3 tracking-widest uppercase">
+          <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
             contato
           </p>
-          <h2 className="text-4xl font-bold text-text-primary mb-4">
-            Vamos conversar?
+          <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+            Me conta sua ideia
           </h2>
-          <p className="text-text-secondary leading-relaxed mb-12">
-            Estou aberto a novas oportunidades, projetos freelance ou apenas uma troca de ideia.
-            Pode mandar mensagem, respondo sempre.
+          <p className="mb-10 leading-relaxed text-text-secondary">
+            Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso.
           </p>
         </motion.div>
 
@@ -53,41 +56,49 @@ export default function Contact() {
           initial={{ opacity: 0, y: 24 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="flex flex-col gap-3 mb-12"
+          className="mb-10 flex flex-col justify-center gap-3 sm:flex-row"
         >
-          {links.map(({ icon: Icon, label, value, href }) => (
+          {orcamentos.map(({ icone: Icone, titulo, href, cor }) => {
+            const ehAccent = cor === 'accent'
+            return (
+              <a
+                key={titulo}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold transition-all duration-200 ${
+                  ehAccent
+                    ? 'bg-accent text-bg hover:bg-accent/90 glow-accent'
+                    : 'border border-cyan/40 text-cyan hover:border-cyan hover:bg-cyan/10'
+                }`}
+              >
+                <Icone size={16} />
+                {titulo}
+              </a>
+            )
+          })}
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
+        >
+          {profissionais.map(({ Icone, rotulo, href, baixar }) => (
             <a
-              key={label}
+              key={rotulo}
               href={href}
+              download={baixar || undefined}
               target={href.startsWith('http') ? '_blank' : undefined}
               rel="noopener noreferrer"
-              className="group flex items-center justify-between bg-surface border border-border rounded-xl px-6 py-4 hover:border-border-2 hover:bg-surface-2 transition-all duration-200"
+              className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
             >
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center">
-                  <Icon size={16} className="text-accent" />
-                </div>
-                <div className="text-left">
-                  <p className="text-xs text-muted font-mono uppercase tracking-wider">{label}</p>
-                  <p className="text-sm text-text-primary font-medium">{value}</p>
-                </div>
-              </div>
-              <ArrowUpRight
-                size={16}
-                className="text-muted group-hover:text-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200"
-              />
+              <Icone size={15} />
+              {rotulo}
             </a>
           ))}
         </motion.div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="font-mono text-xs text-muted"
-        >
-          Feito com React + Vite · {new Date().getFullYear()}
-        </motion.p>
       </div>
     </section>
   )
