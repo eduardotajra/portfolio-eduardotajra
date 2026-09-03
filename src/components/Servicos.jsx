@@ -1,0 +1,135 @@
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Code2, Box, ArrowRight } from 'lucide-react'
+import { contato } from '../data/contato'
+
+const frentes = [
+  {
+    icone: Code2,
+    titulo: 'Desenvolvimento web',
+    resumo:
+      'Sites, jogos e experiências feitos do zero, do jeito que a ideia pede. Se não existe pronto, eu construo.',
+    exemplos: [
+      'jogos e quizzes',
+      'sites institucionais',
+      'ARGs e enigmas',
+      'portfólios e páginas pessoais',
+      'extensões de navegador',
+      'plugins de Minecraft',
+    ],
+    cta: 'Tenho uma ideia',
+    href: contato.whatsappDev,
+    cor: 'accent',
+  },
+  {
+    icone: Box,
+    titulo: 'Impressão 3D',
+    resumo:
+      'Bambu Lab P1S. Imprimo o arquivo que você mandar ou modelo a peça do zero no Fusion.',
+    exemplos: [
+      'peças sob encomenda',
+      'modelagem própria',
+      'prototipagem',
+      'peças funcionais',
+      'chaveiros e brindes',
+      'objetos personalizados',
+    ],
+    cta: 'Quero imprimir uma peça',
+    href: contato.whatsapp3d,
+    cor: 'cyan',
+  },
+]
+
+function Frente({ frente, index }) {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-80px' })
+  const Icone = frente.icone
+  const ehAccent = frente.cor === 'accent'
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
+      className={`group flex flex-col rounded-xl border bg-surface p-7 transition-colors duration-300 ${
+        ehAccent
+          ? 'border-accent/25 hover:border-accent/60'
+          : 'border-cyan/25 hover:border-cyan/60'
+      }`}
+    >
+      <div
+        className={`mb-5 flex h-11 w-11 items-center justify-center rounded-lg border ${
+          ehAccent
+            ? 'border-accent/25 bg-accent/10 text-accent'
+            : 'border-cyan/25 bg-cyan/10 text-cyan'
+        }`}
+      >
+        <Icone size={20} />
+      </div>
+
+      <h3 className="mb-2 text-xl font-semibold text-text-primary">{frente.titulo}</h3>
+      <p className="mb-6 text-sm leading-relaxed text-text-secondary">{frente.resumo}</p>
+
+      <ul className="mb-7 flex flex-wrap gap-2">
+        {frente.exemplos.map((ex) => (
+          <li
+            key={ex}
+            className="rounded border border-border bg-surface-2 px-2.5 py-1 font-mono text-[11px] text-text-secondary"
+          >
+            {ex}
+          </li>
+        ))}
+      </ul>
+
+      <a
+        href={frente.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`mt-auto inline-flex items-center gap-2 self-start rounded-lg px-5 py-2.5 text-sm font-semibold transition-all duration-200 ${
+          ehAccent
+            ? 'bg-accent text-bg hover:bg-accent/90'
+            : 'border border-cyan/40 text-cyan hover:bg-cyan/10 hover:border-cyan'
+        }`}
+      >
+        {frente.cta}
+        <ArrowRight
+          size={15}
+          className="transition-transform duration-200 group-hover:translate-x-0.5"
+        />
+      </a>
+    </motion.div>
+  )
+}
+
+export default function Servicos() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-60px' })
+
+  return (
+    <section id="servicos" className="border-t border-border px-6 py-24">
+      <div className="mx-auto max-w-5xl">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
+            o que eu faço
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
+            Duas frentes, o mesmo jeito de trabalhar
+          </h2>
+        </motion.div>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          {frentes.map((frente, i) => (
+            <Frente key={frente.titulo} frente={frente} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

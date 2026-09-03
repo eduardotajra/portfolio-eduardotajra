@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { GraduationCap, Briefcase } from 'lucide-react'
+import { GraduationCap, Briefcase, Download } from 'lucide-react'
 
 const items = [
   {
@@ -111,11 +111,21 @@ export default function Experience() {
           className="mb-16"
         >
           <p className="font-mono text-sm text-accent mb-3 tracking-widest uppercase">
-            03. formação
+            formação
           </p>
-          <h2 className="text-4xl font-bold text-text-primary">
-            Trajetória
-          </h2>
+          <div className="flex flex-wrap items-center justify-between gap-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
+              Trajetória
+            </h2>
+            <a
+              href="/cv.pdf"
+              download
+              className="flex items-center gap-2 rounded-lg border border-border-2 px-4 py-2 text-sm font-medium text-text-secondary transition-colors duration-200 hover:border-accent hover:text-accent"
+            >
+              <Download size={14} />
+              Baixar currículo
+            </a>
+          </div>
         </motion.div>
 
         <div className="flex gap-6 mb-10">

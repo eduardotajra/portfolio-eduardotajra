@@ -21,7 +21,7 @@ export default function About() {
           transition={{ duration: 0.5 }}
           className="font-mono text-sm text-accent mb-3 tracking-widest uppercase"
         >
-          02. sobre mim
+          sobre mim
         </motion.p>
 
         <div className="grid lg:grid-cols-2 gap-16 items-start">

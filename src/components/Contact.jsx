@@ -38,7 +38,7 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
         >
           <p className="font-mono text-sm text-accent mb-3 tracking-widest uppercase">
-            04. contato
+            contato
           </p>
           <h2 className="text-4xl font-bold text-text-primary mb-4">
             Vamos conversar?

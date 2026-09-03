@@ -129,7 +129,7 @@ export default function Projects() {
           className="mb-16"
         >
           <p className="font-mono text-sm text-accent mb-3 tracking-widest uppercase">
-            01. projetos
+            projetos
           </p>
           <h2 className="text-4xl font-bold text-text-primary">
             O que já construí

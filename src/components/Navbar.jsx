@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 
 const links = [
+  { hash: '#servicos', label: 'Serviços' },
   { hash: '#projects', label: 'Projetos' },
   { hash: '#about', label: 'Sobre' },
   { hash: '#experience', label: 'Trajetória' },
@@ -26,7 +27,7 @@ export default function Navbar() {
   // Destaque da seção ativa só faz sentido na home, onde as seções existem.
   useEffect(() => {
     if (!isHome) return
-    const sections = ['projects', 'about', 'experience', 'contact']
+    const sections = ['servicos', 'projects', 'about', 'experience', 'contact']
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
