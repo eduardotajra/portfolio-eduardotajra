@@ -58,7 +58,7 @@ export default function Hero() {
 
         <motion.h1
           {...fadeUp(0.2)}
-          className="text-6xl sm:text-7xl font-extrabold tracking-tight text-text-primary leading-none mb-4"
+          className="text-[clamp(2.25rem,11vw,4.5rem)] font-extrabold tracking-tight text-text-primary leading-none mb-4"
         >
           Eduardo{' '}
           <span className="text-gradient">Tajra</span>
