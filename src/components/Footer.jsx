@@ -51,9 +51,21 @@ export default function Footer() {
         >
           Eduardo <em>Tajra</em>
         </p>
-        <p className="mt-6 text-center font-mono text-[11px] text-papel/45">
-          © {new Date().getFullYear()} · {t('sem template, feito do zero', 'no template, built from scratch')}
-        </p>
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] text-papel/45">
+          <p>
+            © {new Date().getFullYear()} · {t('sem template, feito do zero', 'no template, built from scratch')}
+          </p>
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="group flex items-center gap-1.5 transition-colors hover:text-marca"
+          >
+            {t('voltar ao topo', 'back to top')}
+            <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:-translate-y-1">
+              ↑
+            </span>
+          </button>
+        </div>
       </div>
     </footer>
   )

@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import Hero from '../components/Hero'
 import Servicos from '../components/Servicos'
 import Processo from '../components/Processo'
@@ -11,14 +10,13 @@ import Experience from '../components/Experience'
 import Contact from '../components/Contact'
 
 export default function Home() {
-  const { hash: hashDaRota } = useLocation()
-
   // Chegando de outra rota com âncora (ex: /projetos -> /#contact),
-  // o scroll nativo não dispara: resolvemos depois da montagem.
+  // o scroll nativo não dispara: resolvemos depois da montagem. Só na montagem:
+  // cliques em âncoras dentro da home já rolam sozinhos, e repetir o scroll aqui
+  // brigava com a rolagem suave do navegador e parava fora do lugar.
   useEffect(() => {
-    // No load inicial o router pode ainda não expor o hash; window.location tem.
-    const hash = hashDaRota || window.location.hash
-    if (!hash) return
+    const hash = window.location.hash
+    if (!hash || hash === '#showreel') return
     // O navegador restaura o scroll para 0 depois do load e desfaz o nosso.
     const restauracaoOriginal = window.history.scrollRestoration
     if (restauracaoOriginal) window.history.scrollRestoration = 'manual'
@@ -41,7 +39,7 @@ export default function Home() {
       window.removeEventListener('load', irParaSecao)
       if (restauracaoOriginal) window.history.scrollRestoration = restauracaoOriginal
     }
-  }, [hashDaRota])
+  }, [])
 
   return (
     <>

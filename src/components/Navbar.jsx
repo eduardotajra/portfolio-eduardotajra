@@ -4,6 +4,9 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useIdioma, SeletorIdioma } from '../i18n'
 import Logo from '../motion/Logo'
+import Relogio from '../motion/Relogio'
+import { BotaoTinta } from '../motion/Botoes'
+import { contato } from '../data/contato'
 
 const links = [
   { hash: '#projects', label: 'Projetos', label_en: 'Work' },
@@ -46,7 +49,7 @@ export default function Navbar() {
     return () => observer.disconnect()
   }, [isHome])
 
-  // O painel é um dropdown curto, não um overlay: não travamos o scroll do body
+  // O menu do celular cobre a tela, mas não trava o scroll do body
   // (travar cancelaria o scroll suave da âncora ao clicar num item).
   useEffect(() => {
     if (!open) return
@@ -138,28 +141,57 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile panel */}
+      {/* Menu do celular: uma folha inteira, com os links no tamanho dos títulos. */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden border-t border-tinta/10 bg-bg"
+            initial={{ clipPath: 'inset(0 0 100% 0)' }}
+            animate={{ clipPath: 'inset(0 0 0% 0)' }}
+            exit={{ clipPath: 'inset(0 0 100% 0)' }}
+            transition={{ duration: 0.5, ease: [0.7, 0, 0.2, 1] }}
+            className="fixed inset-x-0 bottom-0 top-16 flex flex-col justify-between overflow-y-auto overscroll-contain bg-bg px-6 pb-8 pt-4 md:hidden"
           >
-            <ul className="px-6 py-2">
-              {links.map((item) => (
-                <li key={item.hash} className="border-b border-border last:border-0">
-                  {navLink(
-                    item.hash,
-                    tr(item, 'label'),
-                    () => setOpen(false),
-                    'titulo block py-4 text-3xl text-tinta transition-colors hover:text-accent'
-                  )}
+            <ul>
+              {links.map((item, i) => (
+                <li key={item.hash} className="overflow-hidden border-b border-tinta/15">
+                  <motion.div
+                    initial={{ y: '105%' }}
+                    animate={{ y: 0 }}
+                    transition={{ duration: 0.55, delay: 0.15 + i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                  >
+                    {navLink(
+                      item.hash,
+                      <>
+                        <span className="mr-4 w-6 font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
+                        {tr(item, 'label')}
+                      </>,
+                      () => setOpen(false),
+                      'titulo flex items-baseline py-3 text-[2.75rem] text-tinta transition-colors active:text-accent'
+                    )}
+                  </motion.div>
                 </li>
               ))}
             </ul>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.45 }}
+              className="mt-8 flex flex-col items-start gap-4"
+            >
+              {navLink(
+                '#showreel',
+                <>
+                  <span aria-hidden="true">▶</span> {t('assistir o showreel', 'watch the showreel')}
+                  <span className="font-mono text-[11px] text-muted">1:06</span>
+                </>,
+                () => setOpen(false),
+                'flex items-center gap-2 text-[15px] font-medium text-tinta'
+              )}
+              <BotaoTinta href={contato.discord} target="_blank" rel="noopener noreferrer">
+                {t('Me conta a ideia', 'Tell me the idea')}
+              </BotaoTinta>
+              <Relogio className="text-sm text-muted" />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

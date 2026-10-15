@@ -209,6 +209,31 @@
   60% { top: 0%; opacity: 1; }
   100% { top: 100%; opacity: 1; }
 }
+@keyframes digito-rola {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes dois-pontos {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+.digito-rola {
+  animation: digito-rola 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dois-pontos {
+  animation: dois-pontos 2s steps(1) infinite;
+}
+
+/* Blocos caindo no vazio, na página 404. */
+@keyframes bloco-cai {
+  0% { transform: translateY(0) rotate(0); opacity: 1; }
+  75% { opacity: 1; }
+  100% { transform: translateY(760px) rotate(var(--giro, 180deg)); opacity: 0; }
+}
+
 @keyframes pisca {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }

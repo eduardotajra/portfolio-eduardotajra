@@ -4,12 +4,29 @@ import { useEffect, useState } from 'react'
 const formata = () =>
   new Intl.DateTimeFormat('pt-BR', { timeZone: 'America/Fortaleza', hour: '2-digit', minute: '2-digit' }).format(new Date())
 
+// Cada dígito que muda sobe de baixo, como num contador mecânico; os dois-pontos piscam devagar.
+function Digitos({ texto }) {
+  return [...texto].map((c, i) =>
+    /\d/.test(c) ? (
+      <span key={i} className="inline-block overflow-hidden align-bottom">
+        <span key={c} className="digito-rola inline-block">
+          {c}
+        </span>
+      </span>
+    ) : (
+      <span key={i} className="dois-pontos">
+        {c}
+      </span>
+    )
+  )
+}
+
 export default function Relogio({ className = '' }) {
   const [hora, setHora] = useState('')
 
   useEffect(() => {
     const t0 = setTimeout(() => setHora(formata()), 0)
-    const id = setInterval(() => setHora(formata()), 20000)
+    const id = setInterval(() => setHora(formata()), 15000)
     return () => {
       clearTimeout(t0)
       clearInterval(id)
@@ -22,7 +39,9 @@ export default function Relogio({ className = '' }) {
       {hora && (
         <>
           {' · '}
-          <time>{hora}</time>
+          <time className="tabular-nums" aria-label={hora}>
+            <Digitos texto={hora} />
+          </time>
         </>
       )}
     </span>

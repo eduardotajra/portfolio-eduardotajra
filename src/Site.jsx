@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, MotionConfig, motion, useScroll, useSpring } from 'framer-motion'
 import Navbar from './components/Navbar'
@@ -9,6 +9,7 @@ import { forma, traco } from './motion/tracos'
 const Home = lazy(() => import('./pages/Home'))
 const Projetos = lazy(() => import('./pages/Projetos'))
 const Mods = lazy(() => import('./pages/Mods'))
+const NaoEncontrada = lazy(() => import('./pages/NaoEncontrada'))
 
 const curva = [0.76, 0, 0.24, 1]
 
@@ -29,9 +30,17 @@ const mascara = {
   sai: { pathLength: 1, opacity: 1, transition: { pathLength: { duration: 0.55, ease: curva }, opacity: { duration: 0 } } },
 }
 
+// Na primeira visita a pincelada não cobre a tela: a página só aparece.
+// (Fica aqui, e não no AnimatePresence, para não desligar as entradas do resto.)
+let jaMontou = false
+
 function Pagina({ children }) {
+  const inicio = jaMontou ? 'entra' : false
+  useEffect(() => {
+    jaMontou = true
+  }, [])
   return (
-    <motion.div initial="entra" animate="mostra" exit="sai">
+    <motion.div initial={inicio} animate="mostra" exit="sai">
       {children}
       <svg
         aria-hidden="true"
@@ -91,14 +100,14 @@ export default function Site() {
         <BarraDeLeitura />
         <Navbar />
         <main>
-          <AnimatePresence mode="wait" initial={false} onExitComplete={aoTerminarSaida}>
+          <AnimatePresence mode="wait" onExitComplete={aoTerminarSaida}>
             <Pagina key={location.pathname}>
               <Suspense fallback={<Carregando />}>
                 <Routes location={location}>
                   <Route path="/" element={<Home />} />
                   <Route path="/projetos" element={<Projetos />} />
                   <Route path="/mods" element={<Mods />} />
-                  <Route path="*" element={<Home />} />
+                  <Route path="*" element={<NaoEncontrada />} />
                 </Routes>
               </Suspense>
             </Pagina>

@@ -1,7 +1,7 @@
 import { ArrowUpRight } from 'lucide-react'
 
 // Botão de tinta: o texto sobe e uma cópia entra por baixo (text lift),
-// e a seta escorrega na diagonal. Sem brilho, sem gradiente.
+// e a seta escorrega na diagonal. No toque, o botão afunda um pouco. Sem brilho, sem gradiente.
 export function BotaoTinta({ children, href, className = '', variante = 'tinta', icone = true, ...props }) {
   const estilos = {
     tinta: 'bg-tinta text-papel hover:bg-accent',
@@ -11,7 +11,7 @@ export function BotaoTinta({ children, href, className = '', variante = 'tinta',
   return (
     <a
       href={href}
-      className={`group inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-[15px] font-medium transition-colors duration-300 ${estilos[variante]} ${className}`}
+      className={`group inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-[15px] font-medium transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.97] active:duration-75 ${estilos[variante]} ${className}`}
       {...props}
     >
       <span className="relative block h-[1.25em] overflow-hidden">
