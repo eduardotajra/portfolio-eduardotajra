@@ -45,7 +45,7 @@ export const mods = [
       'Painel (Y) com editor de balões: skins, enfeites, cores e permissões VIP',
     ],
     numeros: ['em desenvolvimento', 'Java 21', 'Better Combat', 'Curios', "Iron's Spells"],
-    credito: 'Mods originais: Traço, de Zacza, e Aurador Bubbles, de JupiterAstral.',
+    credito: 'Mods originais: Aurador Weapons, de Zacza, e Aurador Bubbles, de JupiterAstral.',
     video: { src: '/mods/aurador.mp4', poster: '/mods/aurador-poster.jpg', loop: true },
     galeria: [
       { src: '/mods/aurador-orgulho.jpg', contain: true, legenda: 'Cartão do Orgulho com habilidades' },
