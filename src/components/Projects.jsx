@@ -45,7 +45,7 @@ export default function Projects() {
         <div className="mb-6 flex flex-wrap items-end justify-between gap-6">
           <div>
             <p className="font-mao text-2xl text-accent">{t('trabalho escolhido', 'selected work')}</p>
-            <h2 className="titulo-serifa text-[clamp(3rem,7vw,6rem)] text-tinta">
+            <h2 className="titulo text-[clamp(3rem,7vw,6rem)] text-tinta">
               {t('Coisas que eu fiz', 'Things I made')}{' '}
               <span className="align-top font-sans text-lg text-muted">({destaques.length})</span>
             </h2>
@@ -84,7 +84,7 @@ export default function Projects() {
                   <span className={`font-mono text-xs ${on && claro ? 'text-papel/70' : 'text-muted'}`}>
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="titulo-serifa text-[clamp(2rem,4.6vw,3.8rem)] transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-x-2">
+                  <span className="titulo text-[clamp(2rem,4.6vw,3.8rem)] transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-x-2">
                     {p.title}
                   </span>
                   <span className={`hidden text-sm sm:block ${on && claro ? 'text-papel/80' : 'text-text-secondary'}`}>
@@ -114,7 +114,7 @@ export default function Projects() {
 
         <div className="mt-10 flex justify-end">
           <Link to="/projetos" className="group inline-flex items-baseline gap-3 text-tinta">
-            <span className="titulo-serifa text-3xl italic transition-colors group-hover:text-accent">
+            <span className="titulo text-3xl italic transition-colors group-hover:text-accent">
               {t('ver todos os projetos', 'see all projects')}
             </span>
             <span className="font-mono text-xs text-muted">+{restantes}</span>

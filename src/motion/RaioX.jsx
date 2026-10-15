@@ -8,7 +8,7 @@ export default function RaioX({ src, alt, privado = false, className = '' }) {
 
   if (privado || !src) {
     return (
-      <div className={`relative flex aspect-[16/10] flex-col justify-center gap-2.5 overflow-hidden bg-[#f4efe3] p-6 ${className}`}>
+      <div className={`relative flex aspect-[16/10] flex-col justify-center gap-2.5 overflow-hidden bg-[#f5f4ee] p-6 ${className}`}>
         <span className="mb-1 font-mono text-[10px] uppercase tracking-[0.2em] text-accent">{t('confidencial', 'classified')}</span>
         {[92, 70, 84, 40, 76, 58].map((w, i) => (
           <span key={i} className="block h-3 bg-tinta" style={{ width: `${w}%`, opacity: i === 3 ? 0.25 : 0.92 }} />

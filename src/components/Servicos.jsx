@@ -54,7 +54,7 @@ export default function Servicos() {
     <section id="servicos" className="relative px-5 py-24 sm:px-8 lg:py-32" onPointerMove={move}>
       <div className="mx-auto max-w-[1320px]">
         <div className="mb-10 flex flex-wrap items-baseline justify-between gap-4 border-b border-tinta pb-4">
-          <h2 className="titulo-serifa text-4xl text-tinta sm:text-5xl">
+          <h2 className="titulo text-4xl text-tinta sm:text-5xl">
             {t('O que eu faço', 'What I do')}
           </h2>
           <p className="font-mao text-2xl text-tinta/70">{t('três frentes, o mesmo capricho', 'three fronts, the same care')}</p>
@@ -69,7 +69,7 @@ export default function Servicos() {
                 className="group grid items-center gap-x-6 gap-y-2 py-7 sm:grid-cols-[3rem_1fr_auto] lg:py-9"
               >
                 <span className="font-mono text-xs text-muted">{f.n}</span>
-                <span className="titulo-serifa text-[clamp(2.4rem,6.4vw,5.6rem)] text-tinta transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-x-3">
+                <span className="titulo text-[clamp(2.4rem,6.4vw,5.6rem)] text-tinta transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-x-3">
                   <Pincel tipo="sublinhado" ativo={ativa === i} semente={i + 21} duracao={0.45}>
                     {tr(f, 'titulo')}
                   </Pincel>

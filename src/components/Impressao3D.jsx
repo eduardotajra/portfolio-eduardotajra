@@ -62,7 +62,7 @@ export default function Impressao3D() {
         <div className="mb-14 grid items-center gap-10 lg:grid-cols-[1fr_320px]">
           <div>
             <p className="font-mao text-2xl text-accent">{t('a outra bancada', 'the other workbench')}</p>
-            <h2 className="titulo-serifa text-[clamp(3rem,7vw,6rem)] text-tinta">
+            <h2 className="titulo text-[clamp(3rem,7vw,6rem)] text-tinta">
               {t('Você manda o arquivo.', 'You send the file.')}
               <br />
               <em>
@@ -105,7 +105,7 @@ export default function Impressao3D() {
                   <Icone size={22} strokeWidth={2.3} />
                 </motion.div>
                 <div>
-                  <h3 className="titulo-serifa text-3xl text-tinta">{tr(item, 'titulo')}</h3>
+                  <h3 className="titulo text-3xl text-tinta">{tr(item, 'titulo')}</h3>
                   <p className="mt-2 leading-relaxed text-text-secondary">{tr(item, 'texto')}</p>
                 </div>
               </motion.div>
@@ -159,7 +159,7 @@ export default function Impressao3D() {
 
         <div className="mt-14 flex flex-col items-start gap-5 border-t border-tinta pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <p className="titulo-serifa text-4xl text-tinta">{t('Me conta o que você quer imprimir', 'Tell me what you want printed')}</p>
+            <p className="titulo text-4xl text-tinta">{t('Me conta o que você quer imprimir', 'Tell me what you want printed')}</p>
             <p className="mt-2 text-text-secondary">
               {t('Manda o arquivo ou a ideia pelo Discord que eu retorno com prazo e preço.', 'Send the file or the idea on Discord and I will get back with a deadline and a price.')}
             </p>

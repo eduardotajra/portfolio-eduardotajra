@@ -155,7 +155,7 @@ export default function Navbar() {
                     item.hash,
                     tr(item, 'label'),
                     () => setOpen(false),
-                    'titulo-serifa block py-4 text-3xl text-tinta transition-colors hover:text-accent'
+                    'titulo block py-4 text-3xl text-tinta transition-colors hover:text-accent'
                   )}
                 </li>
               ))}

@@ -78,7 +78,7 @@ function Card({ mod, i }) {
         <p className="font-mono text-[11px] uppercase tracking-wider text-[#8fd16a]">
           {String(i + 1).padStart(2, '0')} · {tr(mod, 'tipo')}
         </p>
-        <h3 className="titulo-serifa mt-2 text-4xl text-[#eef7e2]">{tr(mod, 'titulo')}</h3>
+        <h3 className="titulo mt-2 text-4xl text-[#eef7e2]">{tr(mod, 'titulo')}</h3>
         <p className="mt-2 text-[15px] leading-relaxed text-[#b9c9b0]">{tr(mod, 'chamada')}</p>
       </div>
     </Link>
@@ -151,7 +151,7 @@ export default function ModsDestaque() {
                   <PicaretaStopMotion />
                   {t('enquanto isso, no Minecraft', 'meanwhile, in Minecraft')}
                 </p>
-                <h2 className="titulo-serifa text-[clamp(3rem,7vw,6rem)]">{t('Mods e sistemas', 'Mods & systems')}</h2>
+                <h2 className="titulo text-[clamp(3rem,7vw,6rem)]">{t('Mods e sistemas', 'Mods & systems')}</h2>
                 <p className="mt-3 max-w-xl text-lg text-[#b9c9b0]">
                   {t(
                     'Armas com poderes, chefes, chats e mecânicas que o jogo não tem. Tudo programado por mim e gravado no próprio Minecraft.',
@@ -182,7 +182,7 @@ export default function ModsDestaque() {
                   <span className="flex h-12 w-12 items-center justify-center bg-[#8fd16a] text-noite transition-transform duration-300 group-hover:-rotate-6 group-hover:scale-110">
                     <DiscordIcon size={22} />
                   </span>
-                  <span className="titulo-serifa text-3xl">{t('O próximo pode ser o do seu servidor', 'The next one could be for your server')}</span>
+                  <span className="titulo text-3xl">{t('O próximo pode ser o do seu servidor', 'The next one could be for your server')}</span>
                   <span className="font-mono text-sm text-[#b9c9b0]">{t('me chama no Discord →', 'message me on Discord →')}</span>
                 </a>
               </motion.div>

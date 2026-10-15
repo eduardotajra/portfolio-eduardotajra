@@ -68,13 +68,13 @@ export default function Links() {
           <SeletorIdioma />
         </div>
 
-        {/* Identidade: monograma a tinta, nome em serifa e uma nota à mão. */}
+        {/* Identidade: monograma a tinta, nome em letra condensada e uma nota à mão. */}
         <div className="mb-10 text-center">
           <svg width="56" height="52" viewBox="0 0 26 24" fill="none" aria-hidden="true" className="mx-auto mb-4">
             <path d="M10 4H3v16h7M3 12h6M13 4h9" stroke="#17140f" strokeWidth="2.3" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M17.5 4v16" stroke="#bb2e17" strokeWidth="2.3" strokeLinecap="round" />
           </svg>
-          <h1 className="titulo-serifa text-5xl text-tinta">
+          <h1 className="titulo text-5xl text-tinta">
             Eduardo <em>Tajra</em>
           </h1>
           <p className="mt-2 text-text-secondary">
@@ -98,7 +98,7 @@ export default function Links() {
               }`}
             >
               <span className="min-w-0 flex-1">
-                <span className="titulo-serifa block text-2xl">{tr(acao, 'titulo')}</span>
+                <span className="titulo block text-2xl">{tr(acao, 'titulo')}</span>
                 <span className="block text-sm opacity-70">{tr(acao, 'sub')}</span>
               </span>
               {seta}

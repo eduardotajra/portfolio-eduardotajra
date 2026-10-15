@@ -69,7 +69,7 @@ function TimelineItem({ item, index }) {
         <p className="font-mao text-xl text-muted">{isEdu ? t('estudo', 'study') : t('trabalho', 'work')}</p>
       </div>
       <div>
-        <h3 className="titulo-serifa text-3xl text-tinta sm:text-4xl">{tr(item, 'title')}</h3>
+        <h3 className="titulo text-3xl text-tinta sm:text-4xl">{tr(item, 'title')}</h3>
         <p className="mt-1 text-sm font-medium uppercase tracking-wide text-accent">{item.org}</p>
         <p className="mt-3 max-w-2xl leading-relaxed text-text-secondary">{tr(item, 'description')}</p>
         <p className="mt-3 text-sm text-muted">{tr(item, 'tags').join(' · ')}</p>
@@ -91,7 +91,7 @@ export default function Experience() {
         <div className="mb-8 flex flex-wrap items-end justify-between gap-4 border-b border-tinta pb-4">
           <div>
             <p className="font-mao text-2xl text-accent">{t('de onde eu venho', 'where I come from')}</p>
-            <h2 className="titulo-serifa text-[clamp(3rem,6vw,5rem)] text-tinta">{t('Trajetória', 'Journey')}</h2>
+            <h2 className="titulo text-[clamp(3rem,6vw,5rem)] text-tinta">{t('Trajetória', 'Journey')}</h2>
           </div>
           <a
             href="/cv.pdf"

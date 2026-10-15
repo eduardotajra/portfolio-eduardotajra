@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 // Assinatura do site: o monograma ET se desenha a tinta ao abrir e de novo
-// quando o mouse passa; ao lado, o nome em serifa.
+// quando o mouse passa; ao lado, o nome em letra condensada.
 export default function Logo({ nome = true }) {
   const [volta, setVolta] = useState(0)
 
@@ -23,7 +23,7 @@ export default function Logo({ nome = true }) {
           />
         ))}
       </svg>
-      {nome && <span className="titulo-serifa text-[1.45rem] leading-none text-tinta">Eduardo Tajra</span>}
+      {nome && <span className="titulo text-[1.45rem] leading-none text-tinta">Eduardo Tajra</span>}
     </span>
   )
 }

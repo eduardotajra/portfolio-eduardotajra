@@ -58,8 +58,8 @@ export default function Flipbook({ quadros, legenda }) {
         }}
       >
         {/* páginas de baixo, dando volume ao caderno */}
-        <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-r-lg bg-[#d9d4c7]" />
-        <div className="absolute inset-0 translate-x-1 translate-y-1 rounded-r-lg bg-[#e8e3d6]" />
+        <div className="absolute inset-0 translate-x-2 translate-y-2 rounded-r-lg bg-[#d6d4ca]" />
+        <div className="absolute inset-0 translate-x-1 translate-y-1 rounded-r-lg bg-[#e7e5dd]" />
 
         <AnimatePresence initial={false} custom={dir}>
           <motion.div
@@ -70,7 +70,7 @@ export default function Flipbook({ quadros, legenda }) {
             animate="fica"
             exit="sai"
             transition={{ duration: 0.38, ease: [0.45, 0, 0.25, 1] }}
-            className="absolute inset-0 overflow-hidden rounded-r-lg border-[6px] border-[#f5f1e6] bg-[#f5f1e6] shadow-xl"
+            className="absolute inset-0 overflow-hidden rounded-r-lg border-[6px] border-[#f6f5ef] bg-[#f6f5ef] shadow-xl"
             style={{ transformOrigin: 'left center', backfaceVisibility: 'hidden' }}
           >
             <img src={quadros[pagina]} alt="" draggable="false" className="h-full w-full rounded-sm object-cover" />
@@ -84,7 +84,7 @@ export default function Flipbook({ quadros, legenda }) {
         {/* espiral */}
         <div className="pointer-events-none absolute -left-2 top-3 bottom-3 z-10 flex flex-col justify-between">
           {Array.from({ length: 9 }, (_, i) => (
-            <span key={i} className="h-2 w-4 rounded-full border-2 border-[#6f675a] bg-[#efe9dd]" />
+            <span key={i} className="h-2 w-4 rounded-full border-2 border-[#6a665b] bg-[#f1f0ea]" />
           ))}
         </div>
       </div>

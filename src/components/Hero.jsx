@@ -77,7 +77,7 @@ export default function Hero() {
             <Relogio />
           </motion.p>
 
-          <motion.h1 {...surge(0.15)} className="titulo-serifa text-[clamp(3.1rem,8.4vw,7.4rem)] text-tinta">
+          <motion.h1 {...surge(0.15)} className="titulo text-[clamp(3.1rem,8.4vw,7.4rem)] text-tinta">
             {t('Eu construo', 'I build')}
             <br />
             <PalavraCorrigida />

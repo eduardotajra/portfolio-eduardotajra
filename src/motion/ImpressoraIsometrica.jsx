@@ -72,9 +72,9 @@ export default function ImpressoraIsometrica({ className = '' }) {
     <div className={`relative ${className}`}>
       <svg ref={svg} viewBox="0 0 260 240" className="h-full w-full" aria-hidden="true">
         {/* mesa */}
-        <polygon points={pts([0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0])} fill="#e6dfd1" stroke="#17140f" strokeWidth="1.2" />
+        <polygon points={pts([0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0])} fill="#e5e3da" stroke="#17140f" strokeWidth="1.2" />
         {[2.5, 5, 7.5].map((v) => (
-          <g key={v} stroke="#b8ac95" strokeWidth="0.7">
+          <g key={v} stroke="#ada99b" strokeWidth="0.7">
             <line x1={iso(v, 0, 0)[0]} y1={iso(v, 0, 0)[1]} x2={iso(v, 10, 0)[0]} y2={iso(v, 10, 0)[1]} />
             <line x1={iso(0, v, 0)[0]} y1={iso(0, v, 0)[1]} x2={iso(10, v, 0)[0]} y2={iso(10, v, 0)[1]} />
           </g>

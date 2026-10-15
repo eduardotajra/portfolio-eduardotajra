@@ -16,7 +16,7 @@ export default function ProjectCard({ project, index = 0 }) {
   const { t, tr, en } = useIdioma()
   const temCodigo = Boolean(project.links.github) && !project.repoPrivate
   const escuro = (() => {
-    const n = parseInt((project.cor || '#e6dfd1').slice(1), 16)
+    const n = parseInt((project.cor || '#e5e3da').slice(1), 16)
     return 0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255) < 140
   })()
   const giro = inclinacoes[index % inclinacoes.length]
@@ -28,7 +28,7 @@ export default function ProjectCard({ project, index = 0 }) {
       whileHover={{ rotate: 0, y: -6 }}
       viewport={{ once: true, margin: '-60px' }}
       transition={{ type: 'spring', stiffness: 150, damping: 18, delay: (index % 3) * 0.06 }}
-      className="sombra-papel group relative flex h-full flex-col bg-[#fbf8f1] p-3"
+      className="sombra-papel group relative flex h-full flex-col bg-[#fbfbf7] p-3"
     >
       <span className="fita -top-3 left-6 z-10 -rotate-[4deg]" />
 
@@ -39,12 +39,12 @@ export default function ProjectCard({ project, index = 0 }) {
           // Projeto sem captura: capa tipográfica na cor do projeto.
           <div
             className={`relative flex aspect-[16/10] items-end overflow-hidden p-5 ${escuro ? 'text-papel' : 'text-tinta'}`}
-            style={{ backgroundColor: project.cor || '#e6dfd1' }}
+            style={{ backgroundColor: project.cor || '#e5e3da' }}
           >
-            <span aria-hidden="true" className="titulo-serifa absolute -right-3 -top-10 text-[11rem] italic leading-none opacity-15">
+            <span aria-hidden="true" className="titulo absolute -right-3 -top-10 text-[11rem] italic leading-none opacity-15">
               {project.title[0]}
             </span>
-            <span className="titulo-serifa relative text-4xl italic">{project.title}</span>
+            <span className="titulo relative text-4xl italic">{project.title}</span>
           </div>
         ) : (
           <div className="relative aspect-[16/10] bg-surface-2">
@@ -77,7 +77,7 @@ export default function ProjectCard({ project, index = 0 }) {
       <div className="flex flex-1 flex-col px-1 pt-4">
         <div className="flex items-baseline gap-3">
           <span className="font-mono text-xs text-muted">{String(index + 1).padStart(2, '0')}</span>
-          <h3 className="titulo-serifa text-[2rem] text-tinta">{project.title}</h3>
+          <h3 className="titulo text-[2rem] text-tinta">{project.title}</h3>
         </div>
         <p className="mt-2 flex-1 text-[15px] leading-relaxed text-text-secondary">{tr(project, 'description')}</p>
         <p className="mt-4 font-mono text-[11px] leading-relaxed text-muted">{project.tags.join(' · ')}</p>

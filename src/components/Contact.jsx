@@ -78,7 +78,7 @@ export default function Contact() {
         <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
           <div>
             <p className="font-mao text-2xl text-marca">{t('última página', 'last page')}</p>
-            <h2 className="titulo-serifa text-[clamp(3.6rem,11vw,10rem)] leading-[0.88]">
+            <h2 className="titulo text-[clamp(3.6rem,11vw,10rem)] leading-[0.88]">
               {t('Me conta', 'Tell me')}
               <br />
               <em>

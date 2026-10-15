@@ -12,9 +12,9 @@ const blocos = [
   { x: 30, y: 40, w: 340, h: 26, cor: '#17140f' },
   { x: 30, y: 80, w: 200, h: 90, cor: '#ffd84a' },
   { x: 245, y: 80, w: 125, h: 90, cor: '#9db4f5' },
-  { x: 30, y: 185, w: 105, h: 80, cor: '#e6dfd1' },
-  { x: 147, y: 185, w: 105, h: 80, cor: '#e6dfd1' },
-  { x: 264, y: 185, w: 105, h: 80, cor: '#e6dfd1' },
+  { x: 30, y: 185, w: 105, h: 80, cor: '#e5e3da' },
+  { x: 147, y: 185, w: 105, h: 80, cor: '#e5e3da' },
+  { x: 264, y: 185, w: 105, h: 80, cor: '#e5e3da' },
 ]
 
 // Contorno tremido de cada bloco, como quem desenha rápido numa folha.
@@ -49,7 +49,7 @@ const etapas = [
 
 function Rabisco({ i, progresso }) {
   const p = useTransform(progresso, [0.03 + i * 0.03, 0.18 + i * 0.03], [0, 1])
-  return <TracoLivre pontos={rabiscos[i]} opcoes={opcoesRabisco} cor="#4a4338" progresso={p} opacidade={0.85} />
+  return <TracoLivre pontos={rabiscos[i]} opcoes={opcoesRabisco} cor="#45423a" progresso={p} opacidade={0.85} />
 }
 
 function Bloco({ b, i, progresso }) {
@@ -97,9 +97,9 @@ export default function Processo() {
   const carimboEscala = useTransform(scrollYProgress, [0.89, 0.93], [1.8, 1])
 
   const codigo = [
-    [44, 98, 120, '#17140f'], [44, 110, 150, '#4a4338'], [56, 122, 90, '#bb2e17'],
-    [56, 134, 130, '#4a4338'], [44, 146, 70, '#1f4fd8'],
-    [42, 200, 70, '#4a4338'], [159, 200, 60, '#4a4338'], [276, 200, 75, '#4a4338'],
+    [44, 98, 120, '#17140f'], [44, 110, 150, '#45423a'], [56, 122, 90, '#bb2e17'],
+    [56, 134, 130, '#45423a'], [44, 146, 70, '#1f4fd8'],
+    [42, 200, 70, '#45423a'], [159, 200, 60, '#45423a'], [276, 200, 75, '#45423a'],
   ]
 
   return (
@@ -108,7 +108,7 @@ export default function Processo() {
         <div className="mx-auto grid w-full max-w-[1320px] items-center gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <div className="order-2 lg:order-1">
             <p className="font-mao mb-1 text-2xl text-accent">{t('como eu trabalho', 'how I work')}</p>
-            <h2 className="titulo-serifa mb-8 text-5xl text-tinta sm:text-6xl">{t('Do rabisco ao ar', 'From scribble to live')}</h2>
+            <h2 className="titulo mb-8 text-5xl text-tinta sm:text-6xl">{t('Do rabisco ao ar', 'From scribble to live')}</h2>
 
             <ol className="space-y-5 border-l-2 border-accent/70 pl-6">
               {etapas.map((e, i) => {
@@ -116,8 +116,8 @@ export default function Processo() {
                 return (
                   <li key={e.pt}>
                     <p className={`flex items-baseline gap-3 transition-colors duration-300 ${ativo ? 'text-tinta' : 'text-muted'}`}>
-                      <span className="titulo-serifa text-3xl italic">{i + 1}.</span>
-                      <span className="titulo-serifa text-3xl">{en ? e.en : e.pt}</span>
+                      <span className="titulo text-3xl italic">{i + 1}.</span>
+                      <span className="titulo text-3xl">{en ? e.en : e.pt}</span>
                     </p>
                     <motion.p
                       animate={{ opacity: ativo ? 1 : 0.45, x: ativo ? 0 : -4 }}
@@ -140,7 +140,7 @@ export default function Processo() {
               </defs>
               <motion.rect
                 x="10" y="10" width="380" height="280" rx="10"
-                fill="#f6f2e9"
+                fill="#f8f7f2"
                 stroke="#17140f"
                 strokeWidth="1.6"
                 style={{ pathLength: moldura }}

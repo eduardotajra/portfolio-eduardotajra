@@ -92,13 +92,13 @@ function Mod({ mod, i }) {
     <motion.article {...entrada} id={mod.id} className="scroll-mt-24 border-t border-tinta pt-10">
       <div className="grid gap-8 lg:grid-cols-[14rem_1fr]">
         <div className="lg:sticky lg:top-24 lg:self-start">
-          <p className="titulo-serifa text-7xl text-tinta/15 lg:text-8xl">{String(i + 1).padStart(2, '0')}</p>
+          <p className="titulo text-7xl text-tinta/15 lg:text-8xl">{String(i + 1).padStart(2, '0')}</p>
           <p className="mt-2 text-sm text-text-secondary">{tr(mod, 'tipo')}</p>
           <p className="font-mono text-xs text-muted">{mod.plataforma}</p>
         </div>
 
         <div className="min-w-0">
-          <h2 className="titulo-serifa text-[clamp(2.6rem,5.5vw,4.6rem)] text-tinta">{titulo}</h2>
+          <h2 className="titulo text-[clamp(2.6rem,5.5vw,4.6rem)] text-tinta">{titulo}</h2>
           <p className="mt-3 max-w-2xl text-lg leading-relaxed text-text-secondary">{tr(mod, 'resumo')}</p>
 
           <div className="mt-8 grid gap-8 xl:grid-cols-[1.3fr_1fr] xl:items-start">
@@ -140,7 +140,7 @@ function Mod({ mod, i }) {
           </div>
 
           {mod.flipbook && (
-            <div className="pauta mt-12 border border-tinta/10 bg-[#f6f1e6] px-4 py-10">
+            <div className="pauta mt-12 border border-tinta/10 bg-[#f6f5ef] px-4 py-10">
               <Flipbook
                 quadros={mod.flipbook}
                 legenda={t('folheie o eco construindo o pilar, quadro a quadro', 'flip through the echo building the pillar, frame by frame')}
@@ -189,7 +189,7 @@ export default function Mods() {
           <div className="grid gap-10 lg:grid-cols-[1fr_26rem]">
             <div>
               <p className="font-mao text-2xl text-accent">{t('a bancada de blocos', 'the block workbench')}</p>
-              <h1 className="titulo-serifa text-[clamp(3.2rem,8vw,7.4rem)] text-tinta">
+              <h1 className="titulo text-[clamp(3.2rem,8vw,7.4rem)] text-tinta">
                 {t('Mods e sistemas para ', 'Mods and systems for ')}
                 <Pincel tipo="sublinhado" semente={52} atraso={0.4}>
                   <em>{t('servidores', 'servers')}</em>
@@ -205,7 +205,7 @@ export default function Mods() {
                 <BotaoTinta href={contato.discord} target="_blank" rel="noopener noreferrer">
                   {t('Quero um mod', 'I want a mod')}
                 </BotaoTinta>
-                <Link to="/projetos" className="titulo-serifa text-2xl italic text-tinta transition-colors hover:text-accent">
+                <Link to="/projetos" className="titulo text-2xl italic text-tinta transition-colors hover:text-accent">
                   {t('ou ver os sites', 'or see the websites')}
                 </Link>
               </div>
@@ -219,7 +219,7 @@ export default function Mods() {
                   <li key={m.id} className="border-b border-tinta/15">
                     <a href={`#${m.id}`} className="group flex items-baseline gap-4 py-3 text-tinta">
                       <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
-                      <span className="titulo-serifa text-2xl transition-transform duration-300 group-hover:translate-x-1.5">{tr(m, 'titulo')}</span>
+                      <span className="titulo text-2xl transition-transform duration-300 group-hover:translate-x-1.5">{tr(m, 'titulo')}</span>
                       <span className="ml-auto font-mono text-[11px] text-muted">{m.plataforma}</span>
                     </a>
                   </li>
@@ -254,7 +254,7 @@ export default function Mods() {
                   <a href={e.link} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-4 py-5">
                     <GithubIcon size={18} className="mt-1.5 shrink-0 text-tinta" />
                     <span className="min-w-0 flex-1">
-                      <span className="titulo-serifa block text-3xl text-tinta">{e.titulo}</span>
+                      <span className="titulo block text-3xl text-tinta">{e.titulo}</span>
                       <span className="mt-1 block leading-relaxed text-text-secondary">{tr(e, 'descricao')}</span>
                     </span>
                     <ArrowUpRight size={20} className="mt-1.5 shrink-0 text-tinta transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
@@ -264,7 +264,7 @@ export default function Mods() {
             </ul>
           </div>
           <div className="flex flex-col justify-between gap-8 bg-tinta p-8 text-papel sm:p-10">
-            <p className="titulo-serifa text-[clamp(2.4rem,4.5vw,3.8rem)]">
+            <p className="titulo text-[clamp(2.4rem,4.5vw,3.8rem)]">
               {t('Tem uma ideia para o seu ', 'Got an idea for your ')}
               <em className="text-marca">{t('servidor?', 'server?')}</em>
             </p>

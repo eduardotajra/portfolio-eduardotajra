@@ -52,7 +52,7 @@ export default function Projetos() {
           <div className="grid items-end gap-8 border-b border-tinta pb-10 lg:grid-cols-[1fr_24rem]">
             <div>
               <p className="font-mao text-2xl text-accent">{t('a gaveta inteira', 'the whole drawer')}</p>
-              <h1 className="titulo-serifa text-[clamp(3.4rem,9vw,8rem)] text-tinta">
+              <h1 className="titulo text-[clamp(3.4rem,9vw,8rem)] text-tinta">
                 {t('Todos os ', 'All the ')}
                 <Pincel tipo="marca" semente={44} atraso={0.3}>
                   <em>{t('projetos', 'projects')}</em>
@@ -87,7 +87,7 @@ export default function Projetos() {
                 className={`py-2 text-xl transition-colors duration-200 ${ativo ? 'text-tinta' : 'text-text-secondary hover:text-tinta'}`}
               >
                 <Pincel tipo="sublinhado" ativo={ativo} semente={id.length * 7} duracao={0.45}>
-                  <span className="titulo-serifa italic">{tr(aba, 'label')}</span>
+                  <span className="titulo italic">{tr(aba, 'label')}</span>
                 </Pincel>
                 <sup className="ml-1 font-mono text-[11px] text-muted">{contagem[id]}</sup>
               </button>

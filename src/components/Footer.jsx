@@ -46,7 +46,7 @@ export default function Footer() {
         {/* Assinatura enorme no pé da página. */}
         <p
           aria-hidden="true"
-          className="titulo-serifa mt-14 select-none whitespace-nowrap text-center text-[15.5vw] leading-[0.8] text-papel transition-colors duration-500 hover:text-marca lg:text-[13.2rem]"
+          className="titulo mt-14 select-none whitespace-nowrap text-center text-[15.5vw] leading-[0.8] text-papel transition-colors duration-500 hover:text-marca lg:text-[13.2rem]"
         >
           Eduardo <em>Tajra</em>
         </p>

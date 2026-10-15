@@ -36,7 +36,7 @@ export default function About() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="font-mao text-2xl text-accent">{t('quem escreve isso', 'who writes this')}</p>
-          <h2 className="titulo-serifa mb-8 text-[clamp(3rem,7vw,6rem)] text-tinta">
+          <h2 className="titulo mb-8 text-[clamp(3rem,7vw,6rem)] text-tinta">
             {t('Olá, sou o ', "Hi, I'm ")}
             <Pincel tipo="marca" semente={31}>
               <em>Eduardo.</em>
@@ -96,7 +96,7 @@ export default function About() {
           transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="lg:pt-24"
         >
-          <h3 className="titulo-serifa mb-6 border-b border-tinta pb-3 text-3xl text-tinta">{t('Com o que eu trabalho', 'What I work with')}</h3>
+          <h3 className="titulo mb-6 border-b border-tinta pb-3 text-3xl text-tinta">{t('Com o que eu trabalho', 'What I work with')}</h3>
           <p className="text-xl leading-[1.75] text-text-secondary">
             {ferramentas.map((g, i) => (
               <span key={g.pt}>
