@@ -81,6 +81,8 @@ export const mods = [
     numeros: ['41 classes', 'JUnit'],
     credito: null,
     video: { src: '/mods/ecos-do-tempo.mp4', poster: '/mods/ecos-poster.jpg', loop: true },
+    // Quadros da mesma gravação, para folhear como um caderninho.
+    flipbook: Array.from({ length: 12 }, (_, i) => `/mods/flipbook/eco-${String(i + 1).padStart(2, '0')}.jpg`),
     galeria: [
       { src: '/mods/ecos-chega.jpg', legenda: 'O eco aparece' },
       { src: '/mods/ecos-dissolve.jpg', legenda: 'No fim, ele se desfaz' },

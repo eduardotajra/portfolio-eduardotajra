@@ -1,12 +1,15 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Code2, Box, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
+import { IconeCodigo, IconeCamadas } from '../motion/IconesAnimados'
+import { seguirMouse } from '../motion/mouse'
+import { Titulo } from '../motion/Tipografia'
 
 const frentes = [
   {
-    icone: Code2,
+    icone: IconeCodigo,
     titulo: 'Desenvolvimento web',
     titulo_en: 'Web development',
     resumo:
@@ -35,7 +38,7 @@ const frentes = [
     cor: 'accent',
   },
   {
-    icone: Box,
+    icone: IconeCamadas,
     titulo: 'Impressão 3D',
     titulo_en: '3D printing',
     resumo:
@@ -66,6 +69,7 @@ const frentes = [
 
 function Frente({ frente, index }) {
   const { tr } = useIdioma()
+  const [ativo, setAtivo] = useState(false)
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const Icone = frente.icone
@@ -77,7 +81,10 @@ function Frente({ frente, index }) {
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-      className={`group flex flex-col rounded-xl border bg-surface p-7 transition-colors duration-300 ${
+      onPointerMove={seguirMouse}
+      onPointerEnter={() => setAtivo(true)}
+      onPointerLeave={() => setAtivo(false)}
+      className={`holofote group relative flex flex-col overflow-hidden rounded-xl border bg-surface p-7 transition-colors duration-300 [&>*]:relative [&>*]:z-[1] ${
         ehAccent
           ? 'border-accent/25 hover:border-accent/60'
           : 'border-cyan/25 hover:border-cyan/60'
@@ -90,7 +97,7 @@ function Frente({ frente, index }) {
             : 'border-cyan/25 bg-cyan/10 text-cyan'
         }`}
       >
-        <Icone size={20} />
+        <Icone ativo={ativo} />
       </div>
 
       <h3 className="mb-2 text-xl font-semibold text-text-primary">{tr(frente, 'titulo')}</h3>
@@ -145,9 +152,9 @@ export default function Servicos() {
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
             {t('o que eu faço', 'what I do')}
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
+          <Titulo className="text-3xl sm:text-4xl font-bold text-text-primary">
             {t('Duas frentes, o mesmo jeito de trabalhar', 'Two fronts, one way of working')}
-          </h2>
+          </Titulo>
         </motion.div>
 
         <div className="grid gap-5 md:grid-cols-2">

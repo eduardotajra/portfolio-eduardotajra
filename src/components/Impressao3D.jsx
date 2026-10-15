@@ -3,11 +3,17 @@ import { motion, useInView } from 'framer-motion'
 import { Upload, Sparkles, Wrench, PenTool, ArrowRight } from 'lucide-react'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
+import ImpressoraIsometrica from '../motion/ImpressoraIsometrica'
+import { CirculoMao } from '../motion/Rabiscos'
+import { Titulo } from '../motion/Tipografia'
 
 const pecas = [
-  { arquivo: '/impressao3d/trofeu.jpg', legenda: 'Réplica de troféu com acabamento metálico', legenda_en: 'Trophy replica with a metallic finish' },
-  { arquivo: '/impressao3d/suporte-controle.jpg', legenda: 'Suporte de controle em formato de tentáculo', legenda_en: 'Tentacle-shaped controller stand' },
-  { arquivo: '/impressao3d/dinossauro.jpg', legenda: 'Dinossauro com textura de tricô', legenda_en: 'Dinosaur with a knitted texture' },
+  { arquivo: '/impressao3d/trofeu.jpg', legenda: 'Réplica de troféu com acabamento metálico', legenda_en: 'Trophy replica with a metallic finish',
+    nota: 'acabamento metálico', nota_en: 'metallic finish', circulo: { left: '12%', top: '1%', width: '76%' }, posNota: { right: '4%', top: '44%' } },
+  { arquivo: '/impressao3d/suporte-controle.jpg', legenda: 'Suporte de controle em formato de tentáculo', legenda_en: 'Tentacle-shaped controller stand',
+    nota: 'tentáculo!', nota_en: 'tentacle!', circulo: { left: '18%', top: '38%', width: '70%' }, posNota: { left: '6%', top: '8%' } },
+  { arquivo: '/impressao3d/dinossauro.jpg', legenda: 'Dinossauro com textura de tricô', legenda_en: 'Dinosaur with a knitted texture',
+    nota: 'textura de tricô', nota_en: 'knitted texture', circulo: { left: '34%', top: '14%', width: '62%' }, posNota: { left: '5%', bottom: '14%' } },
 ]
 
 const comoFunciona = [
@@ -57,9 +63,14 @@ function Item({ item, index }) {
       transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       className="flex gap-4"
     >
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-cyan/25 bg-cyan/10 text-cyan">
-        <Icone size={18} />
-      </div>
+      <motion.div
+        whileHover={{ scaleX: 1.14, scaleY: 0.86, rotate: -4 }}
+        whileTap={{ scaleX: 0.9, scaleY: 1.1 }}
+        transition={{ type: 'spring', stiffness: 500, damping: 12 }}
+        className="argila flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center"
+      >
+        <Icone size={20} strokeWidth={2.4} />
+      </motion.div>
       <div>
         <h3 className="mb-1 text-sm font-semibold text-text-primary">{tr(item, 'titulo')}</h3>
         <p className="text-sm leading-relaxed text-text-secondary">{tr(item, 'texto')}</p>
@@ -81,20 +92,23 @@ export default function Impressao3D() {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-12 max-w-2xl"
+          className="mb-12 grid items-center gap-8 md:grid-cols-[1fr_260px]"
         >
+          <div className="max-w-2xl">
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-cyan">
             {t('impressão 3D', '3D printing')}
           </p>
-          <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <Titulo className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
             {t('Você manda o arquivo. Ou só a ideia.', 'You send the file. Or just the idea.')}
-          </h2>
+          </Titulo>
           <p className="text-text-secondary">
             {t(
               'Imprimo peças sob encomenda: o modelo que você já tem, um que a gente escolhe junto, ou um que eu desenho quando não existe pronto.',
               'I print made-to-order pieces: the model you already have, one we pick together, or one I design when nothing ready exists.'
             )}
           </p>
+          </div>
+          <ImpressoraIsometrica className="mx-auto h-56 w-64" />
         </motion.div>
 
         <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
@@ -114,18 +128,29 @@ export default function Impressao3D() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.2 + i * 0.06 }}
-                className={`overflow-hidden rounded-xl border border-border bg-surface ${
+                className={`group overflow-hidden rounded-xl border border-border bg-surface ${
                   i === 0 ? 'col-span-2 sm:col-span-1' : ''
                 }`}
               >
-                <img
-                  src={peca.arquivo}
-                  alt={tr(peca, 'legenda')}
-                  loading="lazy"
-                  width="900"
-                  height="1200"
-                  className="aspect-[3/4] w-full border-b border-border object-cover"
-                />
+                {/* Mixed media: foto real + granulado + anotação à mão por cima. */}
+                <div className="granulado relative aspect-[3/4] overflow-hidden border-b border-border">
+                  <img
+                    src={peca.arquivo}
+                    alt={tr(peca, 'legenda')}
+                    loading="lazy"
+                    width="900"
+                    height="1200"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                  />
+                  <CirculoMao className="absolute z-[1]" style={peca.circulo} atraso={0.3 + i * 0.25} />
+                  <span
+                    aria-hidden="true"
+                    className="font-mao absolute z-[2] -rotate-6 text-2xl font-bold text-amber-300 [text-shadow:0_2px_8px_rgba(0,0,0,0.85)] sm:text-[1.7rem]"
+                    style={peca.posNota}
+                  >
+                    {tr(peca, 'nota')}
+                  </span>
+                </div>
                 <figcaption className="px-3 py-2.5 text-xs text-text-secondary">
                   {tr(peca, 'legenda')}
                 </figcaption>

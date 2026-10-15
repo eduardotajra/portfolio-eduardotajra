@@ -51,16 +51,21 @@ export function SeletorIdioma({ className = '' }) {
     <div
       role="group"
       aria-label="Idioma / Language"
-      className={`inline-flex items-center rounded-md border border-border-2 p-0.5 font-mono text-[11px] ${className}`}
+      className={`neu-trilho relative inline-grid grid-cols-2 rounded-lg p-1 font-mono text-[11px] ${className}`}
     >
+      <span
+        aria-hidden="true"
+        className="neu-botao absolute bottom-1 left-1 top-1 w-[calc(50%-4px)] rounded-md transition-transform duration-300 ease-[cubic-bezier(.34,1.56,.64,1)]"
+        style={{ transform: lang === 'en' ? 'translateX(100%)' : 'translateX(0)' }}
+      />
       {['pt', 'en'].map((l) => (
         <button
           key={l}
           type="button"
           onClick={() => setLang(l)}
           aria-pressed={lang === l}
-          className={`rounded px-2 py-1 uppercase transition-colors ${
-            lang === l ? 'bg-accent/15 text-accent' : 'text-text-secondary hover:text-text-primary'
+          className={`relative z-10 rounded-md px-2.5 py-1 uppercase transition-colors duration-300 active:scale-90 ${
+            lang === l ? 'text-accent' : 'text-text-secondary hover:text-text-primary'
           }`}
         >
           {l}

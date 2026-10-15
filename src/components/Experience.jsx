@@ -1,7 +1,8 @@
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useSpring } from 'framer-motion'
 import { GraduationCap, Briefcase, Download } from 'lucide-react'
 import { useIdioma } from '../i18n'
+import { Titulo } from '../motion/Tipografia'
 
 const items = [
   {
@@ -65,15 +66,12 @@ function TimelineItem({ item, index }) {
       transition={{ duration: 0.5, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
       className="relative pl-8 pb-10 last:pb-0"
     >
-      {/* Line */}
-      <div className="absolute left-[11px] top-6 bottom-0 w-px bg-border last:hidden" />
-
       {/* Dot */}
       <div
-        className={`absolute left-0 top-1 w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center ${
+        className={`absolute left-0 top-1 z-[1] w-[22px] h-[22px] rounded-full border-2 flex items-center justify-center ${
           isEdu
-            ? 'border-accent bg-accent/10'
-            : 'border-cyan bg-cyan/10'
+            ? 'border-accent bg-[#151533]'
+            : 'border-cyan bg-[#0b2530]'
         }`}
       >
         {isEdu
@@ -112,6 +110,10 @@ export default function Experience() {
   const { t } = useIdioma()
   const headingRef = useRef(null)
   const headingInView = useInView(headingRef, { once: true, margin: '-60px' })
+  const linhaRef = useRef(null)
+  // A linha da trajetória se desenha conforme a página rola.
+  const { scrollYProgress } = useScroll({ target: linhaRef, offset: ['start 75%', 'end 55%'] })
+  const linha = useSpring(scrollYProgress, { stiffness: 120, damping: 24 })
 
   return (
     <section id="experience" className="py-32 px-6 bg-surface/20">
@@ -127,9 +129,9 @@ export default function Experience() {
             {t('formação', 'background')}
           </p>
           <div className="flex flex-wrap items-center justify-between gap-4">
-            <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
+            <Titulo className="text-3xl sm:text-4xl font-bold text-text-primary">
               {t('Trajetória', 'Journey')}
-            </h2>
+            </Titulo>
             <a
               href="/cv.pdf"
               download
@@ -152,7 +154,13 @@ export default function Experience() {
           </div>
         </div>
 
-        <div>
+        <div ref={linhaRef} className="relative">
+          <div aria-hidden="true" className="absolute bottom-2 left-[11px] top-3 w-px bg-border" />
+          <motion.div
+            aria-hidden="true"
+            className="absolute bottom-2 left-[11px] top-3 w-px origin-top bg-gradient-to-b from-accent via-cyan to-accent shadow-[0_0_8px_rgba(129,140,248,0.8)]"
+            style={{ scaleY: linha }}
+          />
           {items.map((item, i) => (
             <TimelineItem key={i} item={item} index={i} />
           ))}

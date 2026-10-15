@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { useIdioma, SeletorIdioma } from '../i18n'
+import Logo from '../motion/Logo'
 
 const links = [
   { hash: '#servicos', label: 'Serviços', label_en: 'Services' },
@@ -77,7 +78,7 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? 'bg-bg/80 backdrop-blur-md border-b border-border'
+          ? 'bg-bg/60 backdrop-blur-xl backdrop-saturate-150 border-b border-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.25)]'
           : 'bg-transparent'
       }`}
     >
@@ -85,9 +86,10 @@ export default function Navbar() {
         <Link
           to="/"
           onClick={() => setOpen(false)}
-          className="font-mono text-sm text-accent font-medium tracking-wider hover:text-text-primary transition-colors"
+          aria-label="Eduardo Tajra"
+          className="transition-opacity hover:opacity-90"
         >
-          ET<span className="text-text-secondary">.dev</span>
+          <Logo />
         </Link>
 
         {/* Desktop */}
@@ -102,7 +104,7 @@ export default function Navbar() {
                   hash,
                   label,
                   undefined,
-                  `relative text-sm font-medium transition-colors duration-200 ${
+                  `relative text-sm font-medium transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-accent/50 after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100 ${
                     isActive
                       ? 'text-text-primary'
                       : 'text-text-secondary hover:text-text-primary'

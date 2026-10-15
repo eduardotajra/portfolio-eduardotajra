@@ -5,6 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import ProjectCard from '../components/ProjectCard'
 import { projects, categorias } from '../data/projects'
 import { useIdioma } from '../i18n'
+import { Titulo } from '../motion/Tipografia'
 
 export default function Projetos() {
   const [filtro, setFiltro] = useState('todos')
@@ -51,9 +52,9 @@ export default function Projetos() {
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
             {t('arquivo', 'archive')}
           </p>
-          <h1 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <Titulo as="h1" className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
             {t('Todos os projetos', 'All projects')}
-          </h1>
+          </Titulo>
           <p className="mb-10 max-w-xl text-text-secondary">
             {t(
               'Tudo que já construí e está de pé, do trabalho encomendado ao projeto que existe só porque a ideia era boa demais para ficar na cabeça.',

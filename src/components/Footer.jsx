@@ -11,6 +11,7 @@ import {
 } from './icons'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
+import Logo from '../motion/Logo'
 
 // Mesmo conjunto e mesma ordem de /links, para os dois lugares nunca divergirem.
 const redes = [
@@ -30,11 +31,8 @@ export default function Footer() {
       <div className="mx-auto flex max-w-5xl flex-col gap-8">
         <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
           <div>
-            <Link
-              to="/"
-              className="font-mono text-sm font-medium tracking-wider text-accent transition-colors hover:text-text-primary"
-            >
-              ET<span className="text-text-secondary">.dev</span>
+            <Link to="/" aria-label="Eduardo Tajra" className="inline-block">
+              <Logo />
             </Link>
             <p className="mt-2 max-w-xs text-sm text-text-secondary">
               {t('Desenvolvimento web e impressão 3D, feitos sob encomenda.', 'Web development and 3D printing, made to order.')}
@@ -89,6 +87,14 @@ export default function Footer() {
             </a>
           </div>
         </div>
+
+        {/* Letreiro grande: só o contorno, e o gradiente acende no hover. */}
+        <p
+          aria-hidden="true"
+          className="select-none whitespace-nowrap text-center text-[13.5vw] font-black leading-none tracking-tight text-transparent transition-all duration-500 [-webkit-text-stroke:1px_rgba(129,140,248,0.22)] hover:gradiente-vivo hover:[-webkit-text-stroke:0px] lg:text-[9.5rem]"
+        >
+          Eduardo Tajra
+        </p>
       </div>
     </footer>
   )

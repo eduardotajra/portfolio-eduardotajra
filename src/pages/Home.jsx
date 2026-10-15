@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Hero from '../components/Hero'
 import Servicos from '../components/Servicos'
+import Processo from '../components/Processo'
 import Projects from '../components/Projects'
 import ModsDestaque from '../components/ModsDestaque'
 import Impressao3D from '../components/Impressao3D'
@@ -46,6 +47,7 @@ export default function Home() {
     <>
       <Hero />
       <Servicos />
+      <Processo />
       <Projects />
       <ModsDestaque />
       <Impressao3D />

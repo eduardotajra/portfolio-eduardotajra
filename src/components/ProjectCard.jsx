@@ -3,6 +3,7 @@ import { motion, useInView } from 'framer-motion'
 import { ExternalLink, Lock } from 'lucide-react'
 import { GithubIcon } from './icons'
 import { useIdioma } from '../i18n'
+import { Inclina, ImagemEsqueleto } from '../motion/Interacoes'
 
 const estiloCategoria = {
   clientes: 'text-accent border-accent/30 bg-accent/10',
@@ -42,8 +43,9 @@ export default function ProjectCard({ project, index = 0 }) {
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: (index % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="group flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-all duration-300 hover:border-border-2 glow-accent-hover"
+      className="h-full"
     >
+      <Inclina className="group borda-viva flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,box-shadow] duration-300 hover:border-border-2 glow-accent-hover">
       {/* Prévia */}
       <div className="relative overflow-hidden bg-surface-2" style={{ height: '180px' }}>
         <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-1.5 border-b border-border bg-[#0d0d18] px-3 py-2">
@@ -58,11 +60,12 @@ export default function ProjectCard({ project, index = 0 }) {
         </div>
 
         {project.screenshot ? (
-          <img
+          <ImagemEsqueleto
             src={project.screenshot}
             alt={t(`Prévia de ${project.title}`, `Preview of ${project.title}`)}
             loading="lazy"
-            className="h-full w-full object-cover object-top pt-7 transition-transform duration-500 group-hover:scale-[1.03]"
+            classeCaixa="pt-7"
+            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
           />
         ) : (
           <div
@@ -131,6 +134,7 @@ export default function ProjectCard({ project, index = 0 }) {
           )}
         </div>
       </div>
+      </Inclina>
     </motion.article>
   )
 }

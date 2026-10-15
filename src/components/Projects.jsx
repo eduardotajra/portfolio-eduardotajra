@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import ProjectCard from './ProjectCard'
 import { projects } from '../data/projects'
 import { useIdioma } from '../i18n'
+import { Titulo } from '../motion/Tipografia'
 
 export default function Projects() {
   const { t } = useIdioma()
@@ -27,9 +28,9 @@ export default function Projects() {
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
             {t('projetos', 'projects')}
           </p>
-          <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <Titulo className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
             {t('Ideias que viraram coisas de verdade', 'Ideas that became real things')}
-          </h2>
+          </Titulo>
           <p className="max-w-xl text-text-secondary">
             {t(
               'Jogos, experiências interativas, sites e ferramentas. Alguns foram encomendados, outros nasceram de uma ideia estranha que eu quis ver de pé.',

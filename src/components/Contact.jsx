@@ -1,9 +1,12 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { Mail, Download, Code2, Box } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
+import { Mail, Download, Code2, Box, Check } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
+import { Titulo } from '../motion/Tipografia'
+import { BotaoMagnetico } from '../motion/Interacoes'
+import Mascote from '../motion/Mascote'
 
 // Discord é o canal comercial: fica em destaque e abre direto o meu perfil.
 const orcamentos = [
@@ -25,16 +28,54 @@ const orcamentos = [
 
 // Canais profissionais: continuam à mão, sem disputar a atenção com o orçamento.
 const profissionais = [
-  { Icone: Mail, rotulo: 'E-mail', rotulo_en: 'Email', href: `mailto:${contato.email}` },
   { Icone: GithubIcon, rotulo: 'GitHub', href: contato.github },
   { Icone: LinkedinIcon, rotulo: 'LinkedIn', href: contato.linkedin },
   { Icone: Download, rotulo: 'Currículo', rotulo_en: 'Résumé (PT)', href: '/cv.pdf', baixar: true },
 ]
 
+// Microinteração: o e-mail é copiado com um clique e o ícone vira um "certo".
+function CopiaEmail() {
+  const { t } = useIdioma()
+  const [copiado, setCopiado] = useState(false)
+  const copia = async () => {
+    try {
+      await navigator.clipboard.writeText(contato.email)
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 1800)
+    } catch {
+      window.location.href = `mailto:${contato.email}`
+    }
+  }
+  return (
+    <button
+      type="button"
+      onClick={copia}
+      className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+    >
+      <span className="relative h-[15px] w-[15px]">
+        <AnimatePresence initial={false} mode="wait">
+          <motion.span
+            key={copiado ? 'ok' : 'mail'}
+            initial={{ scale: 0, rotate: -90 }}
+            animate={{ scale: 1, rotate: 0 }}
+            exit={{ scale: 0, rotate: 90 }}
+            transition={{ type: 'spring', stiffness: 500, damping: 22 }}
+            className="absolute inset-0"
+          >
+            {copiado ? <Check size={15} className="text-emerald-400" /> : <Mail size={15} />}
+          </motion.span>
+        </AnimatePresence>
+      </span>
+      <span aria-live="polite">{copiado ? t('E-mail copiado!', 'Email copied!') : t('Copiar e-mail', 'Copy email')}</span>
+    </button>
+  )
+}
+
 export default function Contact() {
   const { t, tr } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const [animado, setAnimado] = useState(false)
 
   return (
     <section id="contact" className="px-6 py-24">
@@ -45,12 +86,15 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
         >
+          <div className="mb-6 flex justify-center pt-8">
+            <Mascote feliz={animado} />
+          </div>
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
             {t('contato', 'contact')}
           </p>
-          <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <Titulo className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
             {t('Me conta sua ideia', 'Tell me your idea')}
-          </h2>
+          </Titulo>
           <p className="mb-10 leading-relaxed text-text-secondary">
             {t('Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso.', 'Tell me what you need and I will get back with a deadline and a price, no strings attached.')}
           </p>
@@ -61,26 +105,26 @@ export default function Contact() {
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-10 flex flex-col justify-center gap-3 sm:flex-row"
+          onPointerEnter={() => setAnimado(true)}
+          onPointerLeave={() => setAnimado(false)}
         >
           {orcamentos.map((item) => {
             const { icone: Icone, href, cor } = item
-            const titulo = tr(item, 'titulo')
             const ehAccent = cor === 'accent'
             return (
-              <a
-                key={titulo}
+              <BotaoMagnetico
+                key={item.titulo}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold transition-all duration-200 ${
-                  ehAccent
-                    ? 'bg-accent text-bg hover:bg-accent/90 glow-accent'
-                    : 'border border-cyan/40 text-cyan hover:border-cyan hover:bg-cyan/10'
+                corGota={ehAccent ? 'rgba(255,255,255,0.22)' : 'rgba(34,211,238,0.18)'}
+                className={`flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold ${
+                  ehAccent ? 'bg-accent text-bg glow-accent' : 'border border-cyan/40 text-cyan'
                 }`}
               >
                 <Icone size={16} />
-                {titulo}
-              </a>
+                {tr(item, 'titulo')}
+              </BotaoMagnetico>
             )
           })}
         </motion.div>
@@ -91,21 +135,21 @@ export default function Contact() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
         >
+          <CopiaEmail />
           {profissionais.map((item) => {
             const { Icone, href, baixar } = item
-            const rotulo = tr(item, 'rotulo')
             return (
-            <a
-              key={item.rotulo}
-              href={href}
-              download={baixar || undefined}
-              target={href.startsWith('http') ? '_blank' : undefined}
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
-            >
-              <Icone size={15} />
-              {rotulo}
-            </a>
+              <a
+                key={item.rotulo}
+                href={href}
+                download={baixar || undefined}
+                target={href.startsWith('http') ? '_blank' : undefined}
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+              >
+                <Icone size={15} />
+                {tr(item, 'rotulo')}
+              </a>
             )
           })}
         </motion.div>

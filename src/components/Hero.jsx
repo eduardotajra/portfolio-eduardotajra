@@ -4,6 +4,11 @@ import { ArrowDown, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
+import BolhaLiquida from '../motion/BolhaLiquida'
+import { LetrasVivas } from '../motion/Tipografia'
+import MorphIcone from '../motion/Morph'
+import { Sublinhado, SetaMao } from '../motion/Rabiscos'
+import { BotaoMagnetico } from '../motion/Interacoes'
 
 // Coisas que ele realmente entregou — nada genérico, e a impressão 3D
 // aparece já na primeira dobra.
@@ -73,10 +78,37 @@ export default function Hero() {
         }}
       />
 
+      {/* Movimento ambiente: orbes de luz que flutuam devagar. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div
+          className="absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
+          style={{ animation: 'orbe-flutua 18s ease-in-out infinite' }}
+        />
+        <div
+          className="absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-cyan/10 blur-3xl"
+          style={{ animation: 'orbe-flutua 22s ease-in-out infinite reverse' }}
+        />
+      </div>
+
+      {/* Renderização em tempo real: metal líquido calculado na GPU. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[min(115vw,820px)] -translate-x-1/2 -translate-y-[54%]"
+      >
+        <motion.div
+          className="h-full w-full"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.6, delay: 0.3 }}
+        >
+          <BolhaLiquida className="h-full w-full opacity-[0.38] mix-blend-screen" />
+        </motion.div>
+      </div>
+
       <div className="relative z-10 max-w-3xl mx-auto text-center">
         <motion.div
           {...surge(0.05)}
-          className="inline-flex items-center gap-2 rounded-full border border-border-2 bg-surface/60 px-3 py-1.5 mb-8"
+          className="vidro vidro-brilho inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-8"
         >
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -87,17 +119,19 @@ export default function Hero() {
           </span>
         </motion.div>
 
-        <motion.h1
-          {...surge(0.15)}
+        <h1
+          aria-label="Eduardo Tajra"
           className="text-[clamp(2.25rem,11vw,4.5rem)] font-extrabold tracking-tight text-text-primary leading-none mb-5"
         >
-          Eduardo <span className="text-gradient">Tajra</span>
-        </motion.h1>
+          <LetrasVivas texto="Eduardo" atraso={0.15} />{' '}
+          <LetrasVivas texto="Tajra" gradiente atraso={0.5} />
+        </h1>
 
         <motion.p
           {...surge(0.3)}
           className="font-mono text-base sm:text-xl text-text-secondary min-h-[3.5rem] sm:min-h-[2rem] flex items-center justify-center flex-wrap gap-x-2"
         >
+          <MorphIcone indice={indice} className="h-6 w-6 shrink-0" />
           <span>{t('eu construo', 'I build')}</span>
           <span className="text-accent">
             {texto}
@@ -111,26 +145,42 @@ export default function Hero() {
         >
           {t('Projetos web sob medida e impressão 3D sob encomenda.', 'Custom web projects and made-to-order 3D printing.')}
           <br className="hidden sm:block" />{' '}
-          {t('Quanto mais incomum a ideia, melhor.', 'The stranger the idea, the better.')}
+          {en ? (
+            <>
+              The <Sublinhado atraso={1.4}>stranger</Sublinhado> the idea, the better.
+            </>
+          ) : (
+            <>
+              Quanto mais <Sublinhado atraso={1.4}>incomum</Sublinhado> a ideia, melhor.
+            </>
+          )}
         </motion.p>
 
-        <motion.div {...surge(0.5)} className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
-          <a
+        <motion.div {...surge(0.5)} className="relative flex flex-col sm:flex-row gap-3 justify-center mb-10">
+          {/* Rabisco à mão apontando o primeiro botão (só onde cabe). */}
+          <div aria-hidden="true" className="pointer-events-none absolute -left-40 -top-12 hidden w-40 lg:block">
+            <span className="font-mao block -rotate-6 text-2xl text-amber-300/90">
+              {t('começa por aqui', 'start here')}
+            </span>
+            <SetaMao className="ml-12 h-12 w-16" cor="rgba(252,211,77,0.9)" atraso={1.8} />
+          </div>
+          <BotaoMagnetico
             href={contato.discord}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg bg-accent text-bg font-semibold text-sm hover:bg-accent/90 transition-all duration-200 glow-accent"
+            className="px-6 py-3 rounded-lg bg-accent text-bg font-semibold text-sm glow-accent"
           >
             {t('Tenho uma ideia', 'I have an idea')}
-          </a>
-          <a
+          </BotaoMagnetico>
+          <BotaoMagnetico
             href={contato.discord}
             target="_blank"
             rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg border border-cyan/40 text-cyan font-semibold text-sm hover:border-cyan hover:bg-cyan/5 transition-all duration-200"
+            corGota="rgba(34,211,238,0.18)"
+            className="px-6 py-3 rounded-lg border border-cyan/40 text-cyan font-semibold text-sm"
           >
             {t('Quero imprimir uma peça', 'I want something printed')}
-          </a>
+          </BotaoMagnetico>
         </motion.div>
 
         <motion.div
@@ -146,7 +196,7 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="text-muted hover:text-accent transition-colors duration-200"
+            className="text-muted hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
           >
             <GithubIcon size={18} />
           </a>
@@ -155,14 +205,14 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="text-muted hover:text-accent transition-colors duration-200"
+            className="text-muted hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
           >
             <LinkedinIcon size={18} />
           </a>
           <a
             href={`mailto:${contato.email}`}
             aria-label="Email"
-            className="text-muted hover:text-accent transition-colors duration-200"
+            className="text-muted hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
           >
             <Mail size={18} />
           </a>

@@ -6,6 +6,9 @@ import { GithubIcon, DiscordIcon } from '../components/icons'
 import { mods, extras, servicos, servicos_en } from '../data/mods'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
+import Flipbook from '../motion/Flipbook'
+import { ImagemEsqueleto } from '../motion/Interacoes'
+import { Titulo } from '../motion/Tipografia'
 
 const entrada = {
   initial: { opacity: 0, y: 24 },
@@ -61,7 +64,7 @@ function Galeria({ itens, titulo }) {
           className="group overflow-hidden rounded-lg border border-border bg-[#0b0b12] transition-colors duration-200 hover:border-border-2"
         >
           <div className={itens.length === 1 ? '' : 'aspect-video'}>
-            <img
+            <ImagemEsqueleto
               src={item.src}
               alt={`${titulo}: ${tr(item, 'legenda')}`}
               loading="lazy"
@@ -78,7 +81,7 @@ function Galeria({ itens, titulo }) {
 }
 
 function Mod({ mod }) {
-  const { tr } = useIdioma()
+  const { t, tr } = useIdioma()
   const capa = mod.galeria[0]
   const titulo = tr(mod, 'titulo')
   return (
@@ -130,6 +133,15 @@ function Mod({ mod }) {
         </div>
       </div>
 
+      {mod.flipbook && (
+        <div className="mt-8 rounded-xl border border-border bg-bg/40 px-4 py-8">
+          <Flipbook
+            quadros={mod.flipbook}
+            legenda={t('folheie o eco construindo o pilar, quadro a quadro', 'flip through the echo building the pillar, frame by frame')}
+          />
+        </div>
+      )}
+
       {/* Sem vídeo, a imagem principal já é a galeria. */}
       {mod.video && <Galeria itens={mod.galeria} titulo={titulo} />}
     </motion.article>
@@ -171,9 +183,9 @@ export default function Mods() {
           </Link>
 
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">minecraft</p>
-          <h1 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+          <Titulo as="h1" className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
             {t('Mods e sistemas para servidores', 'Mods and systems for servers')}
-          </h1>
+          </Titulo>
           <p className="max-w-2xl text-text-secondary">
             {t(
               'Programo o que o servidor precisa: mecânicas, chefes, itens, chats, painéis e interfaces. Tudo abaixo foi capturado no próprio jogo.',

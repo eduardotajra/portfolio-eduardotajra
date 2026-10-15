@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { useIdioma } from '../i18n'
+import { Titulo } from '../motion/Tipografia'
 
 const nomesCategoria = { Frontend: 'Frontend', Backend: 'Backend', Ferramentas: 'Tools' }
 
@@ -35,9 +36,9 @@ export default function About() {
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <h2 className="text-4xl font-bold text-text-primary mb-6">
+            <Titulo className="text-4xl font-bold text-text-primary mb-6">
               {t('Olá, sou o Eduardo', "Hi, I'm Eduardo")}
-            </h2>
+            </Titulo>
             <div className="space-y-4 text-text-secondary leading-relaxed">
               <p>
                 {t(
@@ -59,6 +60,27 @@ export default function About() {
                 <span className="text-accent">{t('disponível para novos trabalhos', 'available for new work')}</span>.
               </p>
             </div>
+
+            {/* Assinatura que se desenha sozinha: o traço corre e depois a tinta preenche. */}
+            <svg viewBox="0 0 340 80" className="mt-8 h-16 w-64 overflow-visible" aria-hidden="true">
+              <motion.text
+                x="4"
+                y="58"
+                className="font-mao"
+                fontSize="58"
+                fontWeight="700"
+                stroke="#818cf8"
+                strokeWidth="1.2"
+                strokeDasharray="1200"
+                initial={{ strokeDashoffset: 1200, fillOpacity: 0 }}
+                whileInView={{ strokeDashoffset: 0, fillOpacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ strokeDashoffset: { duration: 2.4, ease: 'easeInOut' }, fillOpacity: { duration: 0.8, delay: 1.9 } }}
+                fill="#c7d2fe"
+              >
+                Eduardo Tajra
+              </motion.text>
+            </svg>
           </motion.div>
 
           {/* Skills */}
@@ -74,13 +96,17 @@ export default function About() {
                   {en ? nomesCategoria[category] : category}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {items.map((skill) => (
-                    <span
+                  {items.map((skill, i) => (
+                    <motion.span
                       key={skill}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={inView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.3 + i * 0.04, type: 'spring', stiffness: 300, damping: 18 }}
+                      whileHover={{ y: -3 }}
                       className="font-mono text-xs text-text-secondary bg-surface border border-border rounded px-3 py-1.5 hover:border-accent/40 hover:text-accent transition-colors duration-200"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
               </div>
