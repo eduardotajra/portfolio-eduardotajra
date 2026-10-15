@@ -1,239 +1,126 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { ArrowDown, Mail } from 'lucide-react'
-import { GithubIcon, LinkedinIcon } from './icons'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
-import BolhaLiquida from '../motion/BolhaLiquida'
-import { LetrasVivas } from '../motion/Tipografia'
-import MorphIcone from '../motion/Morph'
-import { Sublinhado, SetaMao } from '../motion/Rabiscos'
-import { BotaoMagnetico } from '../motion/Interacoes'
+import TintaViva from '../motion/TintaViva'
+import { Pincel } from '../motion/Pincel'
+import { BotaoTinta } from '../motion/Botoes'
+import Relogio from '../motion/Relogio'
+import Mesa from './Mesa'
 
-// Coisas que ele realmente entregou — nada genérico, e a impressão 3D
-// aparece já na primeira dobra.
-const construo = [
-  'caça-palavras diários',
-  'ARGs de investigação',
-  'sites de estúdios de games',
-  'extensões de navegador',
-  'mods de Minecraft',
-  'peças em impressão 3D',
-]
+// O que eu construo, em ordem: a caneta vermelha risca uma e escreve a próxima.
+const palavras = ['sites', 'jogos diários', 'ARGs', 'mods de Minecraft', 'extensões', 'peças em 3D']
+const palavrasEn = ['websites', 'daily games', 'ARGs', 'Minecraft mods', 'extensions', '3D prints']
 
-const construoEn = [
-  'daily word puzzles',
-  'investigation ARGs',
-  'game studio websites',
-  'browser extensions',
-  'Minecraft mods',
-  '3D printed parts',
-]
+function PalavraCorrigida() {
+  const { en } = useIdioma()
+  const lista = en ? palavrasEn : palavras
+  const [i, setI] = useState(0)
+  const [riscando, setRiscando] = useState(false)
+
+  // Ciclo: mostra a palavra, risca com a caneta vermelha, troca pela próxima.
+  useEffect(() => {
+    const risca = setTimeout(() => setRiscando(true), 2600)
+    const troca = setTimeout(() => {
+      setRiscando(false)
+      setI((v) => (v + 1) % lista.length)
+    }, 3400)
+    return () => {
+      clearTimeout(risca)
+      clearTimeout(troca)
+    }
+  }, [i, lista.length])
+
+  return (
+    <span className="relative inline-block whitespace-nowrap">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={`${en}-${i}`}
+          className="inline-block"
+          initial={{ opacity: 0, y: '0.25em', rotate: -2 }}
+          animate={{ opacity: 1, y: 0, rotate: 0 }}
+          exit={{ opacity: 0, y: '-0.15em', transition: { duration: 0.2 } }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Pincel tipo="risca" ativo={riscando} semente={i + 2} duracao={0.35}>
+            <Pincel tipo="marca" semente={i + 9} atraso={0.1} duracao={0.55}>
+              <em className="px-[0.06em] italic">{lista[i % lista.length]}</em>
+            </Pincel>
+          </Pincel>
+        </motion.span>
+      </AnimatePresence>
+    </span>
+  )
+}
 
 export default function Hero() {
   const { t, en } = useIdioma()
-  const palavras = en ? construoEn : construo
-  const [indice, setIndice] = useState(0)
-  const [texto, setTexto] = useState('')
-  const [digitando, setDigitando] = useState(true)
-
-  useEffect(() => {
-    const alvo = palavras[indice]
-
-    if (digitando) {
-      if (texto.length < alvo.length) {
-        const t = setTimeout(() => setTexto(alvo.slice(0, texto.length + 1)), 55)
-        return () => clearTimeout(t)
-      }
-      const t = setTimeout(() => setDigitando(false), 1800)
-      return () => clearTimeout(t)
-    }
-
-    if (texto.length > 0) {
-      const t = setTimeout(() => setTexto(texto.slice(0, -1)), 28)
-      return () => clearTimeout(t)
-    }
-
-    // Também agendado: trocar a palavra sem setState síncrono no efeito.
-    const t = setTimeout(() => {
-      setIndice((v) => (v + 1) % palavras.length)
-      setDigitando(true)
-    }, 320)
-    return () => clearTimeout(t)
-  }, [texto, digitando, indice, palavras])
 
   const surge = (delay = 0) => ({
-    initial: { opacity: 0, y: 24 },
+    initial: { opacity: 0, y: 26 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] },
   })
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center grid-bg overflow-hidden px-6">
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(129,140,248,0.12) 0%, transparent 70%)',
-        }}
-      />
+    <section className="relative overflow-hidden px-5 pb-16 pt-28 sm:px-8 lg:min-h-[100svh] lg:pb-10 lg:pt-32">
+      {/* Renderização em tempo real: tinta que escorre no papel. */}
+      <TintaViva className="pointer-events-none absolute inset-0 h-full w-full" />
 
-      {/* Movimento ambiente: orbes de luz que flutuam devagar. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div
-          className="absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-accent/10 blur-3xl"
-          style={{ animation: 'orbe-flutua 18s ease-in-out infinite' }}
-        />
-        <div
-          className="absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-cyan/10 blur-3xl"
-          style={{ animation: 'orbe-flutua 22s ease-in-out infinite reverse' }}
-        />
-      </div>
+      <div className="relative mx-auto grid max-w-[1320px] gap-12 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:gap-6">
+        <div className="flex flex-col justify-center">
+          <motion.p {...surge(0.05)} className="mb-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-text-secondary">
+            <span className="font-medium text-tinta">Eduardo Tajra</span>
+            <span aria-hidden="true">/</span>
+            <span>{t('dev full stack', 'full stack dev')}</span>
+            <span aria-hidden="true">/</span>
+            <Relogio />
+          </motion.p>
 
-      {/* Renderização em tempo real: metal líquido calculado na GPU. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[min(115vw,820px)] -translate-x-1/2 -translate-y-[54%]"
-      >
-        <motion.div
-          className="h-full w-full"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.6, delay: 0.3 }}
-        >
-          <BolhaLiquida className="h-full w-full opacity-[0.38] mix-blend-screen" />
-        </motion.div>
-      </div>
+          <motion.h1 {...surge(0.15)} className="titulo-serifa text-[clamp(3.1rem,8.4vw,7.4rem)] text-tinta">
+            {t('Eu construo', 'I build')}
+            <br />
+            <PalavraCorrigida />
+          </motion.h1>
 
-      <div className="relative z-10 max-w-3xl mx-auto text-center">
-        <motion.div
-          {...surge(0.05)}
-          className="vidro vidro-brilho inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-8"
-        >
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
-          </span>
-          <span className="font-mono text-[11px] uppercase tracking-widest text-text-secondary">
-            {t('aceitando novos projetos', 'open for new projects')}
-          </span>
-        </motion.div>
+          <motion.p {...surge(0.35)} className="mt-8 max-w-xl text-lg leading-relaxed text-text-secondary sm:text-xl">
+            {en ? (
+              <>
+                Custom websites, games and experiences, mods for Minecraft servers and made-to-order 3D printing. The{' '}
+                <Pincel tipo="sublinhado" atraso={1.2}>
+                  stranger
+                </Pincel>{' '}
+                the idea, the better.
+              </>
+            ) : (
+              <>
+                Sites, jogos e experiências sob medida, mods para servidores de Minecraft e impressão 3D sob encomenda.
+                Quanto mais{' '}
+                <Pincel tipo="sublinhado" atraso={1.2}>
+                  incomum
+                </Pincel>{' '}
+                a ideia, melhor.
+              </>
+            )}
+          </motion.p>
 
-        <h1
-          aria-label="Eduardo Tajra"
-          className="text-[clamp(2.25rem,11vw,4.5rem)] font-extrabold tracking-tight text-text-primary leading-none mb-5"
-        >
-          <LetrasVivas texto="Eduardo" atraso={0.15} />{' '}
-          <LetrasVivas texto="Tajra" gradiente atraso={0.5} />
-        </h1>
-
-        <motion.p
-          {...surge(0.3)}
-          className="font-mono text-base sm:text-xl text-text-secondary min-h-[3.5rem] sm:min-h-[2rem] flex items-center justify-center flex-wrap gap-x-2"
-        >
-          <MorphIcone indice={indice} className="h-6 w-6 shrink-0" />
-          <span>{t('eu construo', 'I build')}</span>
-          <span className="text-accent">
-            {texto}
-            <span className="animate-blink">|</span>
-          </span>
-        </motion.p>
-
-        <motion.p
-          {...surge(0.4)}
-          className="text-text-secondary text-base sm:text-lg leading-relaxed max-w-lg mx-auto mt-4 mb-9"
-        >
-          {t('Projetos web sob medida e impressão 3D sob encomenda.', 'Custom web projects and made-to-order 3D printing.')}
-          <br className="hidden sm:block" />{' '}
-          {en ? (
-            <>
-              The <Sublinhado atraso={1.4}>stranger</Sublinhado> the idea, the better.
-            </>
-          ) : (
-            <>
-              Quanto mais <Sublinhado atraso={1.4}>incomum</Sublinhado> a ideia, melhor.
-            </>
-          )}
-        </motion.p>
-
-        <motion.div {...surge(0.5)} className="relative flex flex-col sm:flex-row gap-3 justify-center mb-10">
-          {/* Rabisco à mão apontando o primeiro botão (só onde cabe). */}
-          <div aria-hidden="true" className="pointer-events-none absolute -left-40 -top-12 hidden w-40 lg:block">
-            <span className="font-mao block -rotate-6 text-2xl text-amber-300/90">
-              {t('começa por aqui', 'start here')}
-            </span>
-            <SetaMao className="ml-12 h-12 w-16" cor="rgba(252,211,77,0.9)" atraso={1.8} />
-          </div>
-          <BotaoMagnetico
-            href={contato.discord}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-6 py-3 rounded-lg bg-accent text-bg font-semibold text-sm glow-accent"
-          >
-            {t('Tenho uma ideia', 'I have an idea')}
-          </BotaoMagnetico>
-          <BotaoMagnetico
-            href={contato.discord}
-            target="_blank"
-            rel="noopener noreferrer"
-            corGota="rgba(34,211,238,0.18)"
-            className="px-6 py-3 rounded-lg border border-cyan/40 text-cyan font-semibold text-sm"
-          >
-            {t('Quero imprimir uma peça', 'I want something printed')}
-          </BotaoMagnetico>
-        </motion.div>
-
-        <motion.div
-          {...surge(0.6)}
-          className="flex items-center justify-center gap-5 text-text-secondary"
-        >
-          <a href="#projects" className="text-sm hover:text-text-primary transition-colors">
-            {t('Ver projetos', 'See projects')}
-          </a>
-          <span className="h-3 w-px bg-border-2" />
-          <a
-            href={contato.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-            className="text-muted hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <GithubIcon size={18} />
-          </a>
-          <a
-            href={contato.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-            className="text-muted hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <LinkedinIcon size={18} />
-          </a>
-          <a
-            href={`mailto:${contato.email}`}
-            aria-label="Email"
-            className="text-muted hover:text-accent hover:-translate-y-0.5 transition-all duration-200"
-          >
-            <Mail size={18} />
-          </a>
-        </motion.div>
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-      >
-        <a href="#servicos" aria-label={t('Ver serviços', 'See services')} className="text-muted hover:text-accent transition-colors">
-          <motion.div
-            animate={{ y: [0, 6, 0] }}
-            transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-          >
-            <ArrowDown size={18} />
+          <motion.div {...surge(0.5)} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <BotaoTinta href={contato.discord} target="_blank" rel="noopener noreferrer">
+              {t('Me conta a ideia', 'Tell me the idea')}
+            </BotaoTinta>
+            <a href="#projects" className="group text-[15px] font-medium text-tinta">
+              <span className="border-b border-tinta/30 pb-0.5 transition-colors group-hover:border-accent group-hover:text-accent">
+                {t('ou veja o que eu já fiz', 'or see what I made')}
+              </span>{' '}
+              ↓
+            </a>
           </motion.div>
-        </a>
-      </motion.div>
+        </div>
+
+        <motion.div {...surge(0.3)} className="relative lg:min-h-[640px]">
+          <Mesa />
+        </motion.div>
+      </div>
     </section>
   )
 }

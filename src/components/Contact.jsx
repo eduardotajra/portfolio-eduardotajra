@@ -1,11 +1,10 @@
-import { useRef, useState } from 'react'
-import { AnimatePresence, motion, useInView } from 'framer-motion'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Mail, Download, Code2, Box, Check } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
-import { Titulo } from '../motion/Tipografia'
-import { BotaoMagnetico } from '../motion/Interacoes'
+import { Pincel } from '../motion/Pincel'
 import Mascote from '../motion/Mascote'
 
 // Discord é o canal comercial: fica em destaque e abre direto o meu perfil.
@@ -15,15 +14,13 @@ const orcamentos = [
     titulo: 'Quero criar um projeto',
     titulo_en: 'I want to build a project',
     href: contato.discord,
-    cor: 'accent',
-  },
+      },
   {
     icone: Box,
     titulo: 'Quero imprimir uma peça',
     titulo_en: 'I want something printed',
     href: contato.discord,
-    cor: 'cyan',
-  },
+      },
 ]
 
 // Canais profissionais: continuam à mão, sem disputar a atenção com o orçamento.
@@ -50,7 +47,7 @@ function CopiaEmail() {
     <button
       type="button"
       onClick={copia}
-      className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+      className="flex items-center gap-2 text-[15px] text-papel/75 transition-colors hover:text-marca"
     >
       <span className="relative h-[15px] w-[15px]">
         <AnimatePresence initial={false} mode="wait">
@@ -73,68 +70,63 @@ function CopiaEmail() {
 
 export default function Contact() {
   const { t, tr } = useIdioma()
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
   const [animado, setAnimado] = useState(false)
 
   return (
-    <section id="contact" className="px-6 py-24">
-      <div className="mx-auto max-w-2xl text-center">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="mb-6 flex justify-center pt-8">
+    <section id="contact" className="relative overflow-hidden bg-tinta px-5 pb-6 pt-24 text-papel sm:px-8 lg:pt-32">
+      <div className="mx-auto max-w-[1320px]">
+        <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
+          <div>
+            <p className="font-mao text-2xl text-marca">{t('última página', 'last page')}</p>
+            <h2 className="titulo-serifa text-[clamp(3.6rem,11vw,10rem)] leading-[0.88]">
+              {t('Me conta', 'Tell me')}
+              <br />
+              <em>
+                {t('a ', 'the ')}
+                <Pincel tipo="circulo" semente={41} cor="#ffd84a" atraso={0.3}>
+                  {t('ideia', 'idea')}
+                </Pincel>
+                .
+              </em>
+            </h2>
+            <p className="mt-12 max-w-xl text-lg leading-relaxed text-papel/75">
+              {t(
+                'Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso. Site, jogo, mod ou peça impressa.',
+                'Tell me what you need and I will get back with a deadline and a price, no strings attached. Website, game, mod or printed part.'
+              )}
+            </p>
+          </div>
+          <div className="flex justify-start lg:justify-end">
             <Mascote feliz={animado} />
           </div>
-          <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
-            {t('contato', 'contact')}
-          </p>
-          <Titulo className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            {t('Me conta sua ideia', 'Tell me your idea')}
-          </Titulo>
-          <p className="mb-10 leading-relaxed text-text-secondary">
-            {t('Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso.', 'Tell me what you need and I will get back with a deadline and a price, no strings attached.')}
-          </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-10 flex flex-col justify-center gap-3 sm:flex-row"
+        <div
+          className="mt-12 flex flex-col gap-3 sm:flex-row"
           onPointerEnter={() => setAnimado(true)}
           onPointerLeave={() => setAnimado(false)}
         >
           {orcamentos.map((item) => {
-            const { icone: Icone, href, cor } = item
-            const ehAccent = cor === 'accent'
+            const { icone: Icone, href } = item
             return (
-              <BotaoMagnetico
+              <a
                 key={item.titulo}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                corGota={ehAccent ? 'rgba(255,255,255,0.22)' : 'rgba(34,211,238,0.18)'}
-                className={`flex items-center justify-center gap-2 rounded-lg px-6 py-3.5 text-sm font-semibold ${
-                  ehAccent ? 'bg-accent text-bg glow-accent' : 'border border-cyan/40 text-cyan'
-                }`}
+                className="group flex items-center justify-between gap-6 border border-papel/25 px-6 py-5 text-lg transition-colors duration-300 hover:border-marca hover:bg-marca hover:text-tinta sm:flex-1"
               >
-                <Icone size={16} />
-                {tr(item, 'titulo')}
-              </BotaoMagnetico>
+                <span className="flex items-center gap-3">
+                  <Icone size={18} />
+                  {tr(item, 'titulo')}
+                </span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </a>
             )
           })}
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
-        >
+        <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-papel/15 pt-8">
           <CopiaEmail />
           {profissionais.map((item) => {
             const { Icone, href, baixar } = item
@@ -145,14 +137,14 @@ export default function Contact() {
                 download={baixar || undefined}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+                className="flex items-center gap-2 text-[15px] text-papel/75 transition-colors hover:text-marca"
               >
                 <Icone size={15} />
                 {tr(item, 'rotulo')}
               </a>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

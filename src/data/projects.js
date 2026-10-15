@@ -182,7 +182,7 @@ export const projects = [
     id: 16,
     title: 'Monitor de Cotação',
     description:
-      'Robô que busca a cotação do dólar sozinho, guarda o histórico e serve os dados para um painel — sem ninguém abrir o site do banco.',
+      'Robô que busca a cotação do dólar sozinho, guarda o histórico e serve os dados para um painel, sem ninguém abrir o site do banco.',
     category: 'autorais',
     tags: ['Node.js', 'Puppeteer', 'PostgreSQL', 'Next.js'],
     screenshot: null,
@@ -264,4 +264,26 @@ const descricoesEn = {
 }
 projects.forEach((p) => {
   if (descricoesEn[p.id]) p.description_en = descricoesEn[p.id]
+})
+
+// Cor de cada projeto, tirada do próprio site: pinta o fundo da linha no hover.
+const coresProjeto = {
+  1: '#e9d9a8',
+  2: '#1d2b47',
+  3: '#1c2b33',
+  4: '#0b1230',
+  5: '#0d1a14',
+  6: '#2a0b0b',
+  7: '#213b3e',
+  8: '#c9b48f',
+  9: '#e8a48c',
+  14: '#2f5d3a',
+  15: '#3b2a1a',
+  16: '#14361f',
+  17: '#2e4a7d',
+  18: '#3a2f5c',
+  19: '#4a1d2e',
+}
+projects.forEach((p) => {
+  p.cor = coresProjeto[p.id] || '#17140f'
 })

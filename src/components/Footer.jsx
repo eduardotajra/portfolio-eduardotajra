@@ -1,99 +1,57 @@
 import { Link } from 'react-router-dom'
-import { Mail } from 'lucide-react'
-import {
-  GithubIcon,
-  LinkedinIcon,
-  InstagramIcon,
-  TiktokIcon,
-  YoutubeIcon,
-  XIcon,
-  DiscordIcon,
-} from './icons'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
-import Logo from '../motion/Logo'
+import Relogio from '../motion/Relogio'
 
 // Mesmo conjunto e mesma ordem de /links, para os dois lugares nunca divergirem.
 const redes = [
-  { Icone: DiscordIcon, nome: 'Discord', href: contato.discord },
-  { Icone: InstagramIcon, nome: 'Instagram', href: contato.instagram },
-  { Icone: TiktokIcon, nome: 'TikTok', href: contato.tiktok },
-  { Icone: YoutubeIcon, nome: 'YouTube', href: contato.youtube },
-  { Icone: XIcon, nome: 'X', href: contato.x },
-  { Icone: GithubIcon, nome: 'GitHub', href: contato.github },
-  { Icone: LinkedinIcon, nome: 'LinkedIn', href: contato.linkedin },
+  { nome: 'Discord', href: contato.discord },
+  { nome: 'Instagram', href: contato.instagram },
+  { nome: 'TikTok', href: contato.tiktok },
+  { nome: 'YouTube', href: contato.youtube },
+  { nome: 'X', href: contato.x },
+  { nome: 'GitHub', href: contato.github },
+  { nome: 'LinkedIn', href: contato.linkedin },
 ]
+
+const linkClaro = 'text-papel/70 transition-colors hover:text-marca'
 
 export default function Footer() {
   const { t } = useIdioma()
   return (
-    <footer className="border-t border-border px-6 py-12">
-      <div className="mx-auto flex max-w-5xl flex-col gap-8">
-        <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:justify-between">
+    <footer className="bg-tinta px-5 pb-8 pt-12 text-papel sm:px-8">
+      <div className="mx-auto max-w-[1320px]">
+        <div className="grid gap-10 border-t border-papel/15 pt-10 sm:grid-cols-3">
           <div>
-            <Link to="/" aria-label="Eduardo Tajra" className="inline-block">
-              <Logo />
-            </Link>
-            <p className="mt-2 max-w-xs text-sm text-text-secondary">
-              {t('Desenvolvimento web e impressão 3D, feitos sob encomenda.', 'Web development and 3D printing, made to order.')}
-            </p>
+            <p className="font-mao text-2xl text-marca">{t('feito à mão em Fortaleza', 'handmade in Fortaleza')}</p>
+            <Relogio className="mt-2 block text-sm text-papel/60" />
           </div>
-
-          <nav className="flex flex-col gap-2 text-sm sm:text-right">
-            <a href="/#servicos" className="text-text-secondary transition-colors hover:text-accent">
-              {t('Serviços', 'Services')}
-            </a>
-            <Link to="/projetos" className="text-text-secondary transition-colors hover:text-accent">
-              {t('Todos os projetos', 'All projects')}
-            </Link>
-            <Link to="/mods" className="text-text-secondary transition-colors hover:text-accent">
-              {t('Mods de Minecraft', 'Minecraft mods')}
-            </Link>
-            <a href="/#contact" className="text-text-secondary transition-colors hover:text-accent">
-              {t('Pedir orçamento', 'Get a quote')}
-            </a>
-            <Link to="/links" className="text-text-secondary transition-colors hover:text-accent">
-              {t('Meus links', 'My links')}
-            </Link>
+          <nav className="flex flex-col gap-1.5 text-[15px]">
+            <a href="/#servicos" className={linkClaro}>{t('O que eu faço', 'What I do')}</a>
+            <Link to="/projetos" className={linkClaro}>{t('Todos os projetos', 'All projects')}</Link>
+            <Link to="/mods" className={linkClaro}>{t('Mods de Minecraft', 'Minecraft mods')}</Link>
+            <a href="/#contact" className={linkClaro}>{t('Pedir orçamento', 'Get a quote')}</a>
+            <Link to="/links" className={linkClaro}>{t('Meus links', 'My links')}</Link>
           </nav>
-        </div>
-
-        <div className="flex flex-col-reverse gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[11px] text-muted">
-            Eduardo Tajra · {new Date().getFullYear()} · {t('feito com React e Vite', 'built with React and Vite')}
-          </p>
-
-          <div className="flex flex-wrap gap-2">
-            {redes.map(({ Icone, nome, href }) => (
-              <a
-                key={nome}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={nome}
-                title={nome}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-text-secondary transition-colors hover:border-accent/50 hover:text-accent"
-              >
-                <Icone size={15} />
+          <div className="flex flex-col gap-1.5 text-[15px]">
+            {redes.map(({ nome, href }) => (
+              <a key={nome} href={href} target="_blank" rel="noopener noreferrer" className={linkClaro}>
+                {nome} ↗
               </a>
             ))}
-            <a
-              href={`mailto:${contato.email}`}
-              aria-label={t('E-mail', 'Email')}
-              title={t('E-mail', 'Email')}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-text-secondary transition-colors hover:border-accent/50 hover:text-accent"
-            >
-              <Mail size={15} />
-            </a>
+            <a href={`mailto:${contato.email}`} className={linkClaro}>{contato.email}</a>
           </div>
         </div>
 
-        {/* Letreiro grande: só o contorno, e o gradiente acende no hover. */}
+        {/* Assinatura enorme no pé da página. */}
         <p
           aria-hidden="true"
-          className="select-none whitespace-nowrap text-center text-[13.5vw] font-black leading-none tracking-tight text-transparent transition-all duration-500 [-webkit-text-stroke:1px_rgba(129,140,248,0.22)] hover:gradiente-vivo hover:[-webkit-text-stroke:0px] lg:text-[9.5rem]"
+          className="titulo-serifa mt-14 select-none whitespace-nowrap text-center text-[15.5vw] leading-[0.8] text-papel transition-colors duration-500 hover:text-marca lg:text-[13.2rem]"
         >
-          Eduardo Tajra
+          Eduardo <em>Tajra</em>
+        </p>
+        <p className="mt-6 text-center font-mono text-[11px] text-papel/45">
+          © {new Date().getFullYear()} · {t('sem template, feito do zero', 'no template, built from scratch')}
         </p>
       </div>
     </footer>

@@ -4,23 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#080810',
-        surface: '#0f0f1a',
-        'surface-2': '#1a1a2e',
-        border: '#1e1e30',
-        'border-2': '#2a2a3e',
-        accent: '#818cf8',
-        'accent-dark': '#6366f1',
-        cyan: '#22d3ee',
-        // #64748b (sugerido) ficava em 4.19:1 no fundo da página e reprovava no AA.
-        // Este é o tom mais próximo que passa em todas as superfícies do site.
-        muted: '#7688a0',
-        'text-primary': '#f1f5f9',
-        'text-secondary': '#94a3b8',
+        // Caderno de oficina: papel, tinta, caneta vermelha, caneta azul e marca-texto.
+        bg: '#efe9dd',
+        surface: '#f6f2e9',
+        'surface-2': '#e6dfd1',
+        border: '#d6ccb9',
+        'border-2': '#b8ac95',
+        accent: '#bb2e17',
+        'accent-dark': '#b0260f',
+        cyan: '#1f4fd8',
+        muted: '#635b4d',
+        'text-primary': '#17140f',
+        'text-secondary': '#4a4338',
+        tinta: '#17140f',
+        papel: '#efe9dd',
+        marca: '#ffd84a',
+        noite: '#0e1410',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+        sans: ['"Instrument Sans"', 'system-ui', 'sans-serif'],
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        mao: ['Caveat', 'cursive'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       keyframes: {
         fadeUp: {

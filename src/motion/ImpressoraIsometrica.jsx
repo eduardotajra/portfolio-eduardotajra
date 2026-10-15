@@ -72,41 +72,41 @@ export default function ImpressoraIsometrica({ className = '' }) {
     <div className={`relative ${className}`}>
       <svg ref={svg} viewBox="0 0 260 240" className="h-full w-full" aria-hidden="true">
         {/* mesa */}
-        <polygon points={pts([0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0])} fill="#13132a" stroke="#2a2a3e" />
+        <polygon points={pts([0, 0, 0], [10, 0, 0], [10, 10, 0], [0, 10, 0])} fill="#e6dfd1" stroke="#17140f" strokeWidth="1.2" />
         {[2.5, 5, 7.5].map((v) => (
-          <g key={v} stroke="#1e1e38" strokeWidth="0.8">
+          <g key={v} stroke="#b8ac95" strokeWidth="0.7">
             <line x1={iso(v, 0, 0)[0]} y1={iso(v, 0, 0)[1]} x2={iso(v, 10, 0)[0]} y2={iso(v, 10, 0)[1]} />
             <line x1={iso(0, v, 0)[0]} y1={iso(0, v, 0)[1]} x2={iso(10, v, 0)[0]} y2={iso(10, v, 0)[1]} />
           </g>
         ))}
         {/* colunas e topo da estrutura */}
         {[[0, 0], [10, 0], [0, 10]].map(([x, y]) => (
-          <line key={`${x}${y}`} x1={iso(x, y, 0)[0]} y1={iso(x, y, 0)[1]} x2={iso(x, y, TOPO)[0]} y2={iso(x, y, TOPO)[1]} stroke="#3a3a5e" strokeWidth="2" strokeLinecap="round" />
+          <line key={`${x}${y}`} x1={iso(x, y, 0)[0]} y1={iso(x, y, 0)[1]} x2={iso(x, y, TOPO)[0]} y2={iso(x, y, TOPO)[1]} stroke="#17140f" strokeWidth="2.2" strokeLinecap="round" />
         ))}
-        <polygon points={pts([0, 0, TOPO], [10, 0, TOPO], [10, 10, TOPO], [0, 10, TOPO])} fill="none" stroke="#3a3a5e" strokeWidth="1.5" strokeDasharray="3 3" />
+        <polygon points={pts([0, 0, TOPO], [10, 0, TOPO], [10, 10, TOPO], [0, 10, TOPO])} fill="none" stroke="#17140f" strokeWidth="1.2" strokeDasharray="3 3" />
 
         {/* peça, camada por camada */}
         {faces.map((c, k) => (
           <g key={k} ref={(el) => {
               camadas.current[k] = el
             }} style={{ opacity: 0 }}>
-            <polygon points={c.direita} fill="#0e7490" style={{ filter: `brightness(${c.tom})` }} />
-            <polygon points={c.esquerda} fill="#0891b2" style={{ filter: `brightness(${c.tom})` }} />
-            <polygon points={c.topo} fill="#67e8f9" />
+            <polygon points={c.direita} fill="#a3240f" style={{ filter: `brightness(${c.tom})` }} />
+            <polygon points={c.esquerda} fill="#d8341c" style={{ filter: `brightness(${c.tom})` }} />
+            <polygon points={c.topo} fill="#ff8a65" />
           </g>
         ))}
 
         {/* cabeçote */}
-        <path ref={fio} stroke="#818cf8" strokeWidth="1.5" strokeOpacity="0.6" />
+        <path ref={fio} stroke="#17140f" strokeWidth="1.4" strokeOpacity="0.7" />
         <g ref={bico}>
-          <rect x="-7" y="-14" width="14" height="8" rx="2" fill="#818cf8" />
-          <polygon points="-3,-6 3,-6 0,-1" fill="#c7d2fe" />
-          <circle cx="0" cy="1" r="1.6" fill="#fbbf24" />
+          <rect x="-7" y="-14" width="14" height="8" rx="2" fill="#17140f" />
+          <polygon points="-3,-6 3,-6 0,-1" fill="#6b6355" />
+          <circle cx="0" cy="1" r="1.6" fill="#ffd84a" />
         </g>
       </svg>
       <span
         ref={texto}
-        className="vidro absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 font-mono text-[11px] text-cyan"
+        className="absolute bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-tinta px-3 py-1 font-mono text-[11px] text-papel"
       />
     </div>
   )

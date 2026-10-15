@@ -6,11 +6,10 @@ import { useIdioma, SeletorIdioma } from '../i18n'
 import Logo from '../motion/Logo'
 
 const links = [
-  { hash: '#servicos', label: 'Serviços', label_en: 'Services' },
-  { hash: '#projects', label: 'Projetos', label_en: 'Projects' },
+  { hash: '#projects', label: 'Projetos', label_en: 'Work' },
   { hash: '#mods', label: 'Mods', label_en: 'Mods' },
+  { hash: '#impressao3d', label: 'Impressão 3D', label_en: '3D printing' },
   { hash: '#about', label: 'Sobre', label_en: 'About' },
-  { hash: '#experience', label: 'Trajetória', label_en: 'Journey' },
   { hash: '#contact', label: 'Contato', label_en: 'Contact' },
 ]
 
@@ -31,7 +30,7 @@ export default function Navbar() {
   // Destaque da seção ativa só faz sentido na home, onde as seções existem.
   useEffect(() => {
     if (!isHome) return
-    const sections = ['servicos', 'projects', 'mods', 'about', 'experience', 'contact']
+    const sections = ['projects', 'mods', 'impressao3d', 'about', 'contact']
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -78,11 +77,11 @@ export default function Navbar() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled || open
-          ? 'bg-bg/60 backdrop-blur-xl backdrop-saturate-150 border-b border-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.25)]'
+          ? 'bg-bg/95 border-b border-tinta/10'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="mx-auto flex h-16 max-w-[calc(1320px+4rem)] items-center justify-between px-5 sm:px-8">
         <Link
           to="/"
           onClick={() => setOpen(false)}
@@ -104,7 +103,7 @@ export default function Navbar() {
                   hash,
                   label,
                   undefined,
-                  `relative text-sm font-medium transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-accent/50 after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100 ${
+                  `relative text-[15px] transition-colors duration-200 after:absolute after:-bottom-1 after:left-0 after:h-px after:w-full after:origin-right after:scale-x-0 after:bg-tinta after:transition-transform after:duration-300 hover:after:origin-left hover:after:scale-x-100 ${
                     isActive
                       ? 'text-text-primary'
                       : 'text-text-secondary hover:text-text-primary'
@@ -113,7 +112,7 @@ export default function Navbar() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-underline"
-                    className="absolute -bottom-1 left-0 right-0 h-px bg-accent"
+                    className="absolute -bottom-1 left-0 right-0 h-[2px] bg-accent"
                   />
                 )}
               </li>
@@ -147,7 +146,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-            className="md:hidden overflow-hidden border-t border-border bg-bg/95 backdrop-blur-md"
+            className="md:hidden overflow-hidden border-t border-tinta/10 bg-bg"
           >
             <ul className="px-6 py-2">
               {links.map((item) => (
@@ -156,7 +155,7 @@ export default function Navbar() {
                     item.hash,
                     tr(item, 'label'),
                     () => setOpen(false),
-                    'block py-4 text-sm font-medium text-text-secondary hover:text-accent transition-colors'
+                    'titulo-serifa block py-4 text-3xl text-tinta transition-colors hover:text-accent'
                   )}
                 </li>
               ))}

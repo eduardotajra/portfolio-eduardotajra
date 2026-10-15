@@ -5,7 +5,7 @@ import { ArrowLeft } from 'lucide-react'
 import ProjectCard from '../components/ProjectCard'
 import { projects, categorias } from '../data/projects'
 import { useIdioma } from '../i18n'
-import { Titulo } from '../motion/Tipografia'
+import { Pincel } from '../motion/Pincel'
 
 export default function Projetos() {
   const [filtro, setFiltro] = useState('todos')
@@ -34,47 +34,48 @@ export default function Projetos() {
   const abas = [{ id: 'todos', label: 'Todos', label_en: 'All' }, ...categorias]
 
   return (
-    <section className="min-h-screen px-6 pb-24 pt-28">
-      <div className="mx-auto max-w-5xl">
+    <section className="min-h-screen px-5 pb-28 pt-28 sm:px-8">
+      <div className="mx-auto max-w-[1320px]">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <Link
             to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+            className="mb-10 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
           >
             <ArrowLeft size={15} />
             {t('Voltar para a home', 'Back to home')}
           </Link>
 
-          <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
-            {t('arquivo', 'archive')}
-          </p>
-          <Titulo as="h1" className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            {t('Todos os projetos', 'All projects')}
-          </Titulo>
-          <p className="mb-10 max-w-xl text-text-secondary">
-            {t(
-              'Tudo que já construí e está de pé, do trabalho encomendado ao projeto que existe só porque a ideia era boa demais para ficar na cabeça.',
-              'Everything I have built that is still standing, from commissioned work to projects that exist only because the idea was too good to stay in my head.'
-            )}
-          </p>
+          <div className="grid items-end gap-8 border-b border-tinta pb-10 lg:grid-cols-[1fr_24rem]">
+            <div>
+              <p className="font-mao text-2xl text-accent">{t('a gaveta inteira', 'the whole drawer')}</p>
+              <h1 className="titulo-serifa text-[clamp(3.4rem,9vw,8rem)] text-tinta">
+                {t('Todos os ', 'All the ')}
+                <Pincel tipo="marca" semente={44} atraso={0.3}>
+                  <em>{t('projetos', 'projects')}</em>
+                </Pincel>
+              </h1>
+            </div>
+            <p className="text-lg leading-relaxed text-text-secondary">
+              {t(
+                'Tudo que já construí e está de pé, do trabalho encomendado ao projeto que existe só porque a ideia era boa demais para ficar na cabeça.',
+                'Everything I have built that is still standing, from commissioned work to projects that exist only because the idea was too good to stay in my head.'
+              )}
+            </p>
+          </div>
         </motion.div>
 
-        {/* Filtros */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-10 flex flex-wrap gap-2"
+        {/* Filtros: a aba escolhida ganha um sublinhado a pincel. */}
+        <div
+          className="mb-14 mt-8 flex flex-wrap gap-x-8 gap-y-3"
           role="tablist"
           aria-label={t('Filtrar projetos por categoria', 'Filter projects by category')}
         >
           {abas.map((aba) => {
             const { id } = aba
-            const label = tr(aba, 'label')
             const ativo = filtro === id
             return (
               <button
@@ -83,21 +84,19 @@ export default function Projetos() {
                 role="tab"
                 aria-selected={ativo}
                 onClick={() => setFiltro(id)}
-                className={`rounded-lg border px-4 py-3 text-sm font-medium transition-all duration-200 ${
-                  ativo
-                    ? 'border-accent bg-accent/10 text-accent'
-                    : 'border-border text-text-secondary hover:border-border-2 hover:text-text-primary'
-                }`}
+                className={`py-2 text-xl transition-colors duration-200 ${ativo ? 'text-tinta' : 'text-text-secondary hover:text-tinta'}`}
               >
-                {label}
-                <span className="ml-2 font-mono text-[11px] text-muted">{contagem[id]}</span>
+                <Pincel tipo="sublinhado" ativo={ativo} semente={id.length * 7} duracao={0.45}>
+                  <span className="titulo-serifa italic">{tr(aba, 'label')}</span>
+                </Pincel>
+                <sup className="ml-1 font-mono text-[11px] text-muted">{contagem[id]}</sup>
               </button>
             )
           })}
-        </motion.div>
+        </div>
 
-        {/* Grade — a key força a re-entrada da animação a cada troca de filtro */}
-        <div key={filtro} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* A key força a re-entrada das fichas a cada troca de filtro. */}
+        <div key={filtro} className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {visiveis.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}

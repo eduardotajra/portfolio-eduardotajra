@@ -13,143 +13,98 @@
     scroll-behavior: smooth;
   }
 
+  /* Papel: cor quente com um granulado leve, como folha de caderno. */
   body {
-    background-color: #080810;
-    color: #f1f5f9;
-    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #efe9dd;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.35 0 0 0 0 0.3 0 0 0 0 0.22 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)'/%3E%3C/svg%3E");
+    color: #17140f;
+    font-family: 'Instrument Sans', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
   }
 
   ::selection {
-    background: rgba(129, 140, 248, 0.3);
-    color: #f1f5f9;
+    background: #ffd84a;
+    color: #17140f;
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #080810;
+    background: #e6dfd1;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #2a2a3e;
-    border-radius: 3px;
+    background: #b8ac95;
+    border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #818cf8;
+    background: #17140f;
+  }
+
+  :focus-visible {
+    outline: 2px solid #bb2e17;
+    outline-offset: 3px;
   }
 }
 
 @layer utilities {
-  .text-gradient {
-    background: linear-gradient(135deg, #818cf8 0%, #22d3ee 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .glow-accent {
-    box-shadow: 0 0 20px rgba(129, 140, 248, 0.25);
-  }
-
-  .glow-accent-hover:hover {
-    box-shadow: 0 0 30px rgba(129, 140, 248, 0.35);
-  }
-
-  .grid-bg {
-    background-image:
-      linear-gradient(rgba(129, 140, 248, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(129, 140, 248, 0.04) 1px, transparent 1px);
-    background-size: 48px 48px;
-  }
-
   .font-mao {
     font-family: 'Caveat', 'Comic Sans MS', cursive;
   }
 
-  /* Gradiente que anda devagar: nome no hero, bordas e rodapé. */
-  .gradiente-vivo {
-    background: linear-gradient(90deg, #818cf8, #22d3ee, #c084fc, #818cf8);
-    background-size: 300% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradiente-anda 8s linear infinite;
+  /* Títulos em serifa com ajuste fino de espaçamento. */
+  .titulo-serifa {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
   }
 
-  /* Brilho que passa por cima de um vidro (pílulas e etiquetas). */
-  .vidro {
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-  }
-  .vidro-brilho {
-    position: relative;
-    overflow: hidden;
-  }
-  .vidro-brilho::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
-    transform: translateX(-120%);
-    animation: brilho-passa 5s ease-in-out infinite;
-    pointer-events: none;
+  /* Linhas de caderno ao fundo (pauta azul bem clara). */
+  .pauta {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      rgba(31, 79, 216, 0.08) 31px,
+      rgba(31, 79, 216, 0.08) 32px
+    );
   }
 
-  /* Luz que segue o mouse dentro de um card (--mx/--my vêm do JS). */
-  .holofote {
-    position: relative;
-  }
-  .holofote::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(129, 140, 248, 0.13), transparent 60%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    pointer-events: none;
-    z-index: 0;
-  }
-  .holofote:hover::before {
-    opacity: 1;
+  /* Quadriculado de papel milimetrado, para a planta dos projetos. */
+  .milimetrado {
+    background-image:
+      linear-gradient(rgba(31, 79, 216, 0.18) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(31, 79, 216, 0.18) 1px, transparent 1px);
+    background-size: 14px 14px;
   }
 
-  /* Borda com gradiente girando, só no hover. */
-  .borda-viva {
-    position: relative;
-    isolation: isolate;
-  }
-  .borda-viva::after {
-    content: '';
+  /* Fita adesiva segurando fotos. */
+  .fita {
     position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    padding: 1px;
-    background: conic-gradient(from var(--angulo), transparent 0deg, #818cf8 70deg, #22d3ee 140deg, transparent 220deg);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.35s;
-    animation: angulo-gira 4s linear infinite;
-    pointer-events: none;
-    z-index: 3;
+    width: 86px;
+    height: 24px;
+    background: rgba(255, 245, 205, 0.72);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+    backdrop-filter: blur(1px);
   }
-  .borda-viva:hover::after {
-    opacity: 1;
+
+  /* Sombra de objeto apoiado no papel. */
+  .sombra-papel {
+    box-shadow:
+      0 1px 1px rgba(23, 20, 15, 0.08),
+      0 6px 14px rgba(23, 20, 15, 0.12),
+      0 18px 32px -12px rgba(23, 20, 15, 0.22);
   }
 
   /* Esqueleto de carregamento. */
   .esqueleto {
-    background: linear-gradient(100deg, #12121f 30%, #1c1c30 50%, #12121f 70%);
+    background: linear-gradient(100deg, #e6dfd1 30%, #f3eee4 50%, #e6dfd1 70%);
     background-size: 200% 100%;
     animation: esqueleto-anda 1.3s ease-in-out infinite;
   }
@@ -157,22 +112,30 @@
   /* Claymorphism: blocos fofos de plástico, combinando com a impressão 3D. */
   .argila {
     border-radius: 18px;
-    background: linear-gradient(145deg, #5eead4, #22d3ee);
+    background: linear-gradient(145deg, #ffb59e, #ff8a65);
     box-shadow:
-      inset -5px -6px 10px rgba(8, 47, 73, 0.45),
-      inset 5px 5px 10px rgba(255, 255, 255, 0.55),
-      6px 10px 18px rgba(0, 0, 0, 0.45);
-    color: #083344;
+      inset -5px -6px 10px rgba(150, 50, 20, 0.35),
+      inset 5px 5px 10px rgba(255, 255, 255, 0.6),
+      6px 10px 18px rgba(23, 20, 15, 0.18);
+    color: #4a1607;
+  }
+  .argila-azul {
+    background: linear-gradient(145deg, #a9c1ff, #6f93f5);
+    box-shadow:
+      inset -5px -6px 10px rgba(20, 40, 120, 0.35),
+      inset 5px 5px 10px rgba(255, 255, 255, 0.6),
+      6px 10px 18px rgba(23, 20, 15, 0.18);
+    color: #0d1f5c;
   }
 
-  /* Neumorphism no escuro: trilho afundado e botão saltado. */
+  /* Neumorphism no papel: trilho afundado e botão saltado. */
   .neu-trilho {
-    background: #0c0c16;
-    box-shadow: inset 2px 2px 5px #04040a, inset -2px -2px 5px #1a1a2c;
+    background: #e9e2d4;
+    box-shadow: inset 2px 2px 4px #cfc6b4, inset -2px -2px 4px #fbf8f1;
   }
   .neu-botao {
-    background: #15152a;
-    box-shadow: 2px 2px 5px #04040a, -2px -2px 5px #20203a;
+    background: #f1ebdf;
+    box-shadow: 2px 2px 4px #cfc6b4, -2px -2px 4px #ffffff;
   }
 
   /* Granulado por cima de fotos (mixed media). */
@@ -195,32 +158,12 @@
     animation: balanca-quadros 1.6s steps(1, end) infinite;
   }
 
-  .noise::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    opacity: 0.4;
+  /* Pixels nítidos para tudo que vem do Minecraft. */
+  .pixelado {
+    image-rendering: pixelated;
   }
 }
 
-@property --angulo {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes gradiente-anda {
-  to { background-position: 300% 0; }
-}
-@keyframes brilho-passa {
-  0%, 55% { transform: translateX(-120%); }
-  85%, 100% { transform: translateX(120%); }
-}
-@keyframes angulo-gira {
-  to { --angulo: 360deg; }
-}
 @keyframes esqueleto-anda {
   from { background-position: 150% 0; }
   to { background-position: -50% 0; }
@@ -246,10 +189,23 @@
   0% { transform: translateX(-100%); }
   100% { transform: translateX(250%); }
 }
-@keyframes orbe-flutua {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(40px, -30px) scale(1.08); }
-  66% { transform: translate(-30px, 20px) scale(0.95); }
+/* Scanner do raio-x: a faixa revelada e a linha que desce juntas. */
+@keyframes raio-x-varre {
+  0% { clip-path: inset(0 0 100% 0); }
+  45% { clip-path: inset(0 0 0% 0); }
+  60% { clip-path: inset(0 0 0% 0); }
+  100% { clip-path: inset(100% 0 0% 0); }
+}
+@keyframes raio-x-linha {
+  0% { top: 0%; opacity: 1; }
+  45% { top: 100%; opacity: 1; }
+  46%, 59% { opacity: 0; }
+  60% { top: 0%; opacity: 1; }
+  100% { top: 100%; opacity: 1; }
+}
+@keyframes pisca {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* Quem pede menos movimento no sistema recebe o site parado. */

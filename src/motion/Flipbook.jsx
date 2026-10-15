@@ -84,7 +84,7 @@ export default function Flipbook({ quadros, legenda }) {
         {/* espiral */}
         <div className="pointer-events-none absolute -left-2 top-3 bottom-3 z-10 flex flex-col justify-between">
           {Array.from({ length: 9 }, (_, i) => (
-            <span key={i} className="h-2 w-4 rounded-full border-2 border-[#9ca3af] bg-[#1a1a2e]" />
+            <span key={i} className="h-2 w-4 rounded-full border-2 border-[#6f675a] bg-[#efe9dd]" />
           ))}
         </div>
       </div>
@@ -96,7 +96,7 @@ export default function Flipbook({ quadros, legenda }) {
             setTocando(false)
             vai(pagina - 1)
           }}
-          className="vidro rounded-lg p-2 text-text-secondary transition-colors hover:text-accent"
+          className="rounded-full border border-tinta/20 p-2 text-tinta transition-colors hover:border-accent hover:text-accent"
           aria-label={t('Página anterior', 'Previous page')}
         >
           <ChevronLeft size={16} />
@@ -104,7 +104,7 @@ export default function Flipbook({ quadros, legenda }) {
         <button
           type="button"
           onClick={() => setTocando((v) => !v)}
-          className="vidro rounded-lg p-2 text-text-secondary transition-colors hover:text-accent"
+          className="rounded-full border border-tinta/20 p-2 text-tinta transition-colors hover:border-accent hover:text-accent"
           aria-label={tocando ? t('Pausar', 'Pause') : t('Folhear', 'Flip through')}
         >
           {tocando ? <Pause size={16} /> : <Play size={16} />}
@@ -119,7 +119,7 @@ export default function Flipbook({ quadros, legenda }) {
             vai(Number(e.target.value))
           }}
           aria-label={t('Escolher página', 'Pick a page')}
-          className="h-1 flex-1 cursor-pointer accent-[#818cf8]"
+          className="h-1 flex-1 cursor-pointer accent-[#bb2e17]"
         />
         <button
           type="button"
@@ -127,13 +127,13 @@ export default function Flipbook({ quadros, legenda }) {
             setTocando(false)
             vai(pagina + 1)
           }}
-          className="vidro rounded-lg p-2 text-text-secondary transition-colors hover:text-accent"
+          className="rounded-full border border-tinta/20 p-2 text-tinta transition-colors hover:border-accent hover:text-accent"
           aria-label={t('Próxima página', 'Next page')}
         >
           <ChevronRight size={16} />
         </button>
       </div>
-      {legenda && <p className="mt-3 text-center font-mono text-[11px] text-muted">{legenda}</p>}
+      {legenda && <p className="font-mao mt-3 text-center text-xl text-tinta/70">{legenda}</p>}
     </div>
   )
 }

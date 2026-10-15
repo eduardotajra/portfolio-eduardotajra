@@ -4,7 +4,7 @@ import { AnimatePresence, MotionConfig, motion, useScroll, useSpring } from 'fra
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Carregando from './motion/Carregando'
-import LuzDoCursor from './motion/LuzDoCursor'
+import { forma, traco } from './motion/tracos'
 
 const Home = lazy(() => import('./pages/Home'))
 const Projetos = lazy(() => import('./pages/Projetos'))
@@ -12,32 +12,53 @@ const Mods = lazy(() => import('./pages/Mods'))
 
 const curva = [0.76, 0, 0.24, 1]
 
-// Troca de página com cortina: na saída, uma faixa sobe e cobre a tela;
-// na entrada, outra recolhe para cima e revela a página nova.
+// Troca de página a pincel: na saída, um zigue-zague de tinta cobre a tela;
+// na entrada, o mesmo traço se apaga e revela a página nova.
+const cortina = (() => {
+  const [f] = forma('rabisco', 1000, 1000, 5)
+  return { ...traco(f.pontos, { ...f, semente: 9 }), largura: f.largura }
+})()
+
+const mascara = {
+  entra: { pathLength: 1, opacity: 1 },
+  mostra: {
+    pathLength: 0,
+    opacity: 0,
+    transition: { pathLength: { duration: 0.6, ease: curva }, opacity: { delay: 0.6, duration: 0 } },
+  },
+  sai: { pathLength: 1, opacity: 1, transition: { pathLength: { duration: 0.55, ease: curva }, opacity: { duration: 0 } } },
+}
+
 function Pagina({ children }) {
   return (
-    <motion.div>
+    <motion.div initial="entra" animate="mostra" exit="sai">
       {children}
-      <motion.div
+      <svg
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[70] origin-bottom bg-accent"
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: 0 }}
-        exit={{ scaleY: 1 }}
-        transition={{ duration: 0.45, ease: curva }}
-      />
-      <motion.div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-[71] flex origin-top items-center justify-center bg-surface"
-        initial={{ scaleY: 1 }}
-        animate={{ scaleY: 0 }}
-        exit={{ scaleY: 0 }}
-        transition={{ duration: 0.5, ease: curva, delay: 0.05 }}
+        className="pointer-events-none fixed inset-0 z-[70] h-full w-full"
+        viewBox="0 0 1000 1000"
+        preserveAspectRatio="none"
       >
-        <span className="font-mono text-sm text-accent">
-          ET<span className="text-text-secondary">.dev</span>
-        </span>
-      </motion.div>
+        <defs>
+          <mask id="cortina-pincel" maskUnits="userSpaceOnUse" x="-500" y="-500" width="2000" height="2000">
+            <motion.path
+              d={cortina.centro}
+              fill="none"
+              stroke="#fff"
+              strokeWidth={cortina.largura * 1.9}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              variants={mascara}
+            />
+          </mask>
+        </defs>
+        <g mask="url(#cortina-pincel)">
+          <path d={cortina.corpo} fill="#17140f" />
+          {cortina.cerdas.map((c, i) => (
+            <path key={i} d={c.d} fill="none" stroke="#17140f" strokeWidth={c.espessura} strokeOpacity={c.opacidade} />
+          ))}
+        </g>
+      </svg>
     </motion.div>
   )
 }
@@ -49,7 +70,7 @@ function BarraDeLeitura() {
     <motion.div
       aria-hidden="true"
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-accent to-cyan"
+      className="fixed inset-x-0 top-0 z-[60] h-[3px] origin-left bg-accent"
     />
   )
 }
@@ -68,7 +89,6 @@ export default function Site() {
     <MotionConfig reducedMotion="user">
       <div className="min-h-screen bg-bg text-text-primary">
         <BarraDeLeitura />
-        <LuzDoCursor />
         <Navbar />
         <main>
           <AnimatePresence mode="wait" initial={false} onExitComplete={aoTerminarSaida}>

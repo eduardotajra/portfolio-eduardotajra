@@ -47,8 +47,8 @@ export default function Home() {
     <>
       <Hero />
       <Servicos />
-      <Processo />
       <Projects />
+      <Processo />
       <ModsDestaque />
       <Impressao3D />
       <About />

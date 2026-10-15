@@ -1,117 +1,96 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { ExternalLink, Lock } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ArrowUpRight, Lock } from 'lucide-react'
 import { GithubIcon } from './icons'
 import { useIdioma } from '../i18n'
-import { Inclina, ImagemEsqueleto } from '../motion/Interacoes'
+import { ImagemEsqueleto } from '../motion/Interacoes'
+import RaioX from '../motion/RaioX'
 
-const estiloCategoria = {
-  clientes: 'text-accent border-accent/30 bg-accent/10',
-  autorais: 'text-cyan border-cyan/30 bg-cyan/10',
-  academicos: 'text-text-secondary border-border-2 bg-surface-2',
-}
+const rotulo = { clientes: ['cliente', 'client'], autorais: ['autoral', 'personal'], academicos: ['acadêmico', 'academic'] }
 
-const rotuloCategoria = {
-  clientes: 'cliente',
-  autorais: 'autoral',
-  academicos: 'acadêmico',
-}
+// Cada ficha fica um tiquinho torta, como papel solto na mesa.
+const inclinacoes = [-1.2, 0.8, -0.4, 1.1, -0.9, 0.5]
 
-const rotuloCategoriaEn = {
-  clientes: 'client',
-  autorais: 'personal',
-  academicos: 'academic',
-}
-
-const gradientes = [
-  'from-violet-900/40 to-indigo-900/40',
-  'from-slate-800/60 to-zinc-900/60',
-  'from-cyan-900/40 to-teal-900/40',
-  'from-emerald-900/40 to-green-900/40',
-  'from-rose-900/40 to-pink-900/40',
-]
-
+// Ficha de arquivo: captura presa com fita, carimbo da categoria e anotações.
+// No hover a ficha se endireita e a captura vira planta (o mesmo raio-X da home).
 export default function ProjectCard({ project, index = 0 }) {
   const { t, tr, en } = useIdioma()
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-80px' })
   const temCodigo = Boolean(project.links.github) && !project.repoPrivate
+  const escuro = (() => {
+    const n = parseInt((project.cor || '#e6dfd1').slice(1), 16)
+    return 0.299 * ((n >> 16) & 255) + 0.587 * ((n >> 8) & 255) + 0.114 * (n & 255) < 140
+  })()
+  const giro = inclinacoes[index % inclinacoes.length]
 
   return (
     <motion.article
-      ref={ref}
-      initial={{ opacity: 0, y: 28 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay: (index % 4) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-      className="h-full"
+      initial={{ opacity: 0, y: 32, rotate: 0 }}
+      whileInView={{ opacity: 1, y: 0, rotate: giro }}
+      whileHover={{ rotate: 0, y: -6 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ type: 'spring', stiffness: 150, damping: 18, delay: (index % 3) * 0.06 }}
+      className="sombra-papel group relative flex h-full flex-col bg-[#fbf8f1] p-3"
     >
-      <Inclina className="group borda-viva flex flex-col overflow-hidden rounded-xl border border-border bg-surface transition-[border-color,box-shadow] duration-300 hover:border-border-2 glow-accent-hover">
-      {/* Prévia */}
-      <div className="relative overflow-hidden bg-surface-2" style={{ height: '180px' }}>
-        <div className="absolute inset-x-0 top-0 z-20 flex items-center gap-1.5 border-b border-border bg-[#0d0d18] px-3 py-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-500/70" />
-          <span className="h-2.5 w-2.5 rounded-full bg-yellow-500/70" />
-          <span className="h-2.5 w-2.5 rounded-full bg-green-500/70" />
-          {project.links.demo && (
-            <span className="ml-2 truncate font-mono text-[10px] text-muted">
-              {project.links.demo.replace('https://', '').replace(/\/$/, '')}
-            </span>
-          )}
-        </div>
+      <span className="fita -top-3 left-6 z-10 -rotate-[4deg]" />
 
-        {project.screenshot ? (
-          <ImagemEsqueleto
-            src={project.screenshot}
-            alt={t(`Prévia de ${project.title}`, `Preview of ${project.title}`)}
-            loading="lazy"
-            classeCaixa="pt-7"
-            className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
-          />
-        ) : (
+      <div className="relative overflow-hidden border border-tinta/10">
+        {project.confidencial ? (
+          <RaioX privado alt={project.title} />
+        ) : !project.screenshot ? (
+          // Projeto sem captura: capa tipográfica na cor do projeto.
           <div
-            className={`flex h-full w-full items-center justify-center bg-gradient-to-br pt-7 ${
-              gradientes[index % gradientes.length]
-            }`}
+            className={`relative flex aspect-[16/10] items-end overflow-hidden p-5 ${escuro ? 'text-papel' : 'text-tinta'}`}
+            style={{ backgroundColor: project.cor || '#e6dfd1' }}
           >
-            <span className="select-none font-mono text-5xl font-bold text-white/10">
+            <span aria-hidden="true" className="titulo-serifa absolute -right-3 -top-10 text-[11rem] italic leading-none opacity-15">
               {project.title[0]}
             </span>
+            <span className="titulo-serifa relative text-4xl italic">{project.title}</span>
+          </div>
+        ) : (
+          <div className="relative aspect-[16/10] bg-surface-2">
+            <ImagemEsqueleto
+              src={project.screenshot}
+              alt={t(`Prévia de ${project.title}`, `Preview of ${project.title}`)}
+              loading="lazy"
+              classeCaixa="absolute inset-0"
+              className="h-full w-full object-cover object-top"
+            />
+            <div
+              aria-hidden="true"
+              className="milimetrado absolute inset-0 bg-[#e9eefb] transition-[clip-path] duration-700 ease-[cubic-bezier(.7,0,.2,1)] [clip-path:inset(0_0_100%_0)] group-hover:[clip-path:inset(0_0_0%_0)]"
+            >
+              <img
+                src={project.screenshot}
+                alt=""
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover object-top opacity-80 mix-blend-multiply"
+                style={{ filter: 'grayscale(1) invert(1) contrast(1.4) brightness(1.1) sepia(1) hue-rotate(180deg) saturate(2.4)' }}
+              />
+            </div>
           </div>
         )}
-
-        <span
-          className={`absolute bottom-2 right-2 z-20 rounded border px-1.5 py-0.5 font-mono text-[10px] backdrop-blur-sm ${
-            estiloCategoria[project.category]
-          }`}
-        >
-          {(en ? rotuloCategoriaEn : rotuloCategoria)[project.category]}
+        <span className="absolute right-2 top-2 rotate-[5deg] border-2 border-accent bg-papel/85 px-1.5 py-px font-mono text-[10px] uppercase tracking-[0.18em] text-accent">
+          {rotulo[project.category]?.[en ? 1 : 0]}
         </span>
       </div>
 
-      {/* Conteúdo */}
-      <div className="flex flex-1 flex-col p-5">
-        <h3 className="mb-2 text-base font-semibold text-text-primary transition-colors duration-200 group-hover:text-accent">
-          {project.title}
-        </h3>
+      <div className="flex flex-1 flex-col px-1 pt-4">
+        <div className="flex items-baseline gap-3">
+          <span className="font-mono text-xs text-muted">{String(index + 1).padStart(2, '0')}</span>
+          <h3 className="titulo-serifa text-[2rem] text-tinta">{project.title}</h3>
+        </div>
+        <p className="mt-2 flex-1 text-[15px] leading-relaxed text-text-secondary">{tr(project, 'description')}</p>
+        <p className="mt-4 font-mono text-[11px] leading-relaxed text-muted">{project.tags.join(' · ')}</p>
 
-        <p className="mb-5 flex-1 text-sm leading-relaxed text-text-secondary">
-          {tr(project, 'description')}
-        </p>
-
-        {/* Stack em segundo plano: importa para quem procura, não atrapalha quem não procura */}
-        <p className="mb-4 font-mono text-[11px] leading-relaxed text-muted">
-          {project.tags.join(' · ')}
-        </p>
-
-        <div className="mt-auto flex items-center gap-4 border-t border-border pt-3">
+        <div className="mt-4 flex items-center gap-4 border-t border-dashed border-tinta/20 pt-3 text-sm">
           {temCodigo && (
             <a
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-text-primary"
+              className="flex items-center gap-1.5 text-text-secondary transition-colors hover:text-tinta"
             >
-              <GithubIcon size={13} />
+              <GithubIcon size={14} />
               {t('Código', 'Code')}
             </a>
           )}
@@ -120,10 +99,10 @@ export default function ProjectCard({ project, index = 0 }) {
               href={project.links.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="ml-auto flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent"
+              className="group/link ml-auto flex items-center gap-1 font-medium text-tinta transition-colors hover:text-accent"
             >
-              <ExternalLink size={13} />
-              {t('Ver ao vivo', 'Live demo')}
+              {t('Ver ao vivo', 'Live')}
+              <ArrowUpRight size={16} className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
             </a>
           )}
           {!temCodigo && !project.links.demo && (
@@ -134,7 +113,6 @@ export default function ProjectCard({ project, index = 0 }) {
           )}
         </div>
       </div>
-      </Inclina>
     </motion.article>
   )
 }
