@@ -1,14 +1,6 @@
-const NUMERO = '5585991529273'
-
-// Cada CTA abre o WhatsApp com a mensagem já escrita, para o contato
-// chegar com o assunto identificado.
-const zap = (texto) => `https://wa.me/${NUMERO}?text=${encodeURIComponent(texto)}`
-
 export const contato = {
-  whatsappDev: zap('Olá, Eduardo! Vi seu portfólio e queria falar sobre um projeto.'),
-  whatsapp3d: zap('Olá, Eduardo! Vi seu portfólio e queria um orçamento de impressão 3D.'),
-  whatsappMods: zap('Olá, Eduardo! Vi seus mods e queria falar sobre um projeto para Minecraft.'),
-  whatsappGeral: zap('Olá, Eduardo! Vi seu portfólio e gostaria de pedir um orçamento.'),
+  // Abre direto o perfil no Discord (app ou navegador), pronto para mandar mensagem.
+  discord: 'https://discord.com/users/307260030393253888',
   email: 'eduardotajra2@hotmail.com',
   github: 'https://github.com/eduardotajra',
   linkedin: 'https://www.linkedin.com/in/eduardo-tajra/',

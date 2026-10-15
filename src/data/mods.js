@@ -5,6 +5,8 @@ export const mods = [
   {
     id: 'a-ilha',
     titulo: 'A Ilha',
+    chamada: 'Contaminação, transformações e chefes para um SMP de terror',
+    capa: { src: '/mods/ilha-maldito-carne.jpg' },
     tipo: 'Projeto voluntário',
     plataforma: 'Forge 1.20.1',
     resumo:
@@ -34,6 +36,8 @@ export const mods = [
   {
     id: 'aurador',
     titulo: 'Aurador 2.0',
+    chamada: 'Armas com poderes, chat por proximidade e balões de fala',
+    capa: { src: '/mods/aurador-poster.jpg' },
     tipo: 'Trabalho para servidor',
     plataforma: 'NeoForge 1.21.1',
     resumo:
@@ -61,6 +65,8 @@ export const mods = [
   {
     id: 'ecos-do-tempo',
     titulo: 'Ecos do Tempo',
+    chamada: 'Grave suas ações e um clone fantasma repete tudo',
+    capa: { src: '/mods/ecos-poster.jpg' },
     tipo: 'Autoral',
     plataforma: 'NeoForge 1.21.1',
     resumo:
@@ -85,6 +91,8 @@ export const mods = [
   {
     id: 'atlas',
     titulo: 'Atlas',
+    chamada: 'Mais de 160 itens e uma caixa de prêmios com cassino',
+    capa: { src: '/mods/atlas-itens.jpg', pixel: true },
     tipo: 'KubeJS',
     plataforma: 'Minecraft 1.20.1',
     resumo:

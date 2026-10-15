@@ -141,11 +141,11 @@ export default function Impressao3D() {
               Me conta o que você quer imprimir
             </p>
             <p className="text-sm text-text-secondary">
-              Manda o arquivo ou a ideia pelo WhatsApp que eu retorno com prazo e preço.
+              Manda o arquivo ou a ideia pelo Discord que eu retorno com prazo e preço.
             </p>
           </div>
           <a
-            href={contato.whatsapp3d}
+            href={contato.discord}
             target="_blank"
             rel="noopener noreferrer"
             className="group inline-flex shrink-0 items-center gap-2 rounded-lg bg-cyan px-5 py-3 text-sm font-semibold text-bg transition-all duration-200 hover:bg-cyan/90"

@@ -7,13 +7,13 @@ import {
   TiktokIcon,
   YoutubeIcon,
   XIcon,
-  WhatsappIcon,
+  DiscordIcon,
 } from './icons'
 import { contato } from '../data/contato'
 
 // Mesmo conjunto e mesma ordem de /links, para os dois lugares nunca divergirem.
 const redes = [
-  { Icone: WhatsappIcon, nome: 'WhatsApp', href: contato.whatsappGeral },
+  { Icone: DiscordIcon, nome: 'Discord', href: contato.discord },
   { Icone: InstagramIcon, nome: 'Instagram', href: contato.instagram },
   { Icone: TiktokIcon, nome: 'TikTok', href: contato.tiktok },
   { Icone: YoutubeIcon, nome: 'YouTube', href: contato.youtube },

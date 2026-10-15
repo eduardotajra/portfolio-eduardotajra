@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { ArrowLeft, ArrowUpRight, Blocks } from 'lucide-react'
-import { GithubIcon, WhatsappIcon } from '../components/icons'
+import { GithubIcon, DiscordIcon } from '../components/icons'
 import { mods, extras, servicos } from '../data/mods'
 import { contato } from '../data/contato'
 
@@ -132,12 +132,21 @@ function Mod({ mod }) {
 }
 
 export default function Mods() {
+  const { hash } = useLocation()
+
   useEffect(() => {
     document.title = 'Mods de Minecraft · Eduardo Tajra'
     return () => {
       document.title = 'Eduardo Tajra · Dev'
     }
   }, [])
+
+  // Os cards da home apontam para /mods#id: rola até o mod depois da montagem.
+  useEffect(() => {
+    if (!hash) return
+    const t = setTimeout(() => document.querySelector(hash)?.scrollIntoView({ behavior: 'instant' }), 120)
+    return () => clearTimeout(t)
+  }, [hash])
 
   return (
     <section className="min-h-screen px-6 pb-24 pt-28">
@@ -166,12 +175,12 @@ export default function Mods() {
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
-              href={contato.whatsappMods}
+              href={contato.discord}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-bg transition-colors hover:bg-accent-dark hover:text-text-primary"
             >
-              <WhatsappIcon size={16} />
+              <DiscordIcon size={16} />
               Quero um mod
             </a>
             <Link
@@ -231,14 +240,14 @@ export default function Mods() {
             </a>
           ))}
           <a
-            href={contato.whatsappMods}
+            href={contato.discord}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex flex-col justify-center rounded-xl border border-accent/30 bg-accent/10 p-5 transition-colors hover:border-accent/70"
           >
             <span className="font-semibold text-text-primary">Tem uma ideia para o seu servidor?</span>
             <span className="mt-1 text-sm text-text-secondary">
-              Me conta pelo WhatsApp e eu digo como dá para fazer.
+              Me chama no Discord e eu digo como dá para fazer.
             </span>
           </a>
         </motion.div>

@@ -103,7 +103,7 @@ export default function Hero() {
 
         <motion.div {...surge(0.5)} className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
           <a
-            href={contato.whatsappDev}
+            href={contato.discord}
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-lg bg-accent text-bg font-semibold text-sm hover:bg-accent/90 transition-all duration-200 glow-accent"
@@ -111,7 +111,7 @@ export default function Hero() {
             Tenho uma ideia
           </a>
           <a
-            href={contato.whatsapp3d}
+            href={contato.discord}
             target="_blank"
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-lg border border-cyan/40 text-cyan font-semibold text-sm hover:border-cyan hover:bg-cyan/5 transition-all duration-200"

@@ -4,18 +4,18 @@ import { Mail, Download, Code2, Box } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 import { contato } from '../data/contato'
 
-// WhatsApp é o canal comercial: fica em destaque, com a mensagem já escrita.
+// Discord é o canal comercial: fica em destaque e abre direto o meu perfil.
 const orcamentos = [
   {
     icone: Code2,
     titulo: 'Quero criar um projeto',
-    href: contato.whatsappDev,
+    href: contato.discord,
     cor: 'accent',
   },
   {
     icone: Box,
     titulo: 'Quero imprimir uma peça',
-    href: contato.whatsapp3d,
+    href: contato.discord,
     cor: 'cyan',
   },
 ]

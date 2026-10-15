@@ -15,10 +15,10 @@ const frentes = [
       'ARGs e enigmas',
       'portfólios e páginas pessoais',
       'extensões de navegador',
-      'plugins de Minecraft',
+      'mods e plugins de Minecraft',
     ],
     cta: 'Tenho uma ideia',
-    href: contato.whatsappDev,
+    href: contato.discord,
     cor: 'accent',
   },
   {
@@ -35,7 +35,7 @@ const frentes = [
       'objetos personalizados',
     ],
     cta: 'Quero imprimir uma peça',
-    href: contato.whatsapp3d,
+    href: contato.discord,
     cor: 'cyan',
   },
 ]

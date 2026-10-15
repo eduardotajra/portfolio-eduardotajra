@@ -8,7 +8,7 @@ import {
   TiktokIcon,
   YoutubeIcon,
   XIcon,
-  WhatsappIcon,
+  DiscordIcon,
 } from '../components/icons'
 import { contato } from '../data/contato'
 
@@ -18,14 +18,14 @@ const acoes = [
     icone: Code2,
     titulo: 'Quero criar um projeto',
     sub: 'site, jogo, experiência interativa',
-    href: contato.whatsappDev,
+    href: contato.discord,
     destaque: 'accent',
   },
   {
     icone: Box,
     titulo: 'Quero imprimir uma peça',
     sub: 'impressão 3D sob encomenda',
-    href: contato.whatsapp3d,
+    href: contato.discord,
     destaque: 'cyan',
   },
 ]
@@ -37,7 +37,7 @@ const navegacao = [
 ]
 
 const redes = [
-  { Icone: WhatsappIcon, nome: 'WhatsApp', href: contato.whatsappGeral },
+  { Icone: DiscordIcon, nome: 'Discord', href: contato.discord },
   { Icone: InstagramIcon, nome: 'Instagram', href: contato.instagram },
   { Icone: TiktokIcon, nome: 'TikTok', href: contato.tiktok },
   { Icone: YoutubeIcon, nome: 'YouTube', href: contato.youtube },
