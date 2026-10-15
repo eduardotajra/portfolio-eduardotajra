@@ -2,17 +2,59 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useIdioma } from '../i18n'
 
-// Personagem: uma cabeça em pixel art no estilo Minecraft (cabelo roxo, como
-// a minha skin de testes). Os olhos seguem o mouse, pisca sozinho, balança em
-// stop-motion e, se clicar ou passar o mouse nos botões, fica feliz e fala.
-const PELE = '#c68a5e'
-const PELE_SOMBRA = '#a86f47'
-const CABELO = '#7c3aed'
-const CABELO_CLARO = '#a78bfa'
+// Personagem: eu em pixel art, no estilo Minecraft. O rosto é uma grade 8×8
+// (deslocada uma célula) e a camada de cima passa da borda: os cachos e o headset.
+// Os olhos seguem o mouse, pisca sozinho, balança em stop-motion e, se clicar ou
+// passar o mouse nos botões, fica feliz e fala.
+const C = {
+  pele: '#e2b59a',
+  peleSombra: '#c9967e',
+  cabelo: '#2b1e17',
+  cabeloClaro: '#5b4231',
+  cabeloEscuro: '#170f0b',
+  sobrancelha: '#1d140f',
+  oculos: '#0f0f10',
+  olho: '#3a2418',
+  branco: '#fbfbf7',
+  boca: '#b8766b',
+  bocaEscura: '#7a3b33',
+  fone: '#1c1c1f',
+  foneClaro: '#3b3b41',
+}
 
-const cabelo = [
-  [0, 0, 8, 1], [0, 1, 8, 1], [0, 2, 1, 2], [7, 2, 1, 2], [1, 2, 2, 1], [5, 2, 2, 1],
+// [x, y, largura, altura, cor] numa grade 10×10.
+const ROSTO = [
+  [1, 1, 8, 8, C.pele],
+  [1, 8.2, 8, 0.8, C.peleSombra],
+  [1, 7.6, 1, 0.6, C.peleSombra],
+  [8, 7.6, 1, 0.6, C.peleSombra],
+  [4.6, 5.9, 0.8, 0.7, C.peleSombra],
+  [4.4, 6.5, 1.2, 0.25, C.peleSombra],
 ]
+const CABELO = [
+  [1, 1, 8, 1.4, C.cabelo], [1, 2.4, 1.6, 0.9, C.cabelo], [7.2, 2.4, 1.8, 1, C.cabelo],
+  [3.2, 2.4, 1.2, 0.5, C.cabelo], [5.4, 2.4, 0.9, 0.4, C.cabelo],
+  [1, 3.3, 0.7, 1.2, C.cabelo], [8.3, 3.4, 0.7, 1.1, C.cabelo],
+  [0.4, 0.4, 2.2, 1, C.cabelo], [2.8, 0, 1.6, 1, C.cabelo], [4.6, 0.3, 1.8, 1, C.cabelo], [6.6, 0, 1.6, 1, C.cabelo], [8.2, 0.5, 1.4, 1.2, C.cabelo],
+  [0, 1.2, 1, 2.6, C.cabelo], [9, 1.4, 1, 2.4, C.cabelo], [0.6, 3.6, 0.8, 0.8, C.cabelo], [8.6, 3.6, 0.8, 0.8, C.cabelo],
+  [1.4, 0.6, 0.6, 0.5, C.cabeloClaro], [3.4, 0.3, 0.5, 0.5, C.cabeloClaro], [5.2, 0.7, 0.6, 0.5, C.cabeloClaro], [7.2, 0.4, 0.5, 0.5, C.cabeloClaro],
+  [2.2, 1.6, 0.6, 0.5, C.cabeloClaro], [6.2, 1.5, 0.6, 0.5, C.cabeloClaro], [0.3, 2.2, 0.5, 0.6, C.cabeloClaro], [9.2, 2.1, 0.5, 0.5, C.cabeloClaro],
+  [4.2, 1.6, 0.5, 0.5, C.cabeloEscuro], [8, 1.8, 0.5, 0.5, C.cabeloEscuro], [1.8, 2.6, 0.5, 0.5, C.cabeloEscuro],
+  [1.7, 3.55, 2.1, 0.55, C.sobrancelha], [6.2, 3.55, 2.1, 0.55, C.sobrancelha],
+]
+// Óculos redondos de armação preta: barras encurtadas e cantos chanfrados.
+const lente = (x) => [
+  [x + 0.35, 4, 2.1, 0.3], [x + 0.35, 5.75, 2.1, 0.3], [x - 0.25, 4.45, 0.3, 1.2], [x + 2.75, 4.45, 0.3, 1.2],
+  [x, 4.2, 0.4, 0.35], [x + 2.4, 4.2, 0.4, 0.35], [x, 5.55, 0.4, 0.35], [x + 2.4, 5.55, 0.4, 0.35],
+]
+const OCULOS = [...lente(1.5), ...lente(5.7), [4.6, 4.45, 0.8, 0.3], [1, 4.4, 0.3, 0.3], [8.7, 4.4, 0.3, 0.3]].map((r) => [...r, C.oculos])
+const FONE = [
+  [0, 4.2, 1.1, 3.2, C.fone], [8.9, 4.2, 1.1, 3.2, C.fone],
+  [0.15, 4.5, 0.35, 2.4, C.foneClaro], [9.5, 4.5, 0.35, 2.4, C.foneClaro],
+  [0.25, 3.3, 0.5, 1, C.fone], [9.25, 3.3, 0.5, 1, C.fone],
+]
+
+const Pixels = ({ lista }) => lista.map(([x, y, w, h, c], i) => <rect key={i} x={x} y={y} width={w} height={h} fill={c} />)
 
 export default function Mascote({ feliz = false }) {
   const ref = useRef(null)
@@ -91,33 +133,34 @@ export default function Mascote({ feliz = false }) {
         transition={{ duration: 0.6, ease: 'easeOut' }}
         className="stop-motion-pula cursor-pointer rounded-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <svg width="72" height="72" viewBox="0 0 8 8" shapeRendering="crispEdges" aria-hidden="true">
-          <rect width="8" height="8" fill={PELE} />
-          <rect x="0" y="6" width="8" height="2" fill={PELE_SOMBRA} />
-          {cabelo.map(([x, y, w, h], i) => (
-            <rect key={i} x={x} y={y} width={w} height={h} fill={i === 1 ? CABELO_CLARO : CABELO} />
-          ))}
+        <svg width="84" height="84" viewBox="0 0 10 10" shapeRendering="crispEdges" aria-hidden="true">
+          <Pixels lista={ROSTO} />
+          <Pixels lista={CABELO} />
           {piscando ? (
-            <>
-              <rect x="1" y="4" width="2" height="0.5" fill="#3b2410" />
-              <rect x="5" y="4" width="2" height="0.5" fill="#3b2410" />
-            </>
+            <Pixels lista={[[2, 4.9, 1.8, 0.35, C.olho], [6.2, 4.9, 1.8, 0.35, C.olho]]} />
           ) : contente ? (
-            <>
-              <rect x="1" y="3.5" width="1" height="1" fill="#3b2410" />
-              <rect x="2" y="3" width="1" height="1" fill="#3b2410" />
-              <rect x="5" y="3" width="1" height="1" fill="#3b2410" />
-              <rect x="6" y="3.5" width="1" height="1" fill="#3b2410" />
-            </>
+            <Pixels
+              lista={[
+                [2, 4.9, 0.6, 0.4, C.olho], [2.6, 4.55, 0.6, 0.4, C.olho], [3.2, 4.9, 0.6, 0.4, C.olho],
+                [6.2, 4.9, 0.6, 0.4, C.olho], [6.8, 4.55, 0.6, 0.4, C.olho], [7.4, 4.9, 0.6, 0.4, C.olho],
+              ]}
+            />
           ) : (
-            <>
-              <rect x="1" y="3" width="2" height="2" fill="#fff" />
-              <rect x="5" y="3" width="2" height="2" fill="#fff" />
-              <rect x={olhar < 0 ? 1 : olhar > 0 ? 2 : 1.5} y="3.5" width="1" height="1.5" fill="#1e1b4b" />
-              <rect x={olhar < 0 ? 5 : olhar > 0 ? 6 : 5.5} y="3.5" width="1" height="1.5" fill="#1e1b4b" />
-            </>
+            <Pixels
+              lista={[
+                [2, 4.5, 1.8, 0.9, C.branco], [6.2, 4.5, 1.8, 0.9, C.branco],
+                [2 + (olhar < 0 ? 0 : olhar > 0 ? 0.9 : 0.45), 4.5, 0.9, 0.9, C.olho],
+                [6.2 + (olhar < 0 ? 0 : olhar > 0 ? 0.9 : 0.45), 4.5, 0.9, 0.9, C.olho],
+              ]}
+            />
           )}
-          <rect x="3" y="6" width="2" height={contente ? 1 : 0.6} fill="#5b2c1a" />
+          <Pixels lista={OCULOS} />
+          {contente ? (
+            <Pixels lista={[[3.8, 6.85, 2.4, 0.55, C.bocaEscura], [3.4, 6.6, 0.4, 0.4, C.bocaEscura], [6.2, 6.6, 0.4, 0.4, C.bocaEscura]]} />
+          ) : (
+            <Pixels lista={[[3.9, 6.95, 2.2, 0.45, C.boca]]} />
+          )}
+          <Pixels lista={FONE} />
         </svg>
       </motion.button>
     </div>
