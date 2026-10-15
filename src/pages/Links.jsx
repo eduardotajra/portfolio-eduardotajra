@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Code2, Box, FolderOpen, Globe, ArrowUpRight, Mail } from 'lucide-react'
+import { Code2, Box, FolderOpen, Globe, Blocks, ArrowUpRight, Mail } from 'lucide-react'
 import {
   GithubIcon,
   LinkedinIcon,
@@ -32,6 +32,7 @@ const acoes = [
 
 const navegacao = [
   { icone: FolderOpen, titulo: 'Meus projetos', to: '/projetos' },
+  { icone: Blocks, titulo: 'Mods de Minecraft', to: '/mods' },
   { icone: Globe, titulo: 'Site completo', to: '/' },
 ]
 

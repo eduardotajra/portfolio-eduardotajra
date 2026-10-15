@@ -7,6 +7,7 @@ import Links from './pages/Links'
 // vem em chunks separados e não pesa nesse primeiro acesso.
 const Home = lazy(() => import('./pages/Home'))
 const Projetos = lazy(() => import('./pages/Projetos'))
+const Mods = lazy(() => import('./pages/Mods'))
 // A navbar não aparece em /links e traz o framer-motion junto: fora do caminho crítico.
 const Navbar = lazy(() => import('./components/Navbar'))
 const Footer = lazy(() => import('./components/Footer'))
@@ -30,6 +31,7 @@ function Layout() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projetos" element={<Projetos />} />
+            <Route path="/mods" element={<Mods />} />
             <Route path="/links" element={<Links />} />
             <Route path="*" element={<Home />} />
           </Routes>

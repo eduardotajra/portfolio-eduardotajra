@@ -46,6 +46,9 @@ export default function Footer() {
             <Link to="/projetos" className="text-text-secondary transition-colors hover:text-accent">
               Todos os projetos
             </Link>
+            <Link to="/mods" className="text-text-secondary transition-colors hover:text-accent">
+              Mods de Minecraft
+            </Link>
             <a href="/#contact" className="text-text-secondary transition-colors hover:text-accent">
               Pedir orçamento
             </a>
