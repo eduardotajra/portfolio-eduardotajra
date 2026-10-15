@@ -3,18 +3,21 @@ import { motion, useInView } from 'framer-motion'
 import { Mail, Download, Code2, Box } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 import { contato } from '../data/contato'
+import { useIdioma } from '../i18n'
 
 // Discord é o canal comercial: fica em destaque e abre direto o meu perfil.
 const orcamentos = [
   {
     icone: Code2,
     titulo: 'Quero criar um projeto',
+    titulo_en: 'I want to build a project',
     href: contato.discord,
     cor: 'accent',
   },
   {
     icone: Box,
     titulo: 'Quero imprimir uma peça',
+    titulo_en: 'I want something printed',
     href: contato.discord,
     cor: 'cyan',
   },
@@ -22,13 +25,14 @@ const orcamentos = [
 
 // Canais profissionais: continuam à mão, sem disputar a atenção com o orçamento.
 const profissionais = [
-  { Icone: Mail, rotulo: 'E-mail', href: `mailto:${contato.email}` },
+  { Icone: Mail, rotulo: 'E-mail', rotulo_en: 'Email', href: `mailto:${contato.email}` },
   { Icone: GithubIcon, rotulo: 'GitHub', href: contato.github },
   { Icone: LinkedinIcon, rotulo: 'LinkedIn', href: contato.linkedin },
-  { Icone: Download, rotulo: 'Currículo', href: '/cv.pdf', baixar: true },
+  { Icone: Download, rotulo: 'Currículo', rotulo_en: 'Résumé (PT)', href: '/cv.pdf', baixar: true },
 ]
 
 export default function Contact() {
+  const { t, tr } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 
@@ -42,13 +46,13 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
         >
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
-            contato
+            {t('contato', 'contact')}
           </p>
           <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            Me conta sua ideia
+            {t('Me conta sua ideia', 'Tell me your idea')}
           </h2>
           <p className="mb-10 leading-relaxed text-text-secondary">
-            Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso.
+            {t('Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso.', 'Tell me what you need and I will get back with a deadline and a price, no strings attached.')}
           </p>
         </motion.div>
 
@@ -58,7 +62,9 @@ export default function Contact() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-10 flex flex-col justify-center gap-3 sm:flex-row"
         >
-          {orcamentos.map(({ icone: Icone, titulo, href, cor }) => {
+          {orcamentos.map((item) => {
+            const { icone: Icone, href, cor } = item
+            const titulo = tr(item, 'titulo')
             const ehAccent = cor === 'accent'
             return (
               <a
@@ -85,9 +91,12 @@ export default function Contact() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3"
         >
-          {profissionais.map(({ Icone, rotulo, href, baixar }) => (
+          {profissionais.map((item) => {
+            const { Icone, href, baixar } = item
+            const rotulo = tr(item, 'rotulo')
+            return (
             <a
-              key={rotulo}
+              key={item.rotulo}
               href={href}
               download={baixar || undefined}
               target={href.startsWith('http') ? '_blank' : undefined}
@@ -97,7 +106,8 @@ export default function Contact() {
               <Icone size={15} />
               {rotulo}
             </a>
-          ))}
+            )
+          })}
         </motion.div>
       </div>
     </section>

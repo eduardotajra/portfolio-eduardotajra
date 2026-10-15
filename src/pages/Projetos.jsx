@@ -4,16 +4,18 @@ import { Link } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import ProjectCard from '../components/ProjectCard'
 import { projects, categorias } from '../data/projects'
+import { useIdioma } from '../i18n'
 
 export default function Projetos() {
   const [filtro, setFiltro] = useState('todos')
+  const { t, tr, en } = useIdioma()
 
   useEffect(() => {
-    document.title = 'Projetos · Eduardo Tajra'
+    document.title = en ? 'Projects · Eduardo Tajra' : 'Projetos · Eduardo Tajra'
     return () => {
       document.title = 'Eduardo Tajra · Dev'
     }
-  }, [])
+  }, [en])
 
   const contagem = useMemo(() => {
     const mapa = { todos: projects.length }
@@ -28,7 +30,7 @@ export default function Projetos() {
     [filtro]
   )
 
-  const abas = [{ id: 'todos', label: 'Todos' }, ...categorias]
+  const abas = [{ id: 'todos', label: 'Todos', label_en: 'All' }, ...categorias]
 
   return (
     <section className="min-h-screen px-6 pb-24 pt-28">
@@ -43,18 +45,20 @@ export default function Projetos() {
             className="mb-8 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
           >
             <ArrowLeft size={15} />
-            Voltar para a home
+            {t('Voltar para a home', 'Back to home')}
           </Link>
 
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
-            arquivo
+            {t('arquivo', 'archive')}
           </p>
           <h1 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            Todos os projetos
+            {t('Todos os projetos', 'All projects')}
           </h1>
           <p className="mb-10 max-w-xl text-text-secondary">
-            Tudo que já construí e está de pé, do trabalho encomendado ao projeto que
-            existe só porque a ideia era boa demais para ficar na cabeça.
+            {t(
+              'Tudo que já construí e está de pé, do trabalho encomendado ao projeto que existe só porque a ideia era boa demais para ficar na cabeça.',
+              'Everything I have built that is still standing, from commissioned work to projects that exist only because the idea was too good to stay in my head.'
+            )}
           </p>
         </motion.div>
 
@@ -65,9 +69,11 @@ export default function Projetos() {
           transition={{ duration: 0.5, delay: 0.15 }}
           className="mb-10 flex flex-wrap gap-2"
           role="tablist"
-          aria-label="Filtrar projetos por categoria"
+          aria-label={t('Filtrar projetos por categoria', 'Filter projects by category')}
         >
-          {abas.map(({ id, label }) => {
+          {abas.map((aba) => {
+            const { id } = aba
+            const label = tr(aba, 'label')
             const ativo = filtro === id
             return (
               <button

@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { mods } from '../data/mods'
 import { contato } from '../data/contato'
+import { useIdioma } from '../i18n'
 
 // O vídeo só é baixado quando o mouse passa por cima: a home continua leve
 // e, no celular (sem hover), fica a imagem de capa.
 function Capa({ mod }) {
+  const { t, tr } = useIdioma()
   const video = useRef(null)
   const temClipe = mod.video?.loop
 
@@ -33,13 +35,13 @@ function Capa({ mod }) {
           loop
           playsInline
           preload="none"
-          aria-label={`Clipe de ${mod.titulo}`}
+          aria-label={t(`Clipe de ${tr(mod, 'titulo')}`, `Clip of ${tr(mod, 'titulo')}`)}
           className="h-full w-full object-cover"
         />
       ) : (
         <img
           src={mod.capa.src}
-          alt={`Imagem de ${mod.titulo}`}
+          alt={t(`Imagem de ${tr(mod, 'titulo')}`, `Image of ${tr(mod, 'titulo')}`)}
           loading="lazy"
           className={`h-full w-full transition-transform duration-500 group-hover:scale-[1.03] ${
             mod.capa.pixel ? 'object-contain p-2 [image-rendering:pixelated]' : 'object-cover'
@@ -51,6 +53,7 @@ function Capa({ mod }) {
 }
 
 export default function ModsDestaque() {
+  const { t, tr } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -66,11 +69,13 @@ export default function ModsDestaque() {
         >
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">minecraft</p>
           <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            Mods e sistemas para servidores
+            {t('Mods e sistemas para servidores', 'Mods and systems for servers')}
           </h2>
           <p className="max-w-xl text-text-secondary">
-            Armas com poderes, chefes, chats, painéis e mecânicas que não existem no jogo. Tudo
-            programado por mim e capturado no próprio Minecraft.
+            {t(
+              'Armas com poderes, chefes, chats, painéis e mecânicas que não existem no jogo. Tudo programado por mim e capturado no próprio Minecraft.',
+              "Weapons with powers, bosses, chats, panels and mechanics the game doesn't have. All programmed by me and captured in Minecraft itself."
+            )}
           </p>
         </motion.div>
 
@@ -88,9 +93,9 @@ export default function ModsDestaque() {
               >
                 <Capa mod={mod} />
                 <div className="flex flex-1 flex-col p-5">
-                  <p className="font-mono text-[11px] uppercase tracking-wider text-accent">{mod.tipo}</p>
-                  <h3 className="mt-1.5 font-semibold text-text-primary">{mod.titulo}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{mod.chamada}</p>
+                  <p className="font-mono text-[11px] uppercase tracking-wider text-accent">{tr(mod, 'tipo')}</p>
+                  <h3 className="mt-1.5 font-semibold text-text-primary">{tr(mod, 'titulo')}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{tr(mod, 'chamada')}</p>
                 </div>
               </Link>
             </motion.div>
@@ -107,7 +112,7 @@ export default function ModsDestaque() {
             to="/mods"
             className="group inline-flex items-center gap-2 rounded-lg border border-border-2 px-6 py-3 text-sm font-semibold text-text-secondary transition-all duration-200 hover:border-accent hover:text-accent"
           >
-            Ver vídeos e detalhes
+            {t('Ver vídeos e detalhes', 'See videos and details')}
             <ArrowRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5" />
           </Link>
           <a
@@ -116,7 +121,7 @@ export default function ModsDestaque() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-text-secondary transition-colors hover:text-accent"
           >
-            Me chama no Discord
+            {t('Me chama no Discord', 'Message me on Discord')}
           </a>
         </motion.div>
       </div>

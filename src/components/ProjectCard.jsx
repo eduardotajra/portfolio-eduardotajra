@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ExternalLink, Lock } from 'lucide-react'
 import { GithubIcon } from './icons'
+import { useIdioma } from '../i18n'
 
 const estiloCategoria = {
   clientes: 'text-accent border-accent/30 bg-accent/10',
@@ -15,6 +16,12 @@ const rotuloCategoria = {
   academicos: 'acadêmico',
 }
 
+const rotuloCategoriaEn = {
+  clientes: 'client',
+  autorais: 'personal',
+  academicos: 'academic',
+}
+
 const gradientes = [
   'from-violet-900/40 to-indigo-900/40',
   'from-slate-800/60 to-zinc-900/60',
@@ -24,6 +31,7 @@ const gradientes = [
 ]
 
 export default function ProjectCard({ project, index = 0 }) {
+  const { t, tr, en } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const temCodigo = Boolean(project.links.github) && !project.repoPrivate
@@ -52,7 +60,7 @@ export default function ProjectCard({ project, index = 0 }) {
         {project.screenshot ? (
           <img
             src={project.screenshot}
-            alt={`Prévia de ${project.title}`}
+            alt={t(`Prévia de ${project.title}`, `Preview of ${project.title}`)}
             loading="lazy"
             className="h-full w-full object-cover object-top pt-7 transition-transform duration-500 group-hover:scale-[1.03]"
           />
@@ -73,7 +81,7 @@ export default function ProjectCard({ project, index = 0 }) {
             estiloCategoria[project.category]
           }`}
         >
-          {rotuloCategoria[project.category]}
+          {(en ? rotuloCategoriaEn : rotuloCategoria)[project.category]}
         </span>
       </div>
 
@@ -84,7 +92,7 @@ export default function ProjectCard({ project, index = 0 }) {
         </h3>
 
         <p className="mb-5 flex-1 text-sm leading-relaxed text-text-secondary">
-          {project.description}
+          {tr(project, 'description')}
         </p>
 
         {/* Stack em segundo plano: importa para quem procura, não atrapalha quem não procura */}
@@ -101,7 +109,7 @@ export default function ProjectCard({ project, index = 0 }) {
               className="flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-text-primary"
             >
               <GithubIcon size={13} />
-              Código
+              {t('Código', 'Code')}
             </a>
           )}
           {project.links.demo && (
@@ -112,13 +120,13 @@ export default function ProjectCard({ project, index = 0 }) {
               className="ml-auto flex items-center gap-1.5 text-xs text-text-secondary transition-colors hover:text-accent"
             >
               <ExternalLink size={13} />
-              Ver ao vivo
+              {t('Ver ao vivo', 'Live demo')}
             </a>
           )}
           {!temCodigo && !project.links.demo && (
             <span className="flex items-center gap-1.5 font-mono text-[11px] text-muted">
               <Lock size={11} />
-              {project.confidencial ? 'projeto privado do cliente' : 'código fechado'}
+              {project.confidencial ? t('projeto privado do cliente', 'private client project') : t('código fechado', 'closed source')}
             </span>
           )}
         </div>

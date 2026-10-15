@@ -2,13 +2,25 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Code2, Box, ArrowRight } from 'lucide-react'
 import { contato } from '../data/contato'
+import { useIdioma } from '../i18n'
 
 const frentes = [
   {
     icone: Code2,
     titulo: 'Desenvolvimento web',
+    titulo_en: 'Web development',
     resumo:
       'Sites, jogos e experiências feitos do zero, do jeito que a ideia pede. Se não existe pronto, eu construo.',
+    resumo_en:
+      'Websites, games and experiences built from scratch, the way the idea asks for. If it does not exist yet, I build it.',
+    exemplos_en: [
+      'games and quizzes',
+      'business websites',
+      'ARGs and puzzles',
+      'portfolios and personal pages',
+      'browser extensions',
+      'Minecraft mods and plugins',
+    ],
     exemplos: [
       'jogos e quizzes',
       'sites institucionais',
@@ -18,14 +30,25 @@ const frentes = [
       'mods e plugins de Minecraft',
     ],
     cta: 'Tenho uma ideia',
+    cta_en: 'I have an idea',
     href: contato.discord,
     cor: 'accent',
   },
   {
     icone: Box,
     titulo: 'Impressão 3D',
+    titulo_en: '3D printing',
     resumo:
       'Bambu Lab P1S. Imprimo o arquivo que você mandar ou modelo a peça do zero no Fusion.',
+    resumo_en: 'Bambu Lab P1S. I print the file you send or model the part from scratch in Fusion.',
+    exemplos_en: [
+      'made-to-order parts',
+      'my own modeling',
+      'prototyping',
+      'functional parts',
+      'keychains and gifts',
+      'personalized objects',
+    ],
     exemplos: [
       'peças sob encomenda',
       'modelagem própria',
@@ -35,12 +58,14 @@ const frentes = [
       'objetos personalizados',
     ],
     cta: 'Quero imprimir uma peça',
+    cta_en: 'I want something printed',
     href: contato.discord,
     cor: 'cyan',
   },
 ]
 
 function Frente({ frente, index }) {
+  const { tr } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
   const Icone = frente.icone
@@ -68,11 +93,11 @@ function Frente({ frente, index }) {
         <Icone size={20} />
       </div>
 
-      <h3 className="mb-2 text-xl font-semibold text-text-primary">{frente.titulo}</h3>
-      <p className="mb-6 text-sm leading-relaxed text-text-secondary">{frente.resumo}</p>
+      <h3 className="mb-2 text-xl font-semibold text-text-primary">{tr(frente, 'titulo')}</h3>
+      <p className="mb-6 text-sm leading-relaxed text-text-secondary">{tr(frente, 'resumo')}</p>
 
       <ul className="mb-7 flex flex-wrap gap-2">
-        {frente.exemplos.map((ex) => (
+        {tr(frente, 'exemplos').map((ex) => (
           <li
             key={ex}
             className="rounded border border-border bg-surface-2 px-2.5 py-1 font-mono text-[11px] text-text-secondary"
@@ -92,7 +117,7 @@ function Frente({ frente, index }) {
             : 'border border-cyan/40 text-cyan hover:bg-cyan/10 hover:border-cyan'
         }`}
       >
-        {frente.cta}
+        {tr(frente, 'cta')}
         <ArrowRight
           size={15}
           className="transition-transform duration-200 group-hover:translate-x-0.5"
@@ -103,6 +128,7 @@ function Frente({ frente, index }) {
 }
 
 export default function Servicos() {
+  const { t } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -117,10 +143,10 @@ export default function Servicos() {
           className="mb-12"
         >
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
-            o que eu faço
+            {t('o que eu faço', 'what I do')}
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary">
-            Duas frentes, o mesmo jeito de trabalhar
+            {t('Duas frentes, o mesmo jeito de trabalhar', 'Two fronts, one way of working')}
           </h2>
         </motion.div>
 

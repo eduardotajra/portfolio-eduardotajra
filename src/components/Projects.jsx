@@ -4,8 +4,10 @@ import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ProjectCard from './ProjectCard'
 import { projects } from '../data/projects'
+import { useIdioma } from '../i18n'
 
 export default function Projects() {
+  const { t } = useIdioma()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-60px' })
 
@@ -23,14 +25,16 @@ export default function Projects() {
           className="mb-12"
         >
           <p className="mb-3 font-mono text-sm uppercase tracking-widest text-accent">
-            projetos
+            {t('projetos', 'projects')}
           </p>
           <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
-            Ideias que viraram coisas de verdade
+            {t('Ideias que viraram coisas de verdade', 'Ideas that became real things')}
           </h2>
           <p className="max-w-xl text-text-secondary">
-            Jogos, experiências interativas, sites e ferramentas. Alguns foram encomendados,
-            outros nasceram de uma ideia estranha que eu quis ver de pé.
+            {t(
+              'Jogos, experiências interativas, sites e ferramentas. Alguns foram encomendados, outros nasceram de uma ideia estranha que eu quis ver de pé.',
+              'Games, interactive experiences, websites and tools. Some were commissioned, others came from a strange idea I wanted to see standing.'
+            )}
           </p>
         </motion.div>
 
@@ -50,7 +54,7 @@ export default function Projects() {
             to="/projetos"
             className="group inline-flex items-center gap-2 rounded-lg border border-border-2 px-6 py-3 text-sm font-semibold text-text-secondary transition-all duration-200 hover:border-accent hover:text-accent"
           >
-            Ver todos os projetos
+            {t('Ver todos os projetos', 'See all projects')}
             <span className="font-mono text-xs text-muted">+{restantes}</span>
             <ArrowRight
               size={15}

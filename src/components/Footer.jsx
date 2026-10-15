@@ -10,6 +10,7 @@ import {
   DiscordIcon,
 } from './icons'
 import { contato } from '../data/contato'
+import { useIdioma } from '../i18n'
 
 // Mesmo conjunto e mesma ordem de /links, para os dois lugares nunca divergirem.
 const redes = [
@@ -23,6 +24,7 @@ const redes = [
 ]
 
 export default function Footer() {
+  const { t } = useIdioma()
   return (
     <footer className="border-t border-border px-6 py-12">
       <div className="mx-auto flex max-w-5xl flex-col gap-8">
@@ -35,32 +37,32 @@ export default function Footer() {
               ET<span className="text-text-secondary">.dev</span>
             </Link>
             <p className="mt-2 max-w-xs text-sm text-text-secondary">
-              Desenvolvimento web e impressão 3D, feitos sob encomenda.
+              {t('Desenvolvimento web e impressão 3D, feitos sob encomenda.', 'Web development and 3D printing, made to order.')}
             </p>
           </div>
 
           <nav className="flex flex-col gap-2 text-sm sm:text-right">
             <a href="/#servicos" className="text-text-secondary transition-colors hover:text-accent">
-              Serviços
+              {t('Serviços', 'Services')}
             </a>
             <Link to="/projetos" className="text-text-secondary transition-colors hover:text-accent">
-              Todos os projetos
+              {t('Todos os projetos', 'All projects')}
             </Link>
             <Link to="/mods" className="text-text-secondary transition-colors hover:text-accent">
-              Mods de Minecraft
+              {t('Mods de Minecraft', 'Minecraft mods')}
             </Link>
             <a href="/#contact" className="text-text-secondary transition-colors hover:text-accent">
-              Pedir orçamento
+              {t('Pedir orçamento', 'Get a quote')}
             </a>
             <Link to="/links" className="text-text-secondary transition-colors hover:text-accent">
-              Meus links
+              {t('Meus links', 'My links')}
             </Link>
           </nav>
         </div>
 
         <div className="flex flex-col-reverse gap-6 border-t border-border pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-mono text-[11px] text-muted">
-            Eduardo Tajra · {new Date().getFullYear()} · feito com React e Vite
+            Eduardo Tajra · {new Date().getFullYear()} · {t('feito com React e Vite', 'built with React and Vite')}
           </p>
 
           <div className="flex flex-wrap gap-2">
@@ -79,8 +81,8 @@ export default function Footer() {
             ))}
             <a
               href={`mailto:${contato.email}`}
-              aria-label="E-mail"
-              title="E-mail"
+              aria-label={t('E-mail', 'Email')}
+              title={t('E-mail', 'Email')}
               className="flex h-9 w-9 items-center justify-center rounded-lg border border-border text-text-secondary transition-colors hover:border-accent/50 hover:text-accent"
             >
               <Mail size={15} />

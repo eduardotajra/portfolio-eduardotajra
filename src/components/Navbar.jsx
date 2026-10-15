@@ -2,14 +2,15 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
+import { useIdioma, SeletorIdioma } from '../i18n'
 
 const links = [
-  { hash: '#servicos', label: 'Serviços' },
-  { hash: '#projects', label: 'Projetos' },
-  { hash: '#mods', label: 'Mods' },
-  { hash: '#about', label: 'Sobre' },
-  { hash: '#experience', label: 'Trajetória' },
-  { hash: '#contact', label: 'Contato' },
+  { hash: '#servicos', label: 'Serviços', label_en: 'Services' },
+  { hash: '#projects', label: 'Projetos', label_en: 'Projects' },
+  { hash: '#mods', label: 'Mods', label_en: 'Mods' },
+  { hash: '#about', label: 'Sobre', label_en: 'About' },
+  { hash: '#experience', label: 'Trajetória', label_en: 'Journey' },
+  { hash: '#contact', label: 'Contato', label_en: 'Contact' },
 ]
 
 export default function Navbar() {
@@ -18,6 +19,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
   const isHome = pathname === '/'
+  const { t, tr } = useIdioma()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -90,7 +92,9 @@ export default function Navbar() {
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8">
-          {links.map(({ hash, label }) => {
+          {links.map((item) => {
+            const { hash } = item
+            const label = tr(item, 'label')
             const isActive = activeSection === hash.replace('#', '')
             return (
               <li key={hash} className="relative">
@@ -113,18 +117,24 @@ export default function Navbar() {
               </li>
             )
           })}
+          <li>
+            <SeletorIdioma />
+          </li>
         </ul>
 
         {/* Mobile trigger */}
+        <div className="flex items-center gap-3 md:hidden">
+          <SeletorIdioma />
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
+          aria-label={open ? t('Fechar menu', 'Close menu') : t('Abrir menu', 'Open menu')}
           aria-expanded={open}
           className="md:hidden text-text-secondary hover:text-text-primary transition-colors p-1 -mr-1"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
         </button>
+        </div>
       </div>
 
       {/* Mobile panel */}
@@ -138,11 +148,11 @@ export default function Navbar() {
             className="md:hidden overflow-hidden border-t border-border bg-bg/95 backdrop-blur-md"
           >
             <ul className="px-6 py-2">
-              {links.map(({ hash, label }) => (
-                <li key={hash} className="border-b border-border last:border-0">
+              {links.map((item) => (
+                <li key={item.hash} className="border-b border-border last:border-0">
                   {navLink(
-                    hash,
-                    label,
+                    item.hash,
+                    tr(item, 'label'),
                     () => setOpen(false),
                     'block py-4 text-sm font-medium text-text-secondary hover:text-accent transition-colors'
                   )}

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowDown, Mail } from 'lucide-react'
 import { GithubIcon, LinkedinIcon } from './icons'
 import { contato } from '../data/contato'
+import { useIdioma } from '../i18n'
 
 // Coisas que ele realmente entregou — nada genérico, e a impressão 3D
 // aparece já na primeira dobra.
@@ -11,17 +12,28 @@ const construo = [
   'ARGs de investigação',
   'sites de estúdios de games',
   'extensões de navegador',
-  'plugins de Minecraft',
+  'mods de Minecraft',
   'peças em impressão 3D',
 ]
 
+const construoEn = [
+  'daily word puzzles',
+  'investigation ARGs',
+  'game studio websites',
+  'browser extensions',
+  'Minecraft mods',
+  '3D printed parts',
+]
+
 export default function Hero() {
+  const { t, en } = useIdioma()
+  const palavras = en ? construoEn : construo
   const [indice, setIndice] = useState(0)
   const [texto, setTexto] = useState('')
   const [digitando, setDigitando] = useState(true)
 
   useEffect(() => {
-    const alvo = construo[indice]
+    const alvo = palavras[indice]
 
     if (digitando) {
       if (texto.length < alvo.length) {
@@ -39,11 +51,11 @@ export default function Hero() {
 
     // Também agendado: trocar a palavra sem setState síncrono no efeito.
     const t = setTimeout(() => {
-      setIndice((v) => (v + 1) % construo.length)
+      setIndice((v) => (v + 1) % palavras.length)
       setDigitando(true)
     }, 320)
     return () => clearTimeout(t)
-  }, [texto, digitando, indice])
+  }, [texto, digitando, indice, palavras])
 
   const surge = (delay = 0) => ({
     initial: { opacity: 0, y: 24 },
@@ -71,7 +83,7 @@ export default function Hero() {
             <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
           </span>
           <span className="font-mono text-[11px] uppercase tracking-widest text-text-secondary">
-            aceitando novos projetos
+            {t('aceitando novos projetos', 'open for new projects')}
           </span>
         </motion.div>
 
@@ -86,7 +98,7 @@ export default function Hero() {
           {...surge(0.3)}
           className="font-mono text-base sm:text-xl text-text-secondary min-h-[3.5rem] sm:min-h-[2rem] flex items-center justify-center flex-wrap gap-x-2"
         >
-          <span>eu construo</span>
+          <span>{t('eu construo', 'I build')}</span>
           <span className="text-accent">
             {texto}
             <span className="animate-blink">|</span>
@@ -97,8 +109,9 @@ export default function Hero() {
           {...surge(0.4)}
           className="text-text-secondary text-base sm:text-lg leading-relaxed max-w-lg mx-auto mt-4 mb-9"
         >
-          Projetos web sob medida e impressão 3D sob encomenda.
-          <br className="hidden sm:block" /> Quanto mais incomum a ideia, melhor.
+          {t('Projetos web sob medida e impressão 3D sob encomenda.', 'Custom web projects and made-to-order 3D printing.')}
+          <br className="hidden sm:block" />{' '}
+          {t('Quanto mais incomum a ideia, melhor.', 'The stranger the idea, the better.')}
         </motion.p>
 
         <motion.div {...surge(0.5)} className="flex flex-col sm:flex-row gap-3 justify-center mb-10">
@@ -108,7 +121,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-lg bg-accent text-bg font-semibold text-sm hover:bg-accent/90 transition-all duration-200 glow-accent"
           >
-            Tenho uma ideia
+            {t('Tenho uma ideia', 'I have an idea')}
           </a>
           <a
             href={contato.discord}
@@ -116,7 +129,7 @@ export default function Hero() {
             rel="noopener noreferrer"
             className="px-6 py-3 rounded-lg border border-cyan/40 text-cyan font-semibold text-sm hover:border-cyan hover:bg-cyan/5 transition-all duration-200"
           >
-            Quero imprimir uma peça
+            {t('Quero imprimir uma peça', 'I want something printed')}
           </a>
         </motion.div>
 
@@ -125,7 +138,7 @@ export default function Hero() {
           className="flex items-center justify-center gap-5 text-text-secondary"
         >
           <a href="#projects" className="text-sm hover:text-text-primary transition-colors">
-            Ver projetos
+            {t('Ver projetos', 'See projects')}
           </a>
           <span className="h-3 w-px bg-border-2" />
           <a
@@ -162,7 +175,7 @@ export default function Hero() {
         transition={{ delay: 1.2, duration: 0.8 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
-        <a href="#servicos" aria-label="Ver serviços" className="text-muted hover:text-accent transition-colors">
+        <a href="#servicos" aria-label={t('Ver serviços', 'See services')} className="text-muted hover:text-accent transition-colors">
           <motion.div
             animate={{ y: [0, 6, 0] }}
             transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
