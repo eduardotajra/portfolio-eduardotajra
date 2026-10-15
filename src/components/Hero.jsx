@@ -122,7 +122,7 @@ export default function Hero() {
             <BotaoTinta href={contato.discord} target="_blank" rel="noopener noreferrer">
               {t('Me conta a ideia', 'Tell me the idea')}
             </BotaoTinta>
-            <a href="#projects" className="group text-[15px] font-medium text-tinta">
+            <a href="#projects" className="alvo group text-[15px] font-medium text-tinta">
               <span className="border-b border-tinta/30 pb-0.5 transition-colors group-hover:border-accent group-hover:text-accent">
                 {t('ou veja o que eu já fiz', 'or see what I made')}
               </span>{' '}

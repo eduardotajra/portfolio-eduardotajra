@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 // Tinta no papel, simulada na GPU em tempo real.
 // Duas texturas se revezam (ping-pong): a cada quadro a tinta escorre pela
 // fibra do papel, espalha para os vizinhos e seca um pouco. O cursor deixa um
-// traço; parado, o papel recebe uns pingos sozinho. WebGL puro, sem biblioteca.
+// traço que seca sozinho. WebGL puro, sem biblioteca.
 
 const VERTICE = `
 attribute vec2 a;
@@ -178,7 +178,6 @@ export default function TintaViva({ className = '', cor = [0.12, 0.2, 0.5] }) {
 
     let visivel = true
     let quadro = 0
-    let proximoPingo = performance.now() + 1200
     const inicio = performance.now()
     let atual = 0
 
@@ -199,17 +198,6 @@ export default function TintaViva({ className = '', cor = [0.12, 0.2, 0.5] }) {
           forca = Math.min(0.55, 0.18 + cursor.vel * 9)
           raio = 0.012 + Math.min(0.02, cursor.vel * 0.4)
         }
-      }
-      // Papel parado recebe um pingo de vez em quando, para nunca ficar morto.
-      if (forca === 0 && agora > proximoPingo && agora - cursor.ultimo > 2500) {
-        // Pingos só na faixa vazia de baixo, longe do título e da mesa.
-        const x = 0.06 + Math.random() * 0.6
-        const y = 0.05 + Math.random() * 0.14
-        p0 = [x, y]
-        p1 = [x + 0.001, y]
-        forca = 0.9
-        raio = 0.018 + Math.random() * 0.02
-        proximoPingo = agora + 1800 + Math.random() * 1600
       }
       cursor.px = cursor.x
       cursor.py = cursor.y

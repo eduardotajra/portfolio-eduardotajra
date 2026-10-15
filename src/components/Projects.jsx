@@ -52,8 +52,8 @@ export default function Projects() {
           </div>
           <p className="max-w-sm text-text-secondary">
             {t(
-              'Jogos, experiências e sites. Alguns encomendados, outros nascidos de uma ideia estranha que eu quis ver de pé.',
-              'Games, experiences and websites. Some commissioned, others born from a strange idea I wanted to see standing.'
+              'Jogos, sites e experiências interativas. Uns feitos para clientes, outros por conta própria.',
+              'Games, websites and interactive experiences. Some made for clients, others on my own.'
             )}
           </p>
         </div>
@@ -104,7 +104,7 @@ export default function Projects() {
                   </span>
                   {/* No celular não tem cursor: a imagem aparece dentro da linha. */}
                   <span className="col-span-2 col-start-2 mt-2 block overflow-hidden rounded border border-tinta/15 sm:hidden">
-                    <RaioX src={p.screenshot} alt={p.title} privado={p.confidencial} />
+                    <RaioX src={p.screenshot} alt={p.title} privado={p.confidencial} discreto atraso={1.5 + i * 0.8} />
                   </span>
                 </Tag>
               </li>

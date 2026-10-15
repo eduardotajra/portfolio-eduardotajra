@@ -3,7 +3,8 @@ import { useIdioma } from '../i18n'
 // Raio-X: um scanner desce pela captura do site e, por onde passa, revela a
 // "planta" por baixo (a mesma imagem em negativo azul sobre papel milimetrado).
 // Projeto privado não tem imagem: vira um documento com tarjas pretas.
-export default function RaioX({ src, alt, privado = false, className = '' }) {
+// `discreto`: no celular, só uma faixa fina passa de vez em quando (a captura fica visível).
+export default function RaioX({ src, alt, privado = false, className = '', discreto = false, atraso = 0 }) {
   const { t } = useIdioma()
 
   if (privado || !src) {
@@ -26,7 +27,7 @@ export default function RaioX({ src, alt, privado = false, className = '' }) {
       <div
         aria-hidden="true"
         className="milimetrado absolute inset-0 bg-[#e9eefb]"
-        style={{ animation: 'raio-x-varre 3.2s cubic-bezier(.6,0,.4,1) infinite' }}
+        style={{ animation: discreto ? `raio-x-faixa 7s ${atraso}s cubic-bezier(.6,0,.4,1) infinite both` : 'raio-x-varre 3.2s cubic-bezier(.6,0,.4,1) infinite' }}
       >
         <img
           src={src}
@@ -38,7 +39,7 @@ export default function RaioX({ src, alt, privado = false, className = '' }) {
       <div
         aria-hidden="true"
         className="absolute inset-x-0 h-[2px] bg-cyan shadow-[0_0_0_1px_rgba(31,79,216,0.25)]"
-        style={{ animation: 'raio-x-linha 3.2s cubic-bezier(.6,0,.4,1) infinite' }}
+        style={{ animation: discreto ? `raio-x-faixa-linha 7s ${atraso}s cubic-bezier(.6,0,.4,1) infinite both` : 'raio-x-linha 3.2s cubic-bezier(.6,0,.4,1) infinite' }}
       >
         <span className="absolute right-2 top-1 bg-cyan px-1.5 font-mono text-[9px] uppercase tracking-widest text-white">raio-x</span>
       </div>

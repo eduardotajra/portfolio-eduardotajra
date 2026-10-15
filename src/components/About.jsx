@@ -45,14 +45,14 @@ export default function About() {
           <div className="space-y-5 text-lg leading-relaxed text-text-secondary">
             <p>
               {t(
-                'Desenvolvedor full stack com foco em front end e pós-graduação em desenvolvimento fullstack pela Rocketseat. Construo desde extensões de navegador até plataformas gamificadas, o que importa é entregar experiências que as pessoas realmente querem usar.',
-                'Full stack developer focused on front end, with a postgraduate degree in full stack development from Rocketseat. I build anything from browser extensions to gamified platforms; what matters is delivering experiences people actually want to use.'
+                'Sou desenvolvedor full stack, com mais prática no front end, e estou cursando a pós-graduação Full-Stack com IA da Rocketseat. Já fiz extensão de navegador, jogo diário, ARG com login para cada jogador e plataforma com ranking de usuários.',
+                'I am a full stack developer with most of my practice on the front end, currently doing the Full Stack with AI postgraduate program at Rocketseat. I have built a browser extension, daily games, an ARG with a login for every player and a platform with a user leaderboard.'
               )}
             </p>
             <p>
               {t(
-                'Meu TCC virou uma extensão real usada por pesquisadores do CNPq. Um projeto pessoal virou um estúdio de jogos. Gosto de levar ideias até o fim.',
-                'My final thesis became a real extension used by researchers funded by CNPq. A personal project became a game studio. I like taking ideas all the way.'
+                'Meu TCC virou uma extensão usada de verdade por pesquisadores do CNPq. Um projeto pessoal virou um estúdio de jogos.',
+                'My final thesis became an extension that CNPq researchers actually use. A personal project became a game studio.'
               )}
             </p>
             <p>
@@ -105,7 +105,8 @@ export default function About() {
               </span>
             ))}
           </p>
-          <p className="font-mao mt-6 text-2xl text-tinta/70">{t('passa o mouse nos nomes ↑', 'hover the names ↑')}</p>
+          {/* Só faz sentido onde existe mouse: em tela de toque a dica some. */}
+          <p className="font-mao mt-6 hidden text-2xl text-tinta/70 [@media(hover:hover)]:block">{t('passa o mouse nos nomes ↑', 'hover the names ↑')}</p>
         </motion.div>
       </div>
     </section>

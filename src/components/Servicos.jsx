@@ -57,7 +57,7 @@ export default function Servicos() {
           <h2 className="titulo text-4xl text-tinta sm:text-5xl">
             {t('O que eu faço', 'What I do')}
           </h2>
-          <p className="font-mao text-2xl text-tinta/70">{t('três frentes, o mesmo capricho', 'three fronts, the same care')}</p>
+          <p className="font-mao text-2xl text-tinta/70">{t('cada linha leva aos exemplos', 'each row leads to examples')}</p>
         </div>
 
         <ul onPointerLeave={() => setAtiva(null)}>

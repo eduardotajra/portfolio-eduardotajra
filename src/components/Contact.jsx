@@ -47,7 +47,7 @@ function CopiaEmail() {
     <button
       type="button"
       onClick={copia}
-      className="flex items-center gap-2 text-[15px] text-papel/75 transition-colors hover:text-marca"
+      className="alvo flex items-center gap-2 text-[15px] text-papel/75 transition-colors hover:text-marca"
     >
       <span className="relative h-[15px] w-[15px]">
         <AnimatePresence initial={false} mode="wait">
@@ -137,7 +137,7 @@ export default function Contact() {
                 download={baixar || undefined}
                 target={href.startsWith('http') ? '_blank' : undefined}
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[15px] text-papel/75 transition-colors hover:text-marca"
+                className="alvo flex items-center gap-2 text-[15px] text-papel/75 transition-colors hover:text-marca"
               >
                 <Icone size={15} />
                 {tr(item, 'rotulo')}

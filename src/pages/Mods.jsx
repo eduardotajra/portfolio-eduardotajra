@@ -180,7 +180,7 @@ export default function Mods() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}>
           <Link
             to="/"
-            className="mb-10 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+            className="alvo mb-10 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
           >
             <ArrowLeft size={15} />
             {t('Voltar para a home', 'Back to home')}
@@ -205,7 +205,7 @@ export default function Mods() {
                 <BotaoTinta href={contato.discord} target="_blank" rel="noopener noreferrer">
                   {t('Quero um mod', 'I want a mod')}
                 </BotaoTinta>
-                <Link to="/projetos" className="titulo text-2xl italic text-tinta transition-colors hover:text-accent">
+                <Link to="/projetos" className="alvo titulo text-2xl italic text-tinta transition-colors hover:text-accent">
                   {t('ou ver os sites', 'or see the websites')}
                 </Link>
               </div>

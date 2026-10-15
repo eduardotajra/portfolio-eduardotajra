@@ -70,7 +70,7 @@ export const mods = [
     tipo: 'Autoral',
     plataforma: 'NeoForge 1.21.1',
     resumo:
-      'O tempo vira recurso: um cristal grava o que você faz e, depois, um eco fantasma repete tudo enquanto você faz outra coisa.',
+      'Um cristal grava o que você faz e, depois, um eco fantasma repete tudo enquanto você faz outra coisa.',
     destaques: [
       'Um cristal grava até 15 s do que você faz: andar, construir, quebrar e atacar',
       'Resolva puzzles de dois jogadores sozinho',
@@ -188,7 +188,7 @@ const ingles = {
     tipo_en: 'Personal project',
     chamada_en: 'Record your actions and a ghost clone repeats everything',
     resumo_en:
-      'Time becomes a resource: a crystal records what you do and, later, a ghost echo repeats it all while you do something else.',
+      'A crystal records what you do and, later, a ghost echo repeats it all while you do something else.',
     destaques_en: [
       'A crystal records up to 15 s of what you do: walking, building, breaking and attacking',
       'Solve two-player puzzles on your own',

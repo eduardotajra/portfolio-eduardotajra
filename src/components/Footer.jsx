@@ -14,7 +14,7 @@ const redes = [
   { nome: 'LinkedIn', href: contato.linkedin },
 ]
 
-const linkClaro = 'text-papel/70 transition-colors hover:text-marca'
+const linkClaro = 'alvo text-papel/70 transition-colors hover:text-marca'
 
 export default function Footer() {
   const { t } = useIdioma()
@@ -26,7 +26,7 @@ export default function Footer() {
             <p className="font-mao text-2xl text-marca">{t('feito à mão em Fortaleza', 'handmade in Fortaleza')}</p>
             <Relogio className="mt-2 block text-sm text-papel/60" />
           </div>
-          <nav className="flex flex-col gap-1.5 text-[15px]">
+          <nav className="flex flex-col items-start gap-2.5 text-[15px]">
             <a href="/#servicos" className={linkClaro}>{t('O que eu faço', 'What I do')}</a>
             <a href="/#showreel" className={linkClaro}>{t('Showreel (1 min)', 'Showreel (1 min)')}</a>
             <Link to="/projetos" className={linkClaro}>{t('Todos os projetos', 'All projects')}</Link>
@@ -34,7 +34,7 @@ export default function Footer() {
             <a href="/#contact" className={linkClaro}>{t('Pedir orçamento', 'Get a quote')}</a>
             <Link to="/links" className={linkClaro}>{t('Meus links', 'My links')}</Link>
           </nav>
-          <div className="flex flex-col gap-1.5 text-[15px]">
+          <div className="flex flex-col items-start gap-2.5 text-[15px]">
             {redes.map(({ nome, href }) => (
               <a key={nome} href={href} target="_blank" rel="noopener noreferrer" className={linkClaro}>
                 {nome} ↗
@@ -58,7 +58,7 @@ export default function Footer() {
           <button
             type="button"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group flex items-center gap-1.5 transition-colors hover:text-marca"
+            className="alvo group flex items-center gap-1.5 py-1 transition-colors hover:text-marca"
           >
             {t('voltar ao topo', 'back to top')}
             <span aria-hidden="true" className="inline-block transition-transform duration-300 group-hover:-translate-y-1">

@@ -88,7 +88,7 @@ export default function ProjectCard({ project, index = 0 }) {
               href={project.links.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-text-secondary transition-colors hover:text-tinta"
+              className="alvo flex items-center gap-1.5 text-text-secondary transition-colors hover:text-tinta"
             >
               <GithubIcon size={14} />
               {t('Código', 'Code')}
@@ -99,7 +99,7 @@ export default function ProjectCard({ project, index = 0 }) {
               href={project.links.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className="group/link ml-auto flex items-center gap-1 font-medium text-tinta transition-colors hover:text-accent"
+              className="alvo group/link ml-auto flex items-center gap-1 font-medium text-tinta transition-colors hover:text-accent"
             >
               {t('Ver ao vivo', 'Live')}
               <ArrowUpRight size={16} className="transition-transform group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />

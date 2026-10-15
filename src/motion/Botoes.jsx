@@ -11,7 +11,7 @@ export function BotaoTinta({ children, href, className = '', variante = 'tinta',
   return (
     <a
       href={href}
-      className={`group inline-flex items-center gap-3 rounded-full px-6 py-3.5 text-[15px] font-medium transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.97] active:duration-75 ${estilos[variante]} ${className}`}
+      className={`group inline-flex shrink-0 items-center gap-3 whitespace-nowrap rounded-full px-6 py-3.5 text-[15px] font-medium transition-[color,background-color,border-color,transform] duration-300 active:scale-[0.97] active:duration-75 ${estilos[variante]} ${className}`}
       {...props}
     >
       <span className="relative block h-[1.25em] overflow-hidden">

@@ -53,6 +53,17 @@
 }
 
 @layer utilities {
+  /* Área de toque maior que o texto, sem mudar o visual (mínimo de 24px no celular). */
+  .alvo {
+    position: relative;
+  }
+
+  .alvo::after {
+    content: '';
+    position: absolute;
+    inset: -5px -4px;
+  }
+
   .font-mao {
     font-family: 'Caveat', 'Comic Sans MS', cursive;
   }
@@ -201,6 +212,19 @@
   45% { clip-path: inset(0 0 0% 0); }
   60% { clip-path: inset(0 0 0% 0); }
   100% { clip-path: inset(100% 0 0% 0); }
+}
+/* Versão discreta (celular): uma faixa fina passa e a captura fica limpa o resto do tempo. */
+@keyframes raio-x-faixa {
+  0% { clip-path: inset(0 0 100% 0); }
+  4% { clip-path: inset(0 0 84% 0); }
+  30% { clip-path: inset(84% 0 0 0); }
+  34%, 100% { clip-path: inset(100% 0 0 0); }
+}
+@keyframes raio-x-faixa-linha {
+  0% { top: 0%; opacity: 0; }
+  4% { top: 16%; opacity: 1; }
+  30% { top: 100%; opacity: 1; }
+  31%, 100% { top: 100%; opacity: 0; }
 }
 @keyframes raio-x-linha {
   0% { top: 0%; opacity: 1; }

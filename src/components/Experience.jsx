@@ -6,7 +6,7 @@ import { useIdioma } from '../i18n'
 const items = [
   {
     type: 'edu',
-    title: 'Pós Graduação Full-Stack com IA',
+    title: 'Pós-graduação Full-Stack com IA',
     title_en: 'Postgraduate in Full Stack with AI',
     org: 'Rocketseat',
     period: '2026–2027',
@@ -21,7 +21,7 @@ const items = [
     title: 'Software Developer',
     org: 'BANCO DO NORDESTE DO BRASIL',
     period: '2024',
-    description: 'Desenvolvimento e manutenção de um aplicativo para o Gabinete da Presidência utilizando React(TypeScript) e C#. Participação em rituais ágeis, como Scrum e Kanban',
+    description: 'Desenvolvimento e manutenção de um aplicativo para o Gabinete da Presidência utilizando React (TypeScript) e C#. Participação em rituais ágeis, como Scrum e Kanban.',
     description_en: "Built and maintained an app for the President's Office using React (TypeScript) and C#. Took part in agile rituals such as Scrum and Kanban.",
     tags: ['React', 'TypeScript', 'C#', 'Scrum', 'Kanban'],
   },
@@ -43,7 +43,7 @@ const items = [
     org: 'UNIFOR',
     period: '2021–2025',
     description:
-      'TCC: qlattes,extensão para classificação automática de artigos do Lattes/CNPq segundo o Qualis CAPES.',
+      'TCC: qlattes, extensão para classificação automática de artigos do Lattes/CNPq segundo o Qualis CAPES.',
     description_en:
       'Thesis: qlattes, an extension that automatically ranks Lattes/CNPq papers by the CAPES Qualis rating.',
     tags: ['JavaScript', 'Extensões de Navegador', 'Pesquisa Acadêmica'],

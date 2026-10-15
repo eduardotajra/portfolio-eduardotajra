@@ -43,7 +43,7 @@ export default function Projetos() {
         >
           <Link
             to="/"
-            className="mb-10 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
+            className="alvo mb-10 inline-flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent"
           >
             <ArrowLeft size={15} />
             {t('Voltar para a home', 'Back to home')}
@@ -61,8 +61,8 @@ export default function Projetos() {
             </div>
             <p className="text-lg leading-relaxed text-text-secondary">
               {t(
-                'Tudo que já construí e está de pé, do trabalho encomendado ao projeto que existe só porque a ideia era boa demais para ficar na cabeça.',
-                'Everything I have built that is still standing, from commissioned work to projects that exist only because the idea was too good to stay in my head.'
+                'Todos os meus projetos, separados entre trabalhos para clientes, projetos meus e projetos da faculdade.',
+                'All my projects, split into client work, my own projects and university projects.'
               )}
             </p>
           </div>
