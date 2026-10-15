@@ -72,7 +72,7 @@ void main() {
   // Mancha com contorno definido (tinta que o papel bebeu), nunca um brilho difuso.
   float corpo = smoothstep(0.05, 0.1, d);
   float grao = 0.82 + 0.18 * hash(floor(gl_FragCoord.xy * 0.5));
-  float a = clamp(corpo * (0.22 + 0.4 * smoothstep(0.1, 0.8, d)) * grao + borda * corpo * 0.4, 0.0, 0.78);
+  float a = clamp(corpo * (0.46 + 0.16 * smoothstep(0.1, 0.8, d)) * grao + borda * corpo * 0.55, 0.0, 0.82);
   gl_FragColor = vec4(uCor * a, a);
 }
 `
@@ -202,8 +202,9 @@ export default function TintaViva({ className = '', cor = [0.12, 0.2, 0.5] }) {
       }
       // Papel parado recebe um pingo de vez em quando, para nunca ficar morto.
       if (forca === 0 && agora > proximoPingo && agora - cursor.ultimo > 2500) {
-        const x = 0.15 + Math.random() * 0.7
-        const y = 0.15 + Math.random() * 0.7
+        // Pingos só na faixa vazia de baixo, longe do título e da mesa.
+        const x = 0.06 + Math.random() * 0.6
+        const y = 0.05 + Math.random() * 0.14
         p0 = [x, y]
         p1 = [x + 0.001, y]
         forca = 0.9

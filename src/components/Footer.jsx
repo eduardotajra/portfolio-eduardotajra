@@ -28,6 +28,7 @@ export default function Footer() {
           </div>
           <nav className="flex flex-col gap-1.5 text-[15px]">
             <a href="/#servicos" className={linkClaro}>{t('O que eu faço', 'What I do')}</a>
+            <a href="/#showreel" className={linkClaro}>{t('Showreel (1 min)', 'Showreel (1 min)')}</a>
             <Link to="/projetos" className={linkClaro}>{t('Todos os projetos', 'All projects')}</Link>
             <Link to="/mods" className={linkClaro}>{t('Mods de Minecraft', 'Minecraft mods')}</Link>
             <a href="/#contact" className={linkClaro}>{t('Pedir orçamento', 'Get a quote')}</a>

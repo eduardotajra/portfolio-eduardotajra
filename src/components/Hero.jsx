@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { contato } from '../data/contato'
 import { useIdioma } from '../i18n'
@@ -7,6 +7,7 @@ import { Pincel } from '../motion/Pincel'
 import { BotaoTinta } from '../motion/Botoes'
 import Relogio from '../motion/Relogio'
 import Mesa from './Mesa'
+import Showreel from './Showreel'
 
 // O que eu construo, em ordem: a caneta vermelha risca uma e escreve a próxima.
 const palavras = ['sites', 'jogos diários', 'ARGs', 'mods de Minecraft', 'extensões', 'peças em 3D']
@@ -62,6 +63,19 @@ export default function Hero() {
     transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] },
   })
 
+  // Showreel abre pelo botão ou por link direto (/#showreel).
+  const [reel, setReel] = useState(false)
+  useEffect(() => {
+    const confere = () => window.location.hash === '#showreel' && setReel(true)
+    confere()
+    window.addEventListener('hashchange', confere)
+    return () => window.removeEventListener('hashchange', confere)
+  }, [])
+  const fecharReel = useCallback(() => {
+    setReel(false)
+    if (window.location.hash === '#showreel') history.replaceState(null, '', window.location.pathname)
+  }, [])
+
   return (
     <section className="relative overflow-hidden px-5 pb-16 pt-28 sm:px-8 lg:min-h-[100svh] lg:pb-10 lg:pt-32">
       {/* Renderização em tempo real: tinta que escorre no papel. */}
@@ -114,6 +128,17 @@ export default function Hero() {
               </span>{' '}
               ↓
             </a>
+            <button type="button" onClick={() => setReel(true)} className="group flex items-center gap-2.5 text-[15px] font-medium text-tinta">
+              <span className="flex h-9 w-9 items-center justify-center rounded-full border-[1.5px] border-tinta transition-colors group-hover:border-accent group-hover:bg-accent group-hover:text-papel">
+                <svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true">
+                  <path d="M1 1l9 5-9 5z" fill="currentColor" />
+                </svg>
+              </span>
+              <span className="border-b border-tinta/30 pb-0.5 transition-colors group-hover:border-accent group-hover:text-accent">
+                {t('showreel', 'showreel')}
+              </span>
+              <span className="font-mono text-[11px] text-muted">1:06</span>
+            </button>
           </motion.div>
         </div>
 
@@ -121,6 +146,7 @@ export default function Hero() {
           <Mesa />
         </motion.div>
       </div>
+      <Showreel aberto={reel} aoFechar={fecharReel} />
     </section>
   )
 }

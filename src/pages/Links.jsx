@@ -32,6 +32,7 @@ const acoes = [
 ]
 
 const navegacao = [
+  { titulo: 'Showreel (1 min)', titulo_en: 'Showreel (1 min)', to: '/#showreel' },
   { titulo: 'Meus projetos', titulo_en: 'My projects', to: '/projetos' },
   { titulo: 'Mods de Minecraft', titulo_en: 'Minecraft mods', to: '/mods' },
   { titulo: 'Site completo', titulo_en: 'Full website', to: '/' },
