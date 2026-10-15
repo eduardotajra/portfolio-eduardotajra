@@ -66,9 +66,8 @@ export default function Servicos() {
               <a
                 href={f.href}
                 onPointerEnter={() => setAtiva(i)}
-                className="group grid items-center gap-x-6 gap-y-2 py-7 sm:grid-cols-[3rem_1fr_auto] lg:py-9"
+                className="group grid items-center gap-x-6 gap-y-2 py-7 sm:grid-cols-[1fr_auto] lg:py-9"
               >
-                <span className="font-mono text-xs text-muted">{f.n}</span>
                 <span className="titulo text-[clamp(2.4rem,6.4vw,5.6rem)] text-tinta transition-transform duration-500 ease-[cubic-bezier(.2,.8,.2,1)] group-hover:translate-x-3">
                   <Pincel tipo="sublinhado" ativo={ativa === i} semente={i + 21} duracao={0.45}>
                     {tr(f, 'titulo')}

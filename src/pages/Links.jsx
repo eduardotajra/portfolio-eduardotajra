@@ -109,10 +109,9 @@ export default function Links() {
 
         {/* Navegação interna, como linhas de um índice. */}
         <ul className="mb-10 mt-8 border-t border-tinta">
-          {navegacao.map(({ to, ...item }, i) => (
+          {navegacao.map(({ to, ...item }) => (
             <li key={to} className="border-b border-tinta/15">
               <Link to={to} className="group flex items-baseline gap-4 py-3.5 text-tinta">
-                <span className="font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
                 <span className="flex-1 text-lg transition-transform duration-300 group-hover:translate-x-1">{tr(item, 'titulo')}</span>
                 {seta}
               </Link>

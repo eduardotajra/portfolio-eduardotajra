@@ -75,37 +75,37 @@ export default function Contact() {
   return (
     <section id="contact" className="relative overflow-hidden bg-tinta px-5 pb-6 pt-24 text-papel sm:px-8 lg:pt-32">
       <div className="mx-auto max-w-[1320px]">
-        <div className="grid items-end gap-10 lg:grid-cols-[1fr_auto]">
-          <div>
-            <p className="font-mao text-2xl text-marca">{t('última página', 'last page')}</p>
-            <h2 className="titulo text-[clamp(3.6rem,11vw,10rem)] leading-[0.88]">
-              {t('Me conta', 'Tell me')}
-              <br />
-              <em>
-                {t('a ', 'the ')}
-                <Pincel tipo="circulo" semente={41} cor="#ffd84a" atraso={0.3}>
-                  {t('ideia', 'idea')}
-                </Pincel>
-                .
-              </em>
-            </h2>
-            <p className="mt-12 max-w-xl text-lg leading-relaxed text-papel/75">
-              {t(
-                'Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso. Site, jogo, mod ou peça impressa.',
-                'Tell me what you need and I will get back with a deadline and a price, no strings attached. Website, game, mod or printed part.'
-              )}
-            </p>
-          </div>
-          <div className="flex justify-start lg:justify-end">
-            <Mascote feliz={animado} />
-          </div>
+        <div>
+          <p className="font-mao text-2xl text-marca">{t('última página', 'last page')}</p>
+          <h2 className="titulo text-[clamp(3.6rem,11vw,10rem)] leading-[0.88]">
+            {t('Me conta', 'Tell me')}
+            <br />
+            <em>
+              {t('a ', 'the ')}
+              <Pincel tipo="circulo" semente={41} cor="#ffd84a" atraso={0.3}>
+                {t('ideia', 'idea')}
+              </Pincel>
+              .
+            </em>
+          </h2>
+          <p className="mt-12 max-w-xl text-lg leading-relaxed text-papel/75">
+            {t(
+              'Você me diz o que precisa e eu retorno com prazo e preço, sem compromisso. Site, jogo, mod ou peça impressa.',
+              'Tell me what you need and I will get back with a deadline and a price, no strings attached. Website, game, mod or printed part.'
+            )}
+          </p>
         </div>
 
+        {/* O boneco espia por cima dos botões, como uma cabeça apoiada num bloco:
+            fica feliz e fala quando alguém chega perto deles. */}
         <div
-          className="mt-12 flex flex-col gap-3 sm:flex-row"
+          className="relative mt-24 flex flex-col gap-3 sm:flex-row"
           onPointerEnter={() => setAnimado(true)}
           onPointerLeave={() => setAnimado(false)}
         >
+          <div className="absolute bottom-full right-5 sm:right-8">
+            <Mascote feliz={animado} />
+          </div>
           {orcamentos.map((item) => {
             const { icone: Icone, href } = item
             return (

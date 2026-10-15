@@ -162,7 +162,6 @@ export default function Navbar() {
                     {navLink(
                       item.hash,
                       <>
-                        <span className="mr-4 w-6 font-mono text-xs text-muted">{String(i + 1).padStart(2, '0')}</span>
                         {tr(item, 'label')}
                       </>,
                       () => setOpen(false),
