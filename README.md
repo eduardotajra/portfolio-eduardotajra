@@ -2,7 +2,7 @@
 
 Meu site pessoal com projetos, trajetória e contatos.
 
-**No ar em: [eduardotajra.vercel.app](https://eduardotajra.vercel.app)**
+**No ar em: [eduardotajra.com](https://eduardotajra.com)**
 
 ![preview](public/og.png)
 

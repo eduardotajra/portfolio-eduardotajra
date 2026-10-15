@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://eduardotajra.vercel.app/</loc>
+    <loc>https://www.eduardotajra.com/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://eduardotajra.vercel.app/projetos</loc>
+    <loc>https://www.eduardotajra.com/projetos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://eduardotajra.vercel.app/mods</loc>
+    <loc>https://www.eduardotajra.com/mods</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

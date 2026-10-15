@@ -172,7 +172,7 @@ export default function Links() {
         </div>
 
         <p className="mt-10 text-center font-mono text-[11px] text-muted">
-          eduardotajra.vercel.app
+          eduardotajra.com
         </p>
       </div>
     </div>
