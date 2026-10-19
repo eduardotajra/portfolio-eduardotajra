@@ -4,7 +4,7 @@ export const contato = {
   email: 'eduardotajra2@hotmail.com',
   github: 'https://github.com/eduardotajra',
   linkedin: 'https://www.linkedin.com/in/eduardo-tajra/',
-  instagram: 'https://www.instagram.com/eduardotajra/',
+  instagram: 'https://www.instagram.com/eduardotajradev/',
   tiktok: 'https://www.tiktok.com/@eduardotajraa?lang=pt-BR',
   youtube: 'https://www.youtube.com/@eduardotajra5',
   x: 'https://x.com/eduardotajra',
